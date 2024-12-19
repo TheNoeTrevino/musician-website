@@ -44,4 +44,17 @@ public class OrderService {
     orderRepo.deleteOrderById(id);
     return orderDTO;
   }
+
+  public List<OrderDTO> getOrderByUserId(Long id) {
+    userRepo.findById(id)
+        .orElseThrow(()->new NotFoundException("order", id));
+
+    List<Order> orders = orderRepo.findByUserId(id);
+
+    List<OrderDTO> orderDTOs = orders.stream()
+        .map(orderMapper::OrderToDTO)
+        .collect(Collectors.toList());
+
+    return orderDTOs;
+  }
 }
