@@ -19,7 +19,7 @@ import lombok.Data;
 @Data
 public class Users {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
   @NotNull(message = "First name on a user cannot be null")

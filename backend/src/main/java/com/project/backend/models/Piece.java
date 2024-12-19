@@ -18,7 +18,7 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 public class Piece {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
   @NotNull(message = "A piece must have a name")

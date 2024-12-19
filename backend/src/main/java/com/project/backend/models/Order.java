@@ -20,7 +20,7 @@ import lombok.Data;
 @Table(name = "orders") // NOTE: order gets canned as a reserve keyword
 public class Order {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @NotNull(message = "An order must have a total price")
