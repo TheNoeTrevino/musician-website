@@ -39,5 +39,4 @@ public class OrdersController {
     logger.info("Fetching orders with userID: {}", id);
     return orderService.getOrderByUserId(id);
   }
-
 }
