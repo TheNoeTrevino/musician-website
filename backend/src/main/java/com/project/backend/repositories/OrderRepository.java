@@ -19,4 +19,7 @@ public interface OrderRepository extends JpaRepository<Order, Long>,
     where o.id = :id
     """)
   int deleteOrderById(@Param(value = "id") Long id);
+
+  // this is borderline magical. derives the query from the name
+  List<Order> findByUserId(Long userId);
 }
