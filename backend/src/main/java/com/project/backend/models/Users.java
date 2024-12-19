@@ -1,7 +1,11 @@
 package com.project.backend.models;
 
+import com.project.backend.eums.Role;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,4 +34,9 @@ public class Users {
   @NotNull(message = "Email on a user cannot be null")
   @Column(name = "email")
   private String emailAddress;
+
+  @NotNull(message = "User must have a role.")
+  @Enumerated(EnumType.STRING)
+  @Column(name = "role")
+  private Role role;
 }
