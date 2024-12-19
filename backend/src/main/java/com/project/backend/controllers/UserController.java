@@ -39,6 +39,7 @@ public class UserController {
 
   @GetMapping("/")
   public List<UserDTO> getUsersByRole(@RequestParam(required = true) Role role) {
+    logger.info("Fetching users with role: {}", role);
     return userService.getUsersByRole(role);
   }
 }
