@@ -1,5 +1,7 @@
 package com.project.backend.models;
 
+import java.util.List;
+
 import com.project.backend.eums.Role;
 
 import jakarta.persistence.Column;
@@ -9,6 +11,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -39,4 +42,8 @@ public class Users {
   @Enumerated(EnumType.STRING)
   @Column(name = "role")
   private Role role;
+
+  @OneToMany(mappedBy = "user")
+  private List<Order> orders;
+
 }
