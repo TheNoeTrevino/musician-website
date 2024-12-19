@@ -23,33 +23,34 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 
   @Autowired
-  UserRepository UserRepo;
+  UserRepository userRepo;
 
   @Autowired
   UserMapper UserMapper;
 
   public UserDTO getUserById(Long userId) {
-    UserRepo.findById(userId);
-
-    UserDTO userDTO = UserMapper
-        .UserToDTO(UserRepo.findById(userId).orElseThrow(() -> new NotFoundException("user", userId)));
-
-    return userDTO;
+    return UserMapper
+        .UserToDTO(userRepo.findById(userId)
+        .orElseThrow(() -> new NotFoundException("user", userId)));
   };
 
   public UserDTO deleteUserById(Long userId) {
     UserDTO userDTO = UserMapper
-        .UserToDTO(UserRepo.findById(userId).orElseThrow(() -> new NotFoundException("user", userId)));
+        .UserToDTO(userRepo.findById(userId)
+        .orElseThrow(() -> new NotFoundException("user", userId)));
 
-    UserRepo.deleteUserById(userId);
+    userRepo.deleteUserById(userId);
 
     return userDTO;
   };
 
   public List<UserDTO> getUsersByRole(Role role) {
-    List<Users> users = UserRepo.findByRole(role);
+    List<Users> users = userRepo.findByRole(role);
 
-    List<UserDTO> usersDTO = users.stream().map(UserMapper::UserToDTO).collect(Collectors.toList());
+    List<UserDTO> usersDTO = users
+        .stream()
+        .map(UserMapper::UserToDTO)
+        .collect(Collectors.toList());
 
     return usersDTO;
   }
