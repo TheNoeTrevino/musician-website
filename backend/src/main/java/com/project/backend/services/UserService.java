@@ -12,6 +12,7 @@ import com.project.backend.eums.Role;
 import com.project.backend.exceptions.NotFoundException;
 import com.project.backend.mappers.UserMapper;
 import com.project.backend.models.Users;
+import com.project.backend.repositories.OrderRepository;
 import com.project.backend.repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -23,31 +24,34 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 
   @Autowired
-  UserRepository UserRepo;
+  UserRepository userRepo;
+
+  @Autowired
+  OrderRepository orderRepo;
 
   @Autowired
   UserMapper UserMapper;
 
   public UserDTO getUserById(Long userId) {
-    UserRepo.findById(userId);
+    userRepo.findById(userId);
 
     UserDTO userDTO = UserMapper
-        .UserToDTO(UserRepo.findById(userId).orElseThrow(() -> new NotFoundException("user", userId)));
+        .UserToDTO(userRepo.findById(userId).orElseThrow(() -> new NotFoundException("user", userId)));
 
     return userDTO;
   };
 
   public UserDTO deleteUserById(Long userId) {
     UserDTO userDTO = UserMapper
-        .UserToDTO(UserRepo.findById(userId).orElseThrow(() -> new NotFoundException("user", userId)));
+        .UserToDTO(userRepo.findById(userId).orElseThrow(() -> new NotFoundException("user", userId)));
 
-    UserRepo.deleteUserById(userId);
+    userRepo.deleteUserById(userId);
 
     return userDTO;
   };
 
   public List<UserDTO> getUsersByRole(Role role) {
-    List<Users> users = UserRepo.findByRole(role);
+    List<Users> users = userRepo.findByRole(role);
 
     List<UserDTO> usersDTO = users.stream().map(UserMapper::UserToDTO).collect(Collectors.toList());
 
