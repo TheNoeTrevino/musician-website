@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.project.backend.DTOs.UserDTO;
 import com.project.backend.eums.Role;
@@ -12,6 +14,12 @@ import com.project.backend.mappers.UserMapper;
 import com.project.backend.models.Users;
 import com.project.backend.repositories.UserRepository;
 
+import lombok.RequiredArgsConstructor;
+
+
+@Service
+@Component("userService")
+@RequiredArgsConstructor
 public class UserService {
 
   @Autowired
