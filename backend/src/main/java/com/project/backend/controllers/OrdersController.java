@@ -1,5 +1,7 @@
 package com.project.backend.controllers;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,4 +33,11 @@ public class OrdersController {
     logger.info("Deleteing order with ID: {}", id);
     return orderService.deleteOrderById(id);
   }
+
+  @GetMapping("/user/{id}")
+  public List<OrderDTO> getOrdersByUser(@PathVariable Long id) {
+    logger.info("Fetching orders with userID: {}", id);
+    return orderService.getOrderByUserId(id);
+  }
+
 }
