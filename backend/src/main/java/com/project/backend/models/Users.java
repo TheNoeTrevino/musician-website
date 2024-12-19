@@ -29,5 +29,5 @@ public class Users {
 
   @NotNull(message = "Email on a user cannot be null")
   @Column(name = "email")
-  private String email;
+  private String emailAddress;
 }
