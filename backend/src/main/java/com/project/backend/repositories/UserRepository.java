@@ -15,13 +15,17 @@ public interface UserRepository extends JpaRepository<Users, Long>,
     JpaSpecificationExecutor<Users> {
 
   @Modifying
-  @Query("delete User u where u.id = :id")
+  @Query("""
+    DELETE FROM Users u
+    where u.id = :id
+    """)
   int deleteUserById(@Param(value = "id") Long id);
 
+  // NOTE: use upper case when refering to entity names here
   @Query("""
-      SELECT u from users u
-      where u.role = :role
-      """)
+    SELECT u FROM Users u
+    where u.role = :role
+    """)
   List<Users> findByRole(@Param(value = "role") Role role);
 
 }
