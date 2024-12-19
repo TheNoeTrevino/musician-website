@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.project.backend.DTOs.UserDTO;
 import com.project.backend.eums.Role;
 import com.project.backend.models.Users;
 
@@ -20,9 +19,9 @@ public interface UserRepository extends JpaRepository<Users, Long>,
   int deleteUserById(@Param(value = "id") Long id);
 
   @Query("""
-      SELECT firstName, lastName, emailAddress from users
-      where role = 'USER'
+      SELECT u from users u
+      where u.role = :role
       """)
-  List<UserDTO> findByRole(Role role);
+  List<Users> findByRole(@Param(value = "role") Role role);
 
 }
