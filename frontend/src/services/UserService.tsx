@@ -53,6 +53,23 @@ export const UserService = {
     }
   },
 
+  async getAllUsersByRole(role: string): Promise<UserDTO[]> {
+    try {
+      const response = await fetch(`http://localhost:8080/users?role=${role}`, {
+        method: "GET",
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `Error fetching users with role ${role}: ${response.statusText}`,
+        );
+      }
+
+      const users: UserDTO[] = await response.json();
+      return users;
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      throw new Error("Something went wrong fetching the users");
     }
   },
 };
