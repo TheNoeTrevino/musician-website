@@ -61,9 +61,12 @@ export const UserService = {
 
   async getAllUsersByRole(role: string): Promise<UserDTO[]> {
     try {
-      const response = await fetch(`http://localhost:8080/users?role=${role}`, {
-        method: "GET",
-      });
+      const response = await fetch(
+        `http://localhost:8080/users/?role=${role}`,
+        {
+          method: "GET",
+        },
+      );
 
       if (!response.ok) {
         throw new Error(
