@@ -13,8 +13,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
 // TODO: add instrumentation
+@Data
 @Entity
 public class Piece {
   @Id
@@ -31,7 +33,7 @@ public class Piece {
 
   @NotNull(message = "A piece must have a price")
   @Column(name = "price")
-  public float price;
+  public Double price;
 
   @NotNull(message = "A piece must have a date in which it was composed")
   @Column(name = "date_composed")
