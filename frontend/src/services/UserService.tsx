@@ -1,5 +1,6 @@
 import { UserDTO } from "../dtos/dtos";
 
+// TODO: remove alerts once this is all settled
 export const UserService = {
   async getUserById(userId: number): Promise<UserDTO> {
     try {
@@ -9,9 +10,10 @@ export const UserService = {
           method: "GET",
         },
       );
+      console.log(`fetching user: ${userId}`);
 
-      if (response.ok) {
-        alert("everything is all good");
+      if (!response.ok) {
+        alert(`Something went wrong fetching user: ${userId}`);
       }
 
       const userData: UserDTO = await response.json();
@@ -21,7 +23,11 @@ export const UserService = {
       return userData;
     } catch (error) {
       console.log(error);
-      throw new Error("Something went wrong fetching the user information");
+      throw new Error(
+        `Something went wrong fetching the user with id: ${userId}`,
+      );
+    }
+  },
 
   async deleteUserById(userId: number): Promise<UserDTO> {
     try {
