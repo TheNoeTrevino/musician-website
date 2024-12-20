@@ -1,6 +1,7 @@
 package com.project.backend.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,20 +27,20 @@ public class UserController {
   UserService userService;
 
   @GetMapping("/user/{id}")
-  public UserDTO getUserById(@PathVariable Long id) {
+  public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
     logger.info("Searching for user with ID: {}", id);
-    return userService.getUserById(id);
+    return ResponseEntity.ok(userService.getUserById(id));
   }
 
   @DeleteMapping("/user/{id}")
-  public UserDTO deleteUserById(@PathVariable Long id) {
+  public ResponseEntity<UserDTO> deleteUserById(@PathVariable Long id) {
     logger.info("Deleteing user with ID: {}", id);
-    return userService.deleteUserById(id);
+    return ResponseEntity.ok(userService.deleteUserById(id));
   }
 
   @GetMapping("/")
-  public List<UserDTO> getUsersByRole(@RequestParam(required = true) Role role) {
+  public ResponseEntity<List<UserDTO>> getUsersByRole(@RequestParam(required = true) Role role) {
     logger.info("Fetching users with role: {}", role);
-    return userService.getUsersByRole(role);
+    return ResponseEntity.ok(userService.getUsersByRole(role));
   }
 }
