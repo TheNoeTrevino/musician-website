@@ -1,4 +1,4 @@
-import { UserService } from "../services/OrderService";
+import { UserService } from "../services/UserService";
 
 const Home = () => {
   const logUser = () => {
