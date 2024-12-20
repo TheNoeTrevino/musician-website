@@ -1,7 +1,10 @@
 package com.project.backend.controllers;
 
+import com.project.backend.DTOs.CreateUpdateOrderDTO;
+import com.project.backend.DTOs.OrderDTO;
+import com.project.backend.services.OrderService;
+import jakarta.validation.Valid;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.backend.DTOs.CreateUpdateOrderDTO;
-import com.project.backend.DTOs.OrderDTO;
-import com.project.backend.services.OrderService;
-
-import jakarta.validation.Valid;
-
 @RestController
 @RequestMapping("/orders")
 public class OrdersController {
   private static final Logger logger = LoggerFactory.getLogger(OrdersController.class);
 
-  @Autowired
-  OrderService orderService;
+  @Autowired OrderService orderService;
 
   @GetMapping("/order/{id}")
   public ResponseEntity<OrderDTO> getOrderById(@PathVariable Long id) {
@@ -40,14 +36,15 @@ public class OrdersController {
     return ResponseEntity.ok(orderService.deleteOrderById(id));
   }
 
-  @GetMapping("/order/{id}")
+  @GetMapping("/order/user/{id}")
   public ResponseEntity<List<OrderDTO>> getOrdersByUser(@PathVariable Long id) {
     logger.info("Fetching orders with userID: {}", id);
     return ResponseEntity.ok(orderService.getOrderByUserId(id));
   }
 
   @PostMapping("/")
-  public ResponseEntity<OrderDTO> createOrder(@Valid @RequestBody CreateUpdateOrderDTO newOrderDTO) {
+  public ResponseEntity<OrderDTO> createOrder(
+      @Valid @RequestBody CreateUpdateOrderDTO newOrderDTO) {
     logger.info("Creating new order with body: {}", newOrderDTO);
     return ResponseEntity.ok(orderService.createOrder(newOrderDTO));
   }
