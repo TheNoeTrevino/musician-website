@@ -1,8 +1,14 @@
 import { UserService } from "../services/UserService";
 
 const Home = () => {
-  const logUser = () => {
+  const logGetUser = () => {
     console.log(UserService.getUserById(1));
+  };
+  const logDeleteUser = () => {
+    console.log(UserService.deleteUserById(1));
+  };
+  const logGetUserByRole = () => {
+    console.log(UserService.getAllUsersByRole("ADMIN"));
   };
   return (
     <>
@@ -40,7 +46,9 @@ const Home = () => {
         tincidunt id eget. Ridiculus arcu nascetur; parturient faucibus
         venenatis tincidunt duis nibh.
       </div>
-      <button onClick={logUser}>Hello</button>
+      <button onClick={logGetUser}>Get User</button>
+      <button onClick={logDeleteUser}>Delete User</button>
+      <button onClick={logGetUserByRole}>Get User by role</button>
     </>
   );
 };
