@@ -3,6 +3,8 @@ package com.project.backend.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.project.backend.DTOs.PieceDTO;
 import com.project.backend.exceptions.NotFoundException;
 import com.project.backend.mappers.PieceMapper;
@@ -10,10 +12,10 @@ import com.project.backend.repositories.PiecesRepository;
 
 public class PieceService{
 
-  @AutoWired
+  @Autowired
   PiecesRepository piecesRepo;
 
-  @AutoWired
+  @Autowired
   PieceMapper piecesMapper;
 
   public PieceDTO getPieceById(Long pieceId) { 
