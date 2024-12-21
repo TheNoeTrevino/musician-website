@@ -25,19 +25,19 @@ public class Piece {
 
   @NotNull(message = "A piece must have a name")
   @Column(name = "name")
-  public String name;
+  private String title;
 
   @NotNull(message = "A piece must have a composer")
   @Column(name = "composer")
-  public String composer;
+  private String composer;
 
   @NotNull(message = "A piece must have a price")
   @Column(name = "price")
-  public Double price;
+  private Double price;
 
   @NotNull(message = "A piece must have a date in which it was composed")
   @Column(name = "date_composed")
-  public LocalDate dateComposed;
+  private LocalDate dateComposed;
 
   @ManyToMany
   @JoinTable(
