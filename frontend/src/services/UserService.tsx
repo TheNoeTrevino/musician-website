@@ -1,6 +1,6 @@
 import { UserDTO } from "../dtos/dtos";
 
-// TODO: remove alerts once this is all settled
+// FIX: remove alerts once this is all settled
 export const UserService = {
   async getUserById(userId: number): Promise<UserDTO> {
     try {
