@@ -26,16 +26,16 @@ public class UserService {
   UserRepository userRepo;
 
   @Autowired
-  UserMapper UserMapper;
+  UserMapper userMapper;
 
   public UserDTO getUserById(Long userId) {
-    return UserMapper
+    return userMapper
         .UserToDTO(userRepo.findById(userId)
         .orElseThrow(() -> new NotFoundException("user", userId)));
   };
 
   public UserDTO deleteUserById(Long userId) {
-    UserDTO userDTO = UserMapper
+    UserDTO userDTO = userMapper
         .UserToDTO(userRepo.findById(userId)
         .orElseThrow(() -> new NotFoundException("user", userId)));
 
@@ -49,7 +49,7 @@ public class UserService {
 
     List<UserDTO> usersDTO = users
         .stream()
-        .map(UserMapper::UserToDTO)
+        .map(userMapper::UserToDTO)
         .collect(Collectors.toList());
 
     return usersDTO;
