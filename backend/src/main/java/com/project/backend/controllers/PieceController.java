@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.backend.DTOs.PieceDTO;
@@ -22,10 +23,13 @@ public class PieceController {
   @Autowired
   PieceService pieceService;
 
+  // TODO: add params
   @GetMapping("/")
-  public ResponseEntity<List<PieceDTO>> getAllPieces(@PathVariable Long id) {
-    logger.info("Getting all pieces", id);
-    return ResponseEntity.ok(pieceService.getAllPieces());
+  public ResponseEntity<List<PieceDTO>> getAllPieces(
+    @RequestParam(required = false) String orderBy,
+    @RequestParam(required = false) String sortOrder) {
+    logger.info("Getting all pieces");
+    return ResponseEntity.ok(pieceService.getAllPieces(sortOrder, orderBy));
   }
 
   @GetMapping("/piece/{id}")
