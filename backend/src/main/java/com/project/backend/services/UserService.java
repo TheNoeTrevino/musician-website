@@ -57,11 +57,7 @@ public class UserService {
   }
 
   public UserDTO createUser(CreateUpdateUserDTO dto) {
-    // TODO: map the create DTO to an actual user
     Users user = userRepo.save(userMapper.CreateUpateDTOToUser(dto));
-    
-    UserDTO userDTO = userMapper.UserToDTO(user);
-
-    return userDTO;
+    return userMapper.UserToDTO(user);
   }
 }
