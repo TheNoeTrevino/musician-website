@@ -10,7 +10,7 @@ import com.project.backend.exceptions.NotFoundException;
 import com.project.backend.mappers.PieceMapper;
 import com.project.backend.repositories.PiecesRepository;
 
-public class PieceService{
+public class PieceService {
 
   @Autowired
   PiecesRepository piecesRepo;
