@@ -37,8 +37,8 @@ public class OrdersController {
   }
 
   @GetMapping("/order/user/{id}")
-  public ResponseEntity<List<OrderDTO>> getOrdersByUser(@PathVariable Long id) {
-    logger.info("Fetching orders with userID: {}", id);
+  public ResponseEntity<List<OrderDTO>> getOrdersByUserId(@PathVariable Long id) {
+    logger.info("Fainetching orders with userID: {}", id);
     return ResponseEntity.ok(orderService.getOrderByUserId(id));
   }
 
