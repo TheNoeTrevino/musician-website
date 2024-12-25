@@ -15,3 +15,9 @@ export interface CreateOrderDTO {
   userId: number;
   piecesIds: number[];
 }
+
+export interface OrderDTO {
+  orderId: number;
+  price: number;
+  pieces: PieceDTO[];
+}
