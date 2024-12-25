@@ -4,6 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mappings;
 import org.mapstruct.Mapping;
 
+import com.project.backend.DTOs.CreateUpdateUserDTO;
 import com.project.backend.DTOs.UserDTO;
 import com.project.backend.models.Users;
 
@@ -14,4 +15,9 @@ public interface UserMapper {
   })
   public UserDTO UserToDTO(Users User);
 
+  @Mappings({
+      @Mapping(target =  "id", ignore = true),
+      @Mapping(target =  "orders", ignore = true)
+  })
+  public Users CreateUpateDTOToUser(CreateUpdateUserDTO dto);
 }
