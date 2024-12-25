@@ -24,7 +24,7 @@ export const UserService = {
     } catch (error) {
       console.log(error);
       throw new Error(
-        `Something went wrong fetching the user with id: ${userId}`,
+        `Something went wrong fetching the user with id: ${userId}. Error: ${error}`,
       );
     }
   },
@@ -54,7 +54,7 @@ export const UserService = {
     } catch (error) {
       console.log(error);
       throw new Error(
-        `Something went wrong deleting the user with id: ${userId}`,
+        `Something went wrong deleting the user with id: ${userId}. Error: ${error}`,
       );
     }
   },
@@ -78,7 +78,9 @@ export const UserService = {
       return users;
     } catch (error) {
       console.error("Error fetching users:", error);
-      throw new Error("Something went wrong fetching the users");
+      throw new Error(
+        `Something went wrong fetching the users. Error: ${error}`,
+      );
     }
   },
 };
