@@ -25,7 +25,7 @@ public class Order {
 
   @NotNull(message = "An order must have a total price")
   @Column(name = "price")
-  public float price;
+  private Double price;
 
   @ManyToOne
   @JoinColumn(name = "user_id", nullable = false)

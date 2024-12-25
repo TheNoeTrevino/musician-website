@@ -12,6 +12,7 @@ import com.project.backend.eums.Role;
 import com.project.backend.exceptions.NotFoundException;
 import com.project.backend.mappers.UserMapper;
 import com.project.backend.models.Users;
+import com.project.backend.DTOs.CreateUpdateUserDTO;
 import com.project.backend.repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -26,16 +27,16 @@ public class UserService {
   UserRepository userRepo;
 
   @Autowired
-  UserMapper UserMapper;
+  UserMapper userMapper;
 
   public UserDTO getUserById(Long userId) {
-    return UserMapper
+    return userMapper
         .UserToDTO(userRepo.findById(userId)
         .orElseThrow(() -> new NotFoundException("user", userId)));
   };
 
   public UserDTO deleteUserById(Long userId) {
-    UserDTO userDTO = UserMapper
+    UserDTO userDTO = userMapper
         .UserToDTO(userRepo.findById(userId)
         .orElseThrow(() -> new NotFoundException("user", userId)));
 
@@ -49,9 +50,14 @@ public class UserService {
 
     List<UserDTO> usersDTO = users
         .stream()
-        .map(UserMapper::UserToDTO)
+        .map(userMapper::UserToDTO)
         .collect(Collectors.toList());
 
     return usersDTO;
+  }
+
+  public UserDTO createUser(CreateUpdateUserDTO dto) {
+    Users user = userRepo.save(userMapper.CreateUpateDTOToUser(dto));
+    return userMapper.UserToDTO(user);
   }
 }

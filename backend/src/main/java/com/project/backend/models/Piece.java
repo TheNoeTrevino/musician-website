@@ -13,8 +13,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
 // TODO: add instrumentation
+// TODO: add photos -- as binary in db, then process the blob in the frontend
+@Data
 @Entity
 public class Piece {
   @Id
@@ -23,19 +26,19 @@ public class Piece {
 
   @NotNull(message = "A piece must have a name")
   @Column(name = "name")
-  public String name;
+  private String title;
 
   @NotNull(message = "A piece must have a composer")
   @Column(name = "composer")
-  public String composer;
+  private String composer;
 
   @NotNull(message = "A piece must have a price")
   @Column(name = "price")
-  public float price;
+  private Double price;
 
   @NotNull(message = "A piece must have a date in which it was composed")
   @Column(name = "date_composed")
-  public LocalDate dateComposed;
+  private LocalDate dateComposed;
 
   @ManyToMany
   @JoinTable(
