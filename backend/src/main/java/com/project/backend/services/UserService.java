@@ -12,6 +12,7 @@ import com.project.backend.eums.Role;
 import com.project.backend.exceptions.NotFoundException;
 import com.project.backend.mappers.UserMapper;
 import com.project.backend.models.Users;
+import com.project.backend.DTOs.CreateUpdateUserDTO;
 import com.project.backend.repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -53,5 +54,14 @@ public class UserService {
         .collect(Collectors.toList());
 
     return usersDTO;
+  }
+
+  public UserDTO createUser(CreateUpdateUserDTO dto) {
+    // TODO: map the create DTO to an actual user
+    Users user = userRepo.save(userMapper.CreateUpateDTOToUser(dto));
+    
+    UserDTO userDTO = userMapper.UserToDTO(user);
+
+    return userDTO;
   }
 }
