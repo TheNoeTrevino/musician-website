@@ -13,6 +13,7 @@ export const PieceService = {
           method: "GET",
         },
       );
+
       console.log(
         `fetching pices with params orderBy: ${orderBy}, sortOrder: ${sortOrder}`,
       );
