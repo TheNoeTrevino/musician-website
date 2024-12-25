@@ -33,7 +33,6 @@ public class PieceService {
   }
 
   public List<PieceDTO> getAllPieces(String orderBy, String sortOrder) { 
-
     Sort.Direction orderDirection = Sort.Direction.ASC;
 
     if (sortOrder == "DESC") {
