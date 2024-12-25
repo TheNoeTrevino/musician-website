@@ -16,6 +16,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 // TODO: add instrumentation
+// TODO: add photos -- as binary in db, then process the blob in the frontend
 @Data
 @Entity
 public class Piece {
