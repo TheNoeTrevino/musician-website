@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -72,11 +73,11 @@ public class Piece {
   @Column(name = "time_length")
   private Duration timeLength;
 
-  @ManyToMany
+  @ManyToMany(cascade = CascadeType.PERSIST)
   @JoinTable(
     name = "order_pieces",
-    joinColumns = @JoinColumn(name = "order_id"),
-    inverseJoinColumns = @JoinColumn(name = "piece_id")
+    joinColumns = @JoinColumn(name = "piece_id"),
+    inverseJoinColumns = @JoinColumn(name = "order_id")
   )
   private Set<Order> orders = new HashSet<>();
 
