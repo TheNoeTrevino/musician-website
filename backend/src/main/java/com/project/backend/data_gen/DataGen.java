@@ -67,4 +67,11 @@ public class DataGen {
 
     piecesList.stream().forEach(pieceRepo::save);
 
+  private List<Order> generateFakeOrderList(Users user) {
+    List<Order> fakeOrderList = new ArrayList<>();
+
+    for (int i = 0; i < rand.nextInt(2) + 1; i++) {
+      fakeOrderList.add(generateFakeOrder(user));
+    }
+    return fakeOrderList;
   }
