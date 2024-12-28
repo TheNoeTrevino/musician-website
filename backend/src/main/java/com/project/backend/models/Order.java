@@ -1,7 +1,6 @@
 package com.project.backend.models;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,11 +14,13 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 @NoArgsConstructor
 @Entity
 @Data
 @Table(name = "orders") // NOTE: order gets canned as a reserve keyword
+@Accessors(chain = true)
 public class Order {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,9 +35,9 @@ public class Order {
   private Users user;
 
   @ManyToMany(mappedBy = "orders")
-  private Set<Piece> pieces = new HashSet<>();
+  private List<Piece> pieces;
 
-  public Order(Double price, Users user, Set<Piece> pieces) {
+  public Order(Double price, Users user, List<Piece> pieces) {
     this.price = price;
     this.user = user;
     this.pieces = pieces;
