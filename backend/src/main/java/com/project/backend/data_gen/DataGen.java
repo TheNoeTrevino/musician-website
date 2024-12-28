@@ -67,6 +67,35 @@ public class DataGen {
 
     piecesList.stream().forEach(pieceRepo::save);
 
+  // helper functions
+  private Order generateFakeOrder(Users user) {
+    List<Piece> allPieces = pieceRepo.findAll();
+    List<Piece> orderPieces = new ArrayList<Piece>();
+    Order fakeOrder = new Order();
+
+    for (int i = 0; i < rand.nextInt(allPieces.size()); i++) {
+      int randomIndex = rand.nextInt(allPieces.size());
+      Piece piece =  allPieces.get(randomIndex);
+      orderPieces.add(piece);
+      if (piece.getOrders() == null) {
+        piece.setOrders(new HashSet<>());
+      }
+      // this is needed for some reason, or the bidirectional relationship will not be set
+      piece.getOrders().add(fakeOrder);
+    }
+
+    Double sum = orderPieces
+        .stream()
+        .mapToDouble(piece -> piece.getPrice())
+        .sum();
+
+    // something going wrong here
+    fakeOrder.setPrice(sum).setPieces(orderPieces).setUser(user);
+    fakeOrder = orderRepo.save(fakeOrder);
+    orderPieces.forEach(piece -> pieceRepo.save(piece));
+    return fakeOrder;
+  }
+
   private List<Order> generateFakeOrderList(Users user) {
     List<Order> fakeOrderList = new ArrayList<>();
 
