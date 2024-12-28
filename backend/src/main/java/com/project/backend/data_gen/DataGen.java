@@ -1,4 +1,5 @@
 package com.project.backend.data_gen;
+
 import com.github.javafaker.Faker;
 import com.project.backend.eums.Role;
 import com.project.backend.models.Piece;
@@ -67,6 +68,27 @@ public class DataGen {
 
     piecesList.stream().forEach(pieceRepo::save);
 
+    // adding us
+    List<Users> userList = new ArrayList<>();
+    userList.add(new Users("Noe", "Trevino", "noe123", "noe.mail.com", Role.ADMIN));
+    userList.add(new Users("Enna", "Trevino", "enna123", "enna.mail.com", Role.ADMIN));
+    userList.add(new Users("Sebastian", "Havner", "sebastian123", "sebastian.mail.com", Role.ADMIN));
+
+    // adding fake random users
+    for (int i = 0; i < 100; i++) {
+      Users user = new Users(faker.name().firstName(), faker.name().lastName(), faker.internet().password(),
+          faker.internet().emailAddress(), Role.USER);
+      userList.add(user);
+    }
+
+    userList.forEach(userRepo::save);
+
+    // make it the actual ones in the database since they are now saved
+    userList = userRepo.findAll();
+    userList.forEach(user -> user.setOrders(generateFakeOrderList(user)));
+    return null;
+  }
+
   // helper functions
   private Order generateFakeOrder(Users user) {
     List<Piece> allPieces = pieceRepo.findAll();
@@ -104,3 +126,4 @@ public class DataGen {
     }
     return fakeOrderList;
   }
+}
