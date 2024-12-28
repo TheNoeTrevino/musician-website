@@ -46,4 +46,11 @@ public class Users {
   @OneToMany(mappedBy = "user")
   private List<Order> orders;
 
+  public Users(String firstName, String lastName, String password, String emailAddress, Role role) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.password = password;
+    this.emailAddress = emailAddress;
+    this.role = role;
+  }
 }
