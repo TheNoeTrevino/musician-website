@@ -1,7 +1,6 @@
 package com.project.backend.services;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,11 +80,11 @@ public class OrderService {
         .orElseThrow(() -> new NotFoundException("User", newOrder.getUserId()));
     order.setUser(user);
 
-    Set<Piece> pieces = newOrder.getPieceIds()
+    List<Piece> pieces = newOrder.getPieceIds()
         .stream()
         .map(id -> piecesRepo.findById(id)
             .orElseThrow(() -> new NotFoundException("pieces", id)))
-        .collect(Collectors.toSet());
+        .collect(Collectors.toList());
 
     Double totalPrice = pieces
         .stream()
