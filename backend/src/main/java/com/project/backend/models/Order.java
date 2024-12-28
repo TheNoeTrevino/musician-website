@@ -33,4 +33,10 @@ public class Order {
 
   @ManyToMany(mappedBy = "orders")
   private Set<Piece> pieces = new HashSet<>();
+
+  public Order(Double price, Users user, Set<Piece> pieces) {
+    this.price = price;
+    this.user = user;
+    this.pieces = pieces;
+  }
 }
