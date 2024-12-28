@@ -55,6 +55,9 @@ public class Piece {
   @Column(name = "has_electronics")
   private boolean hasElectronics;
 
+  @Column(name = "completed")
+  private boolean completed;
+
   @NotNull(message = "We must know the number of players in a piece")
   @Column(name = "num_of_players")
   private Integer numOfPlayers;
@@ -78,12 +81,13 @@ public class Piece {
   private Set<Order> orders = new HashSet<>();
 
   public Piece(String title, String composer, Double price, Integer yearComposed, 
-                boolean hasElectronics, Integer numOfPlayers, Integer difficultyGrade, Duration timeLength) {
+                boolean hasElectronics, boolean completed, Integer numOfPlayers, Integer difficultyGrade, Duration timeLength) {
       this.title = title;
       this.composer = composer;
       this.price = price;
       this.yearComposed = yearComposed;
       this.hasElectronics = hasElectronics;
+      this.completed = completed;
       this.numOfPlayers = numOfPlayers;
       this.difficultyGrade = difficultyGrade;
       this.timeLength = timeLength;
