@@ -4,6 +4,7 @@ import Home from "./pages/home/Home";
 import Cart from "./pages/cart/Cart";
 import Showcase from "./pages/showcase/Showcase";
 import Checkout from "./pages/checkout/Checkout";
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/showcase" element={<Showcase />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Router>
   );
