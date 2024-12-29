@@ -1,5 +1,6 @@
 package com.project.backend.models;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -10,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -37,9 +39,18 @@ public class Order {
   @ManyToMany(mappedBy = "orders")
   private List<Piece> pieces;
 
+  @Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", updatable = false)
+  private LocalDateTime createdAt;
+
   public Order(Double price, Users user, List<Piece> pieces) {
     this.price = price;
     this.user = user;
     this.pieces = pieces;
+    this.createdAt = LocalDateTime.now();
+  }
+
+  @PrePersist
+  protected void onCreate() {
+    this.createdAt = LocalDateTime.now();
   }
 }
