@@ -44,13 +44,12 @@ public class UserController {
     return ResponseEntity.ok(userService.deleteUserById(id));
   }
 
-  @GetMapping("/")
+  @GetMapping("/role")
   public ResponseEntity<List<UserDTO>> getUsersByRole(@RequestParam(required = true) Role role) {
     logger.info("Fetching users with role: {}", role);
     return ResponseEntity.ok(userService.getUsersByRole(role));
   }
 
-  // TODO: this should be a create DTO rather than the actual entity
   @PostMapping("/")
   public ResponseEntity<UserDTO> createUser(@Valid @RequestBody CreateUpdateUserDTO user) {
     logger.info("Creating user");
