@@ -8,11 +8,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.project.backend.DTOs.UserDTO;
+import com.project.backend.DTOs.UserWithOrdersDTO;
 import com.project.backend.eums.Role;
 import com.project.backend.exceptions.NotFoundException;
+import com.project.backend.mappers.OrderMapper;
 import com.project.backend.mappers.UserMapper;
 import com.project.backend.models.Users;
 import com.project.backend.DTOs.CreateUpdateUserDTO;
+import com.project.backend.DTOs.OrderDTO;
+import com.project.backend.repositories.OrderRepository;
 import com.project.backend.repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -28,6 +32,12 @@ public class UserService {
 
   @Autowired
   UserMapper userMapper;
+
+  @Autowired
+  OrderRepository orderRepo;
+
+  @Autowired
+  OrderMapper orderMapper;
 
   public UserDTO getUserById(Long userId) {
     return userMapper
@@ -59,5 +69,20 @@ public class UserService {
   public UserDTO createUser(CreateUpdateUserDTO dto) {
     Users user = userRepo.save(userMapper.CreateUpateDTOToUser(dto));
     return userMapper.UserToDTO(user);
+  }
+
+  public UserWithOrdersDTO getUserWithOrdersById(Long userId) {
+    UserWithOrdersDTO userWithOrders = userMapper
+        .UserToDTOWithOrders(userRepo
+        .findById(userId)
+        .orElseThrow(() -> new NotFoundException("Order", userId)));
+
+    userWithOrders.setOrders(orderRepo
+        .findByUserId(userId)
+        .stream()
+        .map(orderMapper::OrderToDTO) 
+        .collect(Collectors.toList()));
+
+    return userWithOrders;
   }
 }
