@@ -1,6 +1,6 @@
 package com.project.backend.DTOs;
 
-import java.time.LocalDate;
+import java.time.Duration;
 import lombok.Data;
 
 @Data
@@ -9,5 +9,9 @@ public class PieceDTO {
   private String title;
   private String composer;
   private Double price;
-  private LocalDate dateComposed;
+  private Integer yearComposed;
+  private boolean hasElectronics;
+  private Integer numOfPlayers;
+  private Integer difficultyGrade;
+  private Duration timeLength;
 }
