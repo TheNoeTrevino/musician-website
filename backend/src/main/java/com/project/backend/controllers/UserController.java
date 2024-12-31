@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.backend.DTOs.UserDTO;
+import com.project.backend.DTOs.UserWithOrdersDTO;
 import com.project.backend.DTOs.CreateUpdateUserDTO;
 import com.project.backend.eums.Role;
 import com.project.backend.services.UserService;
@@ -54,5 +55,11 @@ public class UserController {
   public ResponseEntity<UserDTO> createUser(@Valid @RequestBody CreateUpdateUserDTO user) {
     logger.info("Creating user");
     return ResponseEntity.ok(userService.createUser(user));
+  }
+
+  @GetMapping("/user/orders/{id}")
+  public ResponseEntity<UserWithOrdersDTO> getUserWithOrdersById(@PathVariable Long id) {
+    logger.info("Searching for user orders with ID: {}", id);
+    return ResponseEntity.ok(userService.getUserWithOrdersById(id));
   }
 }
