@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,20 @@ public class UserService {
 
   @Autowired
   OrderMapper orderMapper;
+
+  public List<UserDTO> getAllUsers(String sortOrder, String orderBy) {
+    Sort.Direction orderDirection = Sort.Direction.ASC;
+
+    if (sortOrder.equals("DESC")) {
+      orderDirection = Sort.Direction.DESC;
+    }
+
+    return userRepo
+        .findAll(Sort.by(orderDirection, orderBy))
+        .stream()
+        .map(userMapper::UserToDTO)
+        .collect(Collectors.toList());
+  }
 
   public UserDTO getUserById(Long userId) {
     return userMapper
