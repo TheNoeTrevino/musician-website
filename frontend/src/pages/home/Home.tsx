@@ -1,3 +1,4 @@
+import { PieceService } from "../../services/PieceService";
 import { UserService } from "../../services/UserService";
 
 const Home = () => {
@@ -9,6 +10,15 @@ const Home = () => {
   };
   const logGetUserByRole = () => {
     console.log(UserService.getAllUsersByRole("ADMIN"));
+  };
+  const logGetUserWithOrders = () => {
+    console.log(UserService.getUserWithOrdersById(1));
+  };
+  const logGetAllUsers = () => {
+    console.log(UserService.getAllUsers("firstName", "DESC"));
+  };
+  const logAllPieces = () => {
+    console.log(PieceService.getAllPieces("title", "DESC"));
   };
   return (
     <>
@@ -46,9 +56,14 @@ const Home = () => {
         tincidunt id eget. Ridiculus arcu nascetur; parturient faucibus
         venenatis tincidunt duis nibh.
       </div>
-      <button onClick={logGetUser}>Get User</button>
-      <button onClick={logDeleteUser}>Delete User</button>
-      <button onClick={logGetUserByRole}>Get User by role</button>
+      <div className="flex flex-col bg-slate-600">
+        <button onClick={logGetUser}>Get User</button>
+        <button onClick={logDeleteUser}>Delete User</button>
+        <button onClick={logGetUserByRole}>Get User by role</button>
+        <button onClick={logGetUserWithOrders}>Get User with orders</button>
+        <button onClick={logGetAllUsers}>Get all Users</button>
+        <button onClick={logAllPieces}>Get all pieces</button>
+      </div>
     </>
   );
 };
