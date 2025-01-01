@@ -14,6 +14,7 @@ export interface CreateUpdateUserDTO {
 }
 
 export interface PieceDTO {
+  pieceId: number;
   title: string;
   composer: string;
   price: number;
