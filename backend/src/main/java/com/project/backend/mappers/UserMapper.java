@@ -11,20 +11,16 @@ import com.project.backend.models.Users;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
-  @Mappings({
-      @Mapping(source = "id", target = "userId")
-  })
   public UserDTO UserToDTO(Users user);
 
   @Mappings({
-      @Mapping(target =  "id", ignore = true),
-      @Mapping(target =  "orders", ignore = true),
-      @Mapping(target =  "createdAt", ignore = true)
+      @Mapping(target = "id", ignore = true),
+      @Mapping(target = "orders", ignore = true),
+      @Mapping(target = "createdAt", ignore = true)
   })
   public Users CreateUpateDTOToUser(CreateUpdateUserDTO dto);
 
   @Mappings({
-      @Mapping(source = "id", target = "userId"),
       @Mapping(target = "orders", ignore = true)
   })
   public UserWithOrdersDTO UserToDTOWithOrders(Users user);
