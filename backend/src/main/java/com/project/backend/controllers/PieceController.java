@@ -23,7 +23,6 @@ public class PieceController {
   @Autowired
   PieceService pieceService;
 
-  // TODO: add params
   @GetMapping("/")
   public ResponseEntity<List<PieceDTO>> getAllPieces(
     @RequestParam(required = false, defaultValue = "title") String orderBy,
