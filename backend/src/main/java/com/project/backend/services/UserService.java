@@ -84,16 +84,17 @@ public class UserService {
   }
 
   public UserWithOrdersDTO getUserWithOrdersById(Long userId) {
-    UserWithOrdersDTO userWithOrders = userMapper
-        .UserToDTOWithOrders(userRepo
-        .findById(userId)
-        .orElseThrow(() -> new NotFoundException("Order", userId)));
+    UserWithOrdersDTO userWithOrders = userMapper.UserToDTOWithOrders(
+        userRepo.findById(userId)
+            .orElseThrow(() -> new NotFoundException("Order", userId))
+        );
 
-    userWithOrders.setOrders(orderRepo
-        .findByUserId(userId)
-        .stream()
-        .map(orderMapper::OrderToDTO) 
-        .collect(Collectors.toList()));
+    userWithOrders.setOrders(
+        orderRepo.findByUserId(userId)
+            .stream()
+            .map(orderMapper::OrderToDTO) 
+            .collect(Collectors.toList())
+        );
 
     return userWithOrders;
   }
