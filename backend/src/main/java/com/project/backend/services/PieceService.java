@@ -39,9 +39,7 @@ public class PieceService {
       orderDirection = Sort.Direction.DESC;
     }
 
-    Sort sort = Sort.by(orderDirection, orderBy);
-
-    return piecesRepo.findAll(sort)
+    return piecesRepo.findAll(Sort.by(orderDirection, orderBy))
         .stream()
         .map(piecesMapper::PieceToDTO)
         .collect(Collectors.toList());
