@@ -26,8 +26,8 @@ public class PieceController {
   // TODO: add params
   @GetMapping("/")
   public ResponseEntity<List<PieceDTO>> getAllPieces(
-    @RequestParam(required = false) String orderBy,
-    @RequestParam(required = false) String sortOrder) {
+    @RequestParam(required = false, defaultValue = "title") String orderBy,
+    @RequestParam(required = false, defaultValue = "ASC") String sortOrder) {
     logger.info("Getting all pieces");
     return ResponseEntity.ok(pieceService.getAllPieces(sortOrder, orderBy));
   }
@@ -37,6 +37,4 @@ public class PieceController {
     logger.info("Fetching piece with id: {}", id);
     return ResponseEntity.ok(pieceService.getPieceById(id));
   }
-
-
 }
