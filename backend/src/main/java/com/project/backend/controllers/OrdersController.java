@@ -44,7 +44,7 @@ public class OrdersController {
 
   @PostMapping("/")
   public ResponseEntity<OrderDTO> createOrder(
-      @Valid @RequestBody CreateUpdateOrderDTO newOrderDTO) {
+    @Valid @RequestBody CreateUpdateOrderDTO newOrderDTO) {
     logger.info("Creating new order with body: {}", newOrderDTO);
     return ResponseEntity.ok(orderService.createOrder(newOrderDTO));
   }

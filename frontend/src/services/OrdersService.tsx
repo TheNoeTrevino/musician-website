@@ -1,4 +1,4 @@
-import { CreateOrderDTO, OrderDTO } from "../dtos/dtos";
+import {  OrderDTO } from "../dtos/dtos";
 
 export const OrderService = {
   async getOrderById(orderId: number): Promise<OrderDTO> {

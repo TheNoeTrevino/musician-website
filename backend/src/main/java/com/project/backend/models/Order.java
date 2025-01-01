@@ -14,6 +14,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -36,6 +37,7 @@ public class Order {
   @JoinColumn(name = "user_id", nullable = false)
   private Users user;
 
+  @Size(min = 1, message = "An order must have at lease one piece") 
   @ManyToMany(mappedBy = "orders")
   private List<Piece> pieces;
 

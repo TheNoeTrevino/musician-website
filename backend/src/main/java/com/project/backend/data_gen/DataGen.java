@@ -8,18 +8,14 @@ import com.project.backend.repositories.OrderRepository;
 import com.project.backend.repositories.PiecesRepository;
 import com.project.backend.repositories.UserRepository;
 import com.project.backend.models.Order;
-import jakarta.annotation.PostConstruct;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Configuration
@@ -40,7 +36,7 @@ public class DataGen {
 
   // NOTE: todos are missing information from sebastian
   @Transactional(rollbackFor = Exception.class)
-  @Bean
+  // @Bean
   public DataGen generateSampleData() {
     // adding the pieces he has written
     List<Piece> piecesList = new ArrayList<>();
