@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { PieceDTO } from "../../dtos/dtos";
 
 interface ShowcaseProps {
@@ -14,6 +15,9 @@ const Showcase = ({ piece }: ShowcaseProps) => {
       <div>{piece.yearComposed}</div>
       <div>{piece.timeLength}</div>
       <div>{piece.difficultyGrade}</div>
+      <Link to={"../"}>
+        <button>Back to home page</button>
+      </Link>
     </div>
   );
 };
