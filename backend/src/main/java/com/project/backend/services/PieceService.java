@@ -32,10 +32,10 @@ public class PieceService {
         .orElseThrow(() -> new NotFoundException("piece", pieceId)));
   }
 
-  public List<PieceDTO> getAllPieces(String orderBy, String sortOrder) { 
+  public List<PieceDTO> getAllPieces(String sortOrder, String orderBy) { 
     Sort.Direction orderDirection = Sort.Direction.ASC;
 
-    if (sortOrder == "DESC") {
+    if (sortOrder.equals("DESC")) {
       orderDirection = Sort.Direction.DESC;
     }
 
