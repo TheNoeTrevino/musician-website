@@ -72,12 +72,10 @@ public class UserService {
   public List<UserDTO> getUsersByRole(Role role) {
     List<Users> users = userRepo.findByRole(role);
 
-    List<UserDTO> usersDTO = users
+    return users
         .stream()
         .map(userMapper::UserToDTO)
         .collect(Collectors.toList());
-
-    return usersDTO;
   }
 
   public UserDTO createUser(CreateUpdateUserDTO dto) {
