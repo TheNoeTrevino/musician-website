@@ -10,7 +10,6 @@ import lombok.Data;
 @AllArgsConstructor
 @Data
 public class UserWithOrdersDTO {
-  private long userId;
   private String firstName;
   private String lastName;
   private String emailAddress;
