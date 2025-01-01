@@ -64,7 +64,6 @@ public class UserController {
     return ResponseEntity.ok(userService.getAllUsers(sortOrder, orderBy));
   }
 
-
   @GetMapping("/user/orders/{id}")
   public ResponseEntity<UserWithOrdersDTO> getUserWithOrdersById(@PathVariable Long id) {
     logger.info("Searching for user orders with ID: {}", id);
