@@ -1,9 +1,15 @@
+import CartSection from "../../components/CartSection";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+
 const Cart = () => {
   return (
-    <div>
-      <div>Cart</div>
-      <div>Cart</div>
-    </div>
+    <body className="flex flex-col  bg-black">
+      <Header />
+      <CartSection />
+
+      <Footer />
+    </body>
   );
 };
 
