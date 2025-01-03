@@ -18,6 +18,7 @@ const Showcase = ({ piece }: ShowcaseProps) => {
       <Link to={"../"}>
         <button>Back to home page</button>
       </Link>
+      <img src={"../../../public/compositions/" + piece.title} />
     </div>
   );
 };
