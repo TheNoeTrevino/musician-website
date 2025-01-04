@@ -17,6 +17,8 @@ function App() {
 
   const [pieces, setPieces] = useState<PieceDTO[]>([]);
 
+  // getting pieces from the backend so we can use all of them for the routes!
+  // Also, using this for sSong cards as well be good
   useEffect(() => {
     fetchPieces();
   }, []);
