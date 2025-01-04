@@ -1,5 +1,8 @@
+import { Link } from "react-router-dom";
 import { PieceService } from "../../services/PieceService";
 import { UserService } from "../../services/UserService";
+import { useState, useEffect } from "react";
+import { PieceDTO } from "../../dtos/dtos";
 
 const Home = () => {
   const logGetUser = () => {
@@ -20,6 +23,18 @@ const Home = () => {
   const logAllPieces = () => {
     console.log(PieceService.getAllPieces("title", "DESC"));
   };
+
+  const fetchPieces = async () => {
+    const pieces = await PieceService.getAllPieces();
+    setPieces(pieces);
+  };
+
+  const [pieces, setPieces] = useState<PieceDTO[]>([]);
+
+  useEffect(() => {
+    fetchPieces();
+  }, []);
+
   return (
     <>
       <div className="bg-red-500 font-semibold ">
@@ -56,13 +71,16 @@ const Home = () => {
         tincidunt id eget. Ridiculus arcu nascetur; parturient faucibus
         venenatis tincidunt duis nibh.
       </div>
-      <div className="flex flex-col bg-slate-600">
+      <div className="flex flex-col bg-slate-600 m-3">
         <button onClick={logGetUser}>Get User</button>
         <button onClick={logDeleteUser}>Delete User</button>
         <button onClick={logGetUserByRole}>Get User by role</button>
         <button onClick={logGetUserWithOrders}>Get User with orders</button>
         <button onClick={logGetAllUsers}>Get all Users</button>
         <button onClick={logAllPieces}>Get all pieces</button>
+        {pieces.map((piece) => (
+          <Link to={`/${piece.title.replace(" ", "-")}`}>{piece.title}</Link>
+        ))}
       </div>
     </>
   );
