@@ -22,8 +22,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-// TODO: add instrumentation
-// TODO: add photos -- as binary in db, then process the blob in the frontend
 @Data
 @Entity
 @Accessors(chain = true)

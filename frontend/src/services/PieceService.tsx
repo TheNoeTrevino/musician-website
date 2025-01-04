@@ -2,13 +2,15 @@ import { PieceDTO } from "../dtos/dtos";
 
 // TODO: make some test buttons for this
 export const PieceService = {
-  async getPiecesWithSort(
-    orderBy: string,
-    sortOrder: string,
-  ): Promise<PieceDTO[]> {
+  async getAllPieces(orderBy: string, sortOrder: string): Promise<PieceDTO[]> {
     try {
+      const params = new URLSearchParams({
+        orderBy: orderBy,
+        sortOrder: sortOrder,
+      });
+
       const response = await fetch(
-        `http://localhost:8080/pieces/?orderBy=${orderBy}&sortOrder=${sortOrder}`,
+        `http://localhost:8080/pieces/?${params.toString()}`,
         {
           method: "GET",
         },
