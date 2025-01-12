@@ -1,9 +1,9 @@
 import { IconChevronRight } from "@tabler/icons-react";
 import { songDummyData } from "../constants/songDummyData";
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ShopSecton = () => {
-  const [items, setItems] = useState(songDummyData);
+  const items = songDummyData;
 
   return (
     <div className="h-screen bg-black flex flex-row pr-52 ">
@@ -40,10 +40,13 @@ const ShopSecton = () => {
               src="/albums/1.png"
               alt="Music Album #4"
             />
-            <a href="/shop" className=" button bg-primary cursor-pointer z-10">
+            <Link
+              to={"/shop"}
+              className=" button bg-primary cursor-pointer z-10"
+            >
               Shop More
               <IconChevronRight />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

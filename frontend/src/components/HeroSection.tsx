@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const HeroSection = () => {
   return (
     <div className="h-screen bg-black flex flex-row">
@@ -16,12 +18,12 @@ const HeroSection = () => {
         </div>
 
         <div className="gap-5 flex">
-          <a href="/about" className=" buttonOutline cursor-pointer ">
+          <Link to={"/about"} className=" buttonOutline cursor-pointer ">
             Learn More
-          </a>
-          <a href="/shop" className="button bg-primary cursor-pointer ">
+          </Link>
+          <Link to={"/shop"} className="button bg-primary cursor-pointer ">
             Shop Now
-          </a>
+          </Link>
         </div>
       </div>
     </div>

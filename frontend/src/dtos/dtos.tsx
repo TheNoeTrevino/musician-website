@@ -23,6 +23,7 @@ export interface PieceDTO {
   numOfPlayers: number;
   difficultyGrade: number;
   timeLength: number; // this might be wrong
+  description: string;
 }
 
 export interface CreateUpdateOrderDTO {

@@ -45,6 +45,10 @@ public class Piece {
   @Column(name = "price")
   private Double price;
 
+  @NotNull(message = "A piece must have a description")
+  @Column(name = "description", length = 2000)
+  private String description;
+
   // this is just a year, not a whole date
   @PastOrPresent(message = "The year composed must be in either the past or present")
   @NotNull(message = "A piece must have a date in which it was composed")
@@ -79,11 +83,12 @@ public class Piece {
   )
   private Set<Order> orders = new HashSet<>();
 
-  public Piece(String title, String composer, Double price, Integer yearComposed, 
+  public Piece(String title, String composer, Double price, String description, Integer yearComposed, 
                 boolean hasElectronics, boolean completed, Integer numOfPlayers, Integer difficultyGrade, Duration timeLength) {
       this.title = title;
       this.composer = composer;
       this.price = price;
+      this.description = description;
       this.yearComposed = yearComposed;
       this.hasElectronics = hasElectronics;
       this.completed = completed;
