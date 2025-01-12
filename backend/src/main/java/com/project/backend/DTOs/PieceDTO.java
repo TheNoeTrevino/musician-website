@@ -9,9 +9,11 @@ public class PieceDTO {
   private String title;
   private String composer;
   private Double price;
+  private String description;
   private Integer yearComposed;
   private boolean hasElectronics;
   private Integer numOfPlayers;
   private Integer difficultyGrade;
   private Duration timeLength;
+  // TODO: add description to model as well
 }
