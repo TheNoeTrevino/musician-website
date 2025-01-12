@@ -2,6 +2,7 @@ import { IconTrash } from "@tabler/icons-react";
 import { useState } from "react";
 import { songDummyData } from "../constants/songDummyData";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const CartSection = () => {
   const [items, setItems] = useState(songDummyData);
@@ -14,18 +15,18 @@ const CartSection = () => {
           return { ...item, quantity: newQuantity };
         }
         return item;
-      })
+      }),
     );
   };
 
   const getSubtotal = () => {
     const activeItems = items.filter(
-      (item: { quantity: number }) => item.quantity > 0
+      (item: { quantity: number }) => item.quantity > 0,
     );
     const total = activeItems.reduce(
       (sum: number, item: { price: number; quantity: number }) =>
         sum + item.price * item.quantity,
-      0
+      0,
     );
     return { count: activeItems.length, total };
   };
@@ -41,18 +42,30 @@ const CartSection = () => {
               index === items.length - 1 ? "" : "border-b border-textGray/20"
             }`}
           >
-            <img
-              src={item.image}
-              alt={item.title}
-              className="min-w-44 h-full object-cover rounded"
-            />
+            <Link to={"/" + item.title.replace(/ /g, "-").toLowerCase()}>
+              <img
+                loading="lazy"
+                src={
+                  "../../public/albums/" +
+                  item.title.replace(/ /g, "-").toLowerCase() +
+                  ".png"
+                }
+                alt={item.title}
+                className="min-w-44 h-full object-cover rounded"
+              />
+            </Link>
 
             <div className="flex flex-col justify-between ">
               <div className="w-ful">
-                <h2 className="text-3xl mb-2">{item.title}</h2>
-                <p className="text-gray-400 text-sm truncate w-96">
-                  {item.description}
-                </p>
+                <Link to={"/" + item.title.replace(/ /g, "-").toLowerCase()}>
+                  <h2 className="text-3xl mb-2">{item.title}</h2>
+                </Link>
+
+                <Link to={"/" + item.title.replace(/ /g, "-").toLowerCase()}>
+                  <p className="text-gray-400 text-sm truncate w-96">
+                    {item.description}
+                  </p>
+                </Link>
               </div>
 
               <div className="flex flex-row items-center gap-4">
