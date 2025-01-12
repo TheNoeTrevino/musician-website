@@ -9,8 +9,7 @@ const Shop = () => {
   return (
     <body className="flex flex-col bg-black">
       <Header />
-      <SecondaryHeroSection backdrop={false} />
-      <div></div>
+      <SecondaryHeroSection backdrop={false} image={null} />
       <div className="h-px bg-gray-500 w-3/4 self-center my-32"></div>
       <StoreSecton />
       <SeperationSection />
