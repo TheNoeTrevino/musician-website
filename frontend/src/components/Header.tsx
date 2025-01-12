@@ -34,10 +34,21 @@ const Header = () => {
       </Link>
 
       <div className="flex gap-10 justify-center items-center self-stretch my-auto whitespace-nowrap min-w-[240px] w-[441px] max-md:max-w-full">
-        <IconBrandInstagram className="cursor-pointer" />
-        <IconBrandYoutube className="cursor-pointer" />
-        <IconBrandSoundcloud className="cursor-pointer" />
-        <IconBrandFacebook className="cursor-pointer" />
+        <a
+          href="https://www.instagram.com/sebastianhavnermusic/"
+          target="_blank"
+        >
+          <IconBrandInstagram className="cursor-pointer" />
+        </a>
+        <a href="https://www.youtube.com/@sebastianhavner" target="_blank">
+          <IconBrandYoutube className="cursor-pointer" />
+        </a>
+        <a href="https://soundcloud.com/sebastian-havner" target="_blank">
+          <IconBrandSoundcloud className="cursor-pointer" />
+        </a>
+        <a href="https://www.facebook.com/sebastian.havner.5" target="_blank">
+          <IconBrandFacebook className="cursor-pointer" />
+        </a>
         <Link
           to={"/cart"}
           className="flex items-center justify-center  cursor-pointer"
