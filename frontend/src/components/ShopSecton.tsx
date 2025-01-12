@@ -1,9 +1,8 @@
 import { IconChevronRight } from "@tabler/icons-react";
 import { songDummyData } from "../constants/songDummyData";
-import { useState } from "react";
 
 const ShopSecton = () => {
-  const [items, setItems] = useState(songDummyData);
+  const items = songDummyData;
 
   return (
     <div className="h-screen bg-black flex flex-row pr-52 ">
