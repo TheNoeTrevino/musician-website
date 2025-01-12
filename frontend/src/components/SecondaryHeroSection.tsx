@@ -3,15 +3,16 @@ interface SecondaryHeroSectionProps {
   image: string;
 }
 
-const SecondaryHeroSection: React.FC<SecondaryHeroSectionProps> = ({
+const SecondaryHeroSection = ({
   backdrop,
   image,
-}) => {
+}: SecondaryHeroSectionProps) => {
   return (
     <div className="h-screen bg-black flex flex-row relative">
       {backdrop ? (
         <div className="w-full h-full relative ">
           <img
+            loading="lazy"
             className="absolute inset-0 object-cover w-full h-full "
             src={image}
             alt="Music Album Background Image"
