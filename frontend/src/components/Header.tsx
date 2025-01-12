@@ -21,6 +21,7 @@ const Header = () => {
           Shop
         </Link>
 
+        {/* TODO: make this take us to a contact page instead of the section   */}
         <Link to={"/#contact"} className="cursor-pointer">
           Contact Us
         </Link>
