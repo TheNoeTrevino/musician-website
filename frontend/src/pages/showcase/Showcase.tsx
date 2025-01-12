@@ -13,7 +13,9 @@ const Shop = ({ piece }: { piece: PieceDTO }) => {
       <SecondaryHeroSection
         backdrop={true}
         image={
-          "../../../public/albums/" + piece.title.replace(/ /g, "-") + ".png"
+          "../../../public/albums/" +
+          piece.title.replace(/ /g, "-").toLowerCase() +
+          ".png"
         }
       />
       <ShowcaseSection piece={piece} />
