@@ -34,7 +34,7 @@ function App() {
         {pieces.map((piece) => (
           <Route
             key={piece.pieceId}
-            path={`${piece.title.replace(" ", "-")}`}
+            path={`${piece.title.replace(/ /g, "-")}`}
             element={<Showcase piece={piece} />}
           ></Route>
         ))}
