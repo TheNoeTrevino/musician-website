@@ -1,6 +1,6 @@
 interface SecondaryHeroSectionProps {
   backdrop: boolean;
-  image: string;
+  image: string | null;
 }
 
 const SecondaryHeroSection = ({
@@ -9,7 +9,7 @@ const SecondaryHeroSection = ({
 }: SecondaryHeroSectionProps) => {
   return (
     <div className="h-screen bg-black flex flex-row relative">
-      {backdrop ? (
+      {backdrop && image ? (
         <div className="w-full h-full relative ">
           <img
             loading="lazy"
