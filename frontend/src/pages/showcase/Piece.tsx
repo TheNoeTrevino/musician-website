@@ -8,14 +8,6 @@ const Shop = ({ piece }: { piece: PieceDTO }) => {
   useScrollToTop();
   return (
     <body className="flex flex-col  bg-black">
-      {/* <SecondaryHeroSection */}
-      {/*   backdrop={true} */}
-      {/*   image={ */}
-      {/*     "../../../public/albums/" + */}
-      {/*     piece.title.replace(/ /g, "-").toLowerCase() + */}
-      {/*     ".png" */}
-      {/*   } */}
-      {/* /> */}
       <ShowcaseSection piece={piece} />
       <SeperationSection />
       <ContactSection />
