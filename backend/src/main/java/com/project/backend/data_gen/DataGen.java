@@ -37,7 +37,7 @@ public class DataGen {
 
   // NOTE: todos are missing information from sebastian
   @Transactional(rollbackFor = Exception.class)
-  @Bean
+  // @Bean
   public DataGen generateSampleData() {
     // adding the pieces he has written
     List<Piece> piecesList = new ArrayList<>();
@@ -46,13 +46,13 @@ public class DataGen {
         new Piece(
             "Standing on The Shoulders of Giants",
             "Sebastian Havner", 50.00,
-            "Standing on The Shoulders of Giants is a piece for two marimba soloists with a backing percussion ensemble.The piece is written in a way that while the soloists are in the spotlight, the whole ensemble is very involved andrather than just support the soloists, they have prominent voices that create the piece’s energy.To me, the beauty of music is the emotions it can bring with it. There is a certain almost larger than life feeling Ihave experienced at many points listening to or performing music, when you are completely pulled into a piece itcan be a profound experience. I wrote Standing on the Shoulders of Giants with the intent to invoke thoseemotions in the audience and players while listening or performing.",
+            "Standing on The Shoulders of Giants is a piece for two marimba soloists with a backing percussion ensemble. The piece is written in a way that while the soloists are in the spotlight, the whole ensemble is very involved andrather than just support the soloists, they have prominent voices that create the piece’s energy.To me, the beauty of music is the emotions it can bring with it. There is a certain almost larger than life feeling Ihave experienced at many points listening to or performing music, when you are completely pulled into a piece itcan be a profound experience. I wrote Standing on the Shoulders of Giants with the intent to invoke thoseemotions in the audience and players while listening or performing.",
             2023, false, true, 8, 6, Duration.ofMinutes(8)));
 
     piecesList.add(
         new Piece("Celestial",
             "Sebastian Havner", 30.00,
-            "Celestial is a percussion sextet written for my alma mater Berkner Highschool. My intention with this piece wasto write a beginner-intermediate level percussion ensemble with the energy and feeling of a professional levelpiece so students can have an enjoyable experience and eventually seamlessly transition to the evolving modernplaystyle.The piece does not follow a strict storyline but one can loosely interpret it as an adventure into space and thereturn back home. It encapsulates the imagery of the cosmos as well as the unknown factor of what dangerscould be out there.",
+            "Celestial is a percussion sextet written for my alma mater, Berkner Highschool. My intention with this piece was to write a beginner-intermediate level percussion ensemble with the energy and feeling of a professional levelpiece so students can have an enjoyable experience and eventually seamlessly transition to the evolving modernplaystyle. The piece does not follow a strict storyline but one can loosely interpret it as an adventure into space and thereturn back home. It encapsulates the imagery of the cosmos as well as the unknown factor of what dangerscould be out there.",
             2024, true, true, 6, 3, Duration.ofMinutes(4)));
 
     piecesList.add(
