@@ -134,18 +134,16 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
             )}
           </div>
 
-          <div>
-            {/* Progress bar */}
-            <div className="relative w-full h-1  bg-reallyWhite rounded">
-              <div
-                className="absolute h-full bg-primary rounded"
-                style={{
-                  width: `${(audio.current.currentTime / audio.current.duration) * 100}%`,
-                }}
-              ></div>
-              <div className="absolute -top-6 right-0 text-white text-sm">
-                {progress + " "} /{" " + formatTime(audio.current.duration)}
-              </div>
+          {/* Progress bar */}
+          <div className="relative w-full h-1  bg-reallyWhite rounded">
+            <div
+              className="absolute h-full bg-primary rounded"
+              style={{
+                width: `${(audio.current.currentTime / audio.current.duration) * 100}%`,
+              }}
+            ></div>
+            <div className="absolute -top-6 right-0 text-white text-sm">
+              {progress + " "} /{" " + formatTime(audio.current.duration)}
             </div>
           </div>
 
