@@ -13,6 +13,16 @@ import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { PieceDTO } from "../dtos/dtos";
 
+function formatTime(time: number) {
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time % 60);
+  if (seconds > 9) {
+    return `${minutes}:${seconds}`;
+  } else {
+    return `${minutes}:0${seconds}`;
+  }
+}
+
 const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
