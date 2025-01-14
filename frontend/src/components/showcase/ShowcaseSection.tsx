@@ -93,6 +93,7 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
               Electronics
             </div>
 
+            {/* TODO: change this to use the backend  */}
             {/* <div className="flex flex-row gap-4 items-center"> */}
             {/*   {song.octaves > 0 ? ( */}
             {/*     `(${song.octaves}) Octave` */}
