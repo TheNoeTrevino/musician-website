@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <div className="absolute w-screen flex flex-row gap-10 justify-between items-center px-44 text-xl text-center text-white max-md:px-5 h-24 z-20  ">
       <div className="flex gap-10 justify-center items-center self-stretch my-auto font-light whitespace-nowrap min-w-[240px] w-[441px] max-md:max-w-full">
-        <Link to={"/#about"} className="cursor-pointer">
+        <Link to={"/"} className="cursor-pointer">
           About
         </Link>
         <Link to={"/shop"} className="cursor-pointer">
@@ -22,8 +22,8 @@ const Header = () => {
         </Link>
 
         {/* TODO: make this take us to a contact page instead of the section   */}
-        <Link to={"/#contact"} className="cursor-pointer">
-          Contact Us
+        <Link to={"/contact-me"} className="cursor-pointer">
+          Contact Me
         </Link>
       </div>
 
