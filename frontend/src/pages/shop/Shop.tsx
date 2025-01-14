@@ -3,6 +3,7 @@ import SecondaryHeroSection from "../../components/SecondaryHeroSection";
 import SeperationSection from "../../components/SeperationSection";
 import StoreSecton from "../../components/StoreSecton";
 
+// TODO: probably no secondary hero section here either
 const Shop = () => {
   return (
     <body className="flex flex-col bg-black">
