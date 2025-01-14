@@ -5,10 +5,7 @@ import Header from "../../components/Header";
 const Cart = () => {
   return (
     <body className="flex flex-col  bg-black">
-      <Header />
       <CartSection />
-
-      <Footer />
     </body>
   );
 };

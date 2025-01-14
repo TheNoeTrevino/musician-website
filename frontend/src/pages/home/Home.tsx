@@ -20,13 +20,11 @@ const Home = () => {
 
   return (
     <body className="flex flex-col ">
-      <Header />
       <HeroSection />
       <AboutSection />
       <SeperationSection />
       <ShopSecton />
       <ContactSection />
-      <Footer />
     </body>
   );
 };
