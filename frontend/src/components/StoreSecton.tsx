@@ -22,6 +22,8 @@ const StoreSecton = () => {
     fetchPieces();
   }, []);
 
+  // FIX: for some reason when you click a category, it takes you to the top. do
+  // not know why this is
   return (
     <div className="h-screen bg-black flex flex-row px-52 py-20 mb-20">
       <div className="w-1/3 text-4xl gap-20 flex flex-col text-white ">
