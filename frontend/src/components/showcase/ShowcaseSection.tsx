@@ -135,7 +135,7 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
           </div>
 
           <div className="progressbar-container">
-            {/* TODO: this is not working... needs to probably use more complay audio controls */}
+            {/* TODO: somehow need to make this choose where you are in the piece */}
             <div
               className="progressbar"
               style={{
