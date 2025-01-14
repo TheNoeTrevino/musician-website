@@ -14,9 +14,11 @@ import { toast } from "react-toastify";
 import { PieceDTO } from "../dtos/dtos";
 
 const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [quantity, setQuantity] = useState(1);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [quantity, setQuantity] = useState<number>(1);
   const [progress, setProgress] = useState("0:01");
+  const [duration, setDuration] = useState<number>(0);
+  const [audioReady, setAudioReady] = useState<boolean>(false);
   const audio = useRef(
     new Audio(
       "../../public/audios/" +
