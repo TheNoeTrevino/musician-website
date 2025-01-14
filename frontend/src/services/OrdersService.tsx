@@ -1,4 +1,4 @@
-import {  OrderDTO } from "../dtos/dtos";
+import { OrderDTO } from "../dtos/dtos";
 
 export const OrderService = {
   async getOrderById(orderId: number): Promise<OrderDTO> {
@@ -61,7 +61,9 @@ export const OrderService = {
 
       return ordersData;
     } catch (error) {
-      throw new Error("something went wrong fetch orders for user");
+      throw new Error(
+        `something went wrong fetch orders for user. Error: ${error}`,
+      );
     }
   },
   // TODO: add create order
