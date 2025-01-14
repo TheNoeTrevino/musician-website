@@ -1,6 +1,4 @@
 import ContactSection from "../../components/ContactSection";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
 import SecondaryHeroSection from "../../components/SecondaryHeroSection";
 import SeperationSection from "../../components/SeperationSection";
 import StoreSecton from "../../components/StoreSecton";
