@@ -9,6 +9,7 @@ import { PieceService } from "./services/PieceService";
 import { useEffect, useState } from "react";
 import { PieceDTO } from "./dtos/dtos";
 import Layout from "./components/Layout";
+import ContactSection from "./components/ContactSection";
 
 function App() {
   const fetchPieces = async () => {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/contact-me" element={<ContactSection />} />
           <Route path="*" element={<ErrorPage />} />
           {pieces.map((piece) => (
             <Route
