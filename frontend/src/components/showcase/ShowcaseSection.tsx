@@ -9,10 +9,11 @@ import {
   IconPlayerPlayFilled,
   IconUsers,
 } from "@tabler/icons-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { PieceDTO } from "../dtos/dtos";
+import { PieceDTO } from "../../dtos/dtos";
 
+// TODO: this is giving a weird pace to the size of some seconds
 function formatTime(time: number) {
   const minutes = Math.floor(time / 60);
   const seconds = Math.floor(time % 60);
@@ -26,16 +27,12 @@ function formatTime(time: number) {
 const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
-  const [progress, setProgress] = useState("0:01");
-  const [duration, setDuration] = useState<number>(0);
-  const [audioReady, setAudioReady] = useState<boolean>(false);
-  const audio = useRef(
-    new Audio(
-      "../../public/audios/" +
-        piece.title.replace(/ /g, "-").toLowerCase() +
-        ".mp3",
-    ),
-  );
+  const [progress, setProgress] = useState<string>("0:00");
+  const pieceAudio =
+    "../../public/audios/" +
+    piece.title.replace(/ /g, "-").toLowerCase() +
+    ".mp3";
+  const audio = useRef(new Audio(pieceAudio));
 
   // TODO: this is not pausing
   const handlePlayPauseClick = () => {
@@ -47,40 +44,50 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
     setIsPlaying(!isPlaying);
   };
 
+  useEffect(() => {
+    const handleTimeUpdate = () => {
+      setProgress(formatTime(audio.current.currentTime));
+    };
+
+    audio.current.addEventListener("timeupdate", handleTimeUpdate);
+
+    return () => {
+      audio.current.removeEventListener("timeupdate", handleTimeUpdate);
+    };
+  }, []);
+
   return (
     <>
-      <div className="min-h-screen  flex flex-row mx-52   mt-24">
-        <div className="flex flex-col w-full h-screen  z-10  text-textGray justify-between py-3">
-          <div className="flex flex-col gap-2">
-            <p className="text-7xl text-white">{piece.title}</p>
-            <span className="text-textGray text-lg font-light w-4/5  ">
-              {piece.description}
-            </span>
+      <div className="main-container">
+        <div className="information-container">
+          <div className="title-description-container">
+            <p className="title">{piece.title}</p>
+            <span className="description">{piece.description}</span>
           </div>
 
-          <div className="flex flex-col gap-4 text-3xl font-light">
-            <div className="flex flex-row gap-4 items-center">
+          <div className="attributes-container">
+            <div className="attributes">
               <IconCalendar /> {piece.yearComposed}
             </div>
 
-            <div className="flex flex-row gap-4 items-center">
+            <div className="attributes">
               <IconUsers /> {piece.numOfPlayers} Players
             </div>
 
-            <div className="flex flex-row gap-4 items-center">
+            <div className="attributes">
               <IconBrandSpeedtest /> {piece.difficultyGrade}{" "}
               {piece.difficultyGrade < 3 ? "Beginner" : "Advanced"}
             </div>
 
-            <div className="flex flex-row gap-4 items-center">
+            <div className="attributes">
               <IconClock /> {piece.timeLength} Minutes
             </div>
 
             <div className="flex flex-row gap-4 items-center">
               {piece.hasElectronics ? (
-                <IconCircleCheckFilled className="text-primary size-6" />
+                <IconCircleCheckFilled className="electronics-check" />
               ) : (
-                <IconCircleXFilled className="text-primary size-6" />
+                <IconCircleXFilled className="electronics-check" />
               )}
               Electronics
             </div>
@@ -132,10 +139,12 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
             <div className="relative w-full h-1  bg-reallyWhite rounded">
               <div
                 className="absolute h-full bg-primary rounded"
-                style={{ width: "2%" }}
+                style={{
+                  width: `${(audio.current.currentTime / audio.current.duration) * 100}%`,
+                }}
               ></div>
               <div className="absolute -top-6 right-0 text-white text-sm">
-                {progress} / {piece.timeLength}
+                {progress + " "} /{" " + formatTime(audio.current.duration)}
               </div>
             </div>
           </div>
