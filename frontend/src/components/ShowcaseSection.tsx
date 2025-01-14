@@ -9,7 +9,7 @@ import {
   IconPlayerPlayFilled,
   IconUsers,
 } from "@tabler/icons-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { PieceDTO } from "../dtos/dtos";
 
@@ -17,8 +17,21 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [progress, setProgress] = useState("0:01");
+  const audio = useRef(
+    new Audio(
+      "../../public/audios/" +
+        piece.title.replace(/ /g, "-").toLowerCase() +
+        ".mp3",
+    ),
+  );
 
-  const handlePlay = () => {
+  // TODO: this is not pausing
+  const handlePlayPauseClick = () => {
+    if (isPlaying) {
+      audio.current.pause();
+    } else {
+      audio.current.play();
+    }
     setIsPlaying(!isPlaying);
   };
 
@@ -91,12 +104,12 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
             />
             {isPlaying ? (
               <IconPlayerPauseFilled
-                onClick={handlePlay}
+                onClick={handlePlayPauseClick}
                 className="absolute z-30 text-primary size-28 hover:text-reallyWhite cursor-pointer"
               />
             ) : (
               <IconPlayerPlayFilled
-                onClick={handlePlay}
+                onClick={handlePlayPauseClick}
                 className="absolute z-30 text-primary size-28 hover:text-reallyWhite cursor-pointer"
               />
             )}
