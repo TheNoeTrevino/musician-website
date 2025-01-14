@@ -1,11 +1,10 @@
-import { Link } from "react-router-dom";
+import ErrorDisplay from "../components/ErrorDisplay";
 
 const ErrorPage = () => {
   return (
-    <div>
-      <div>The page you are looking for does not exist</div>
-      <Link to={"./"}>Please go back to the home page</Link>
-    </div>
+    <body className="flex flex-col ">
+      <ErrorDisplay />
+    </body>
   );
 };
 
