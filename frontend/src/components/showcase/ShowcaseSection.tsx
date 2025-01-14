@@ -12,7 +12,6 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { PieceDTO } from "../../dtos/dtos";
-import "./ShowcaseSection.css";
 
 // TODO: this is giving a weird pace to the size of some seconds
 function formatTime(time: number) {
@@ -68,7 +67,7 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
             </span>
           </div>
 
-          <div className="flex flex-col gap-4 text-3xl font-light;">
+          <div className="flex flex-col gap-4 text-3xl font-light">
             <div className="flex flex-row gap-4 items-center">
               <IconCalendar /> {piece.yearComposed}
             </div>
@@ -108,7 +107,7 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
           </div>
         </div>
 
-        <div className="flex flex-col  justify-between text-2xl font-medium text-textGray w-full  gap-4 h-screen py-3;">
+        <div className="flex flex-col  justify-between text-2xl font-medium text-textGray w-full  gap-4 h-screen py-3">
           <div className="relative flex items-center justify-center">
             <img
               className="z-10 rounded-full w-[550px] h-[550px] object-cover"
