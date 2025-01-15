@@ -4,24 +4,49 @@
 
 ### Frontend
 
-React
+Typescript
 
-Tailwind CSS
+- React
+- Tailwind CSS
 
 ### Backend
 
 Java
+
 - Hibernate
 - Spring
 
 ## How to run
 
-### backend:
+### Frontend:
 
-```cd backend```
+1. Navigate to the `frontend` directory:
+   ```bash
+   cd frontend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+4. Open [http://localhost:5173/](http://localhost:5173/) in your browser to view the site.
 
-```./gradlew bootRun```
+### Backend:
 
+1. Navigate to the `backend` directory:
 
-for now you are going to want the set the ```application.properties``` file to
-the database that you have.
+   ```bash
+   cd backend
+   ```
+
+2. Start the backend server:
+
+   ```bash
+   ./gradlew bootRun
+   ```
+
+3. Configure the database connection:  
+   Open the `application.properties` file and update the database configuration to match your setup.
