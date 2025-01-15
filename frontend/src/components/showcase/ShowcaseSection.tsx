@@ -58,40 +58,43 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
 
   return (
     <>
-      <div className="main-container">
-        <div className="information-container">
-          <div className="title-description-container">
-            <p className="title">{piece.title}</p>
-            <span className="description">{piece.description}</span>
+      <div className="min-h-screen flex flex-row mx-52 mt-24">
+        <div className="flex flex-col w-full h-screen  z-10  text-textGray justify-between py-3">
+          <div className="flex flex-col gap-2">
+            <p className="text-7xl text-white">{piece.title}</p>
+            <span className="text-textGray text-lg font-light w-4/5">
+              {piece.description}
+            </span>
           </div>
 
-          <div className="attributes-container">
-            <div className="attributes">
+          <div className="flex flex-col gap-4 text-3xl font-light">
+            <div className="flex flex-row gap-4 items-center">
               <IconCalendar /> {piece.yearComposed}
             </div>
 
-            <div className="attributes">
+            <div className="flex flex-row gap-4 items-center">
               <IconUsers /> {piece.numOfPlayers} Players
             </div>
 
-            <div className="attributes">
+            <div className="flex flex-row gap-4 items-center">
               <IconBrandSpeedtest /> {piece.difficultyGrade}{" "}
               {piece.difficultyGrade < 3 ? "Beginner" : "Advanced"}
             </div>
 
-            <div className="attributes">
+            <div className="flex flex-row gap-4 items-center">
               <IconClock /> {piece.timeLength} Minutes
             </div>
 
             <div className="flex flex-row gap-4 items-center">
               {piece.hasElectronics ? (
-                <IconCircleCheckFilled className="electronics-check" />
+                <IconCircleCheckFilled className="text-primary size-6" />
               ) : (
-                <IconCircleXFilled className="electronics-check" />
+                <IconCircleXFilled className="text-primary size-6" />
               )}
               Electronics
             </div>
 
+            {/* TODO: change this to use the backend  */}
             {/* <div className="flex flex-row gap-4 items-center"> */}
             {/*   {song.octaves > 0 ? ( */}
             {/*     `(${song.octaves}) Octave` */}
@@ -104,10 +107,10 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
           </div>
         </div>
 
-        <div className="music-cart-container">
-          <div className="image-container">
+        <div className="flex flex-col  justify-between text-2xl font-medium text-textGray w-full  gap-4 h-screen py-3">
+          <div className="relative flex items-center justify-center">
             <img
-              className="art"
+              className="z-10 rounded-full w-[550px] h-[550px] object-cover"
               src={
                 "../../public/albums/" +
                 piece.title.replace(/ /g, "-").toLowerCase() +
@@ -117,48 +120,48 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
             />
             <img
               loading="lazy"
-              className="record-overlay"
+              className="absolute z-20 w-[550px] h-[550px] opacity-30 object-cover"
               src="/record_overlay.png"
               alt="Music Album Overlay"
             />
             {isPlaying ? (
               <IconPlayerPauseFilled
                 onClick={handlePlayPauseClick}
-                className="player-icon"
+                className="absolute z-30 text-primary size-28 hover:text-reallyWhite cursor-pointer"
               />
             ) : (
               <IconPlayerPlayFilled
                 onClick={handlePlayPauseClick}
-                className="player-icon"
+                className="absolute z-30 text-primary size-28 hover:text-reallyWhite cursor-pointer"
               />
             )}
           </div>
 
-          <div className="progressbar-container">
+          <div className="relative w-full h-1  bg-reallyWhite rounded">
             {/* TODO: somehow need to make this choose where you are in the piece */}
             <div
-              className="progressbar"
+              className="absolute h-full bg-primary rounded"
               style={{
                 width: `${(audio.current.currentTime / audio.current.duration) * 100}%`,
               }}
             ></div>
-            <div className="progress-fraction">
+            <div className="absolute -top-6 right-0 text-white text-sm">
               {progress + " "} /{" " + formatTime(audio.current.duration)}
             </div>
           </div>
 
           <div>
-            <div className="cart-section">
-              <div className="button primary-button">
+            <div className="flex flex-row justify-between text-2xl">
+              <div className="button bg-primary py-6">
                 Quantity {quantity} <IconChevronDown />
               </div>
-              <p className="price-text">${piece.price}</p>
+              <p className="text-6xl text-white">${piece.price}</p>
             </div>
             <a
               onClick={() => {
                 toast.success(piece.title + " Added to Cart");
               }}
-              className="button primary-button"
+              className="button bg-primary py-6"
             >
               Add To Cart
             </a>

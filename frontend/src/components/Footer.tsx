@@ -15,10 +15,21 @@ const Footer = () => {
         <div className="mt-2 text-xs">© Copyright 2025</div>
       </div>
       <div className="flex flex-row gap-10 justify-center items-center text-white ">
-        <IconBrandInstagram className="cursor-pointer size-8" />
-        <IconBrandYoutube className="cursor-pointer size-8" />
-        <IconBrandSoundcloud className="cursor-pointer size-8" />
-        <IconBrandFacebook className="cursor-pointer size-8" />
+        <a
+          href="https://www.instagram.com/sebastianhavnermusic/"
+          target="_blank"
+        >
+          <IconBrandInstagram className="cursor-pointer" />
+        </a>
+        <a href="https://www.youtube.com/@sebastianhavner" target="_blank">
+          <IconBrandYoutube className="cursor-pointer" />
+        </a>
+        <a href="https://soundcloud.com/sebastian-havner" target="_blank">
+          <IconBrandSoundcloud className="cursor-pointer" />
+        </a>
+        <a href="https://www.facebook.com/sebastian.havner.5" target="_blank">
+          <IconBrandFacebook className="cursor-pointer" />
+        </a>
       </div>
     </div>
   );

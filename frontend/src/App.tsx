@@ -8,6 +8,8 @@ import ErrorPage from "./pages/ErrorPage";
 import { PieceService } from "./services/PieceService";
 import { useEffect, useState } from "react";
 import { PieceDTO } from "./dtos/dtos";
+import Layout from "./components/Layout";
+import ContactSection from "./components/ContactSection";
 
 function App() {
   const fetchPieces = async () => {
@@ -25,20 +27,23 @@ function App() {
 
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="*" element={<ErrorPage />} />
-        {pieces.map((piece) => (
-          <Route
-            key={piece.pieceId}
-            path={`${piece.title.replace(/ /g, "-")}`}
-            element={<Showcase piece={piece} />}
-          ></Route>
-        ))}
-      </Routes>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/contact-me" element={<ContactSection />} />
+          <Route path="*" element={<ErrorPage />} />
+          {pieces.map((piece) => (
+            <Route
+              key={piece.pieceId}
+              path={`${piece.title.replace(/ /g, "-")}`}
+              element={<Showcase piece={piece} />}
+            ></Route>
+          ))}
+        </Routes>
+      </Layout>
     </Router>
   );
 }

@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { PieceDTO } from "../dtos/dtos";
+import { useEffect } from "react";
 
 const PieceCard = ({ piece }: { piece: PieceDTO }) => {
+  useEffect(() => window.scroll(0, 0));
   return (
     <Link
       to={"/" + piece.title.replace(/ /g, "-")}
       className="text-white flex flex-col items-center justify-center text-center w-full "
-      state={piece}
     >
       <div className="bg-reallyBlack rounded-t-lg w-full text-sm h-12 flex items-center justify-center">
         {piece.title}

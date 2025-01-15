@@ -14,20 +14,35 @@ const ContactSection = () => {
 
       <div className="flex flex-col  justify-between text-2xl font-light text-textGray w-full gap-5 ">
         <div className="flex flex-row  gap-6 justify-between w-full rounded-lg min-h-[62px]">
-          <div className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full ">
-            First Name
-          </div>
-          <div className="flex cursor-text items-center  px-6 h-full rounded-xl border border-solid border-white w-full ">
-            Last Name
-          </div>
+          <input
+            className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit "
+            type="text"
+            name="first-name"
+            placeholder="First Name"
+          />
+          <input
+            className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit "
+            type="text"
+            name="last-name"
+            placeholder="Last Name"
+          />
         </div>
-        <div className=" py-2 cursor-text  px-6 h-full rounded-xl border border-solid border-white w-full ">
-          Email
-        </div>
-        <div className=" cursor-text  py-2  px-6 h-full rounded-xl border border-solid border-white w-full ">
-          Message
-        </div>
-        <div className="button   w-full text-4xl font-semibold text-center  bg-primary rounded-xl border border-solid  min-h-[77px] ">
+        <input
+          className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit "
+          type="text"
+          name="email"
+          placeholder="Email"
+        />
+        <input
+          className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit "
+          type="text"
+          name="message"
+          placeholder="Message"
+        />
+        <div
+          className="button   w-full text-4xl font-semibold text-center  bg-primary rounded-xl border border-solid  min-h-[77px]"
+          onClick={() => alert("your message has been sent")}
+        >
           Send
         </div>
       </div>
