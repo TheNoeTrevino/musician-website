@@ -5,25 +5,43 @@ import { PieceService } from "../services/PieceService";
 import PieceCard from "./PieceCard";
 
 const StoreSecton = () => {
+  const [allPieces, setAllPieces] = useState<PieceDTO[] | undefined>(undefined);
   const [pieces, setPieces] = useState<PieceDTO[] | undefined>(undefined);
 
-  const [currentCateogry, setCurrentCategory] = useState("Solo");
+  const [currentCateogry, setCurrentCategory] = useState("solo");
 
   const handleCategoryChange = (category: string) => {
     setCurrentCategory(category);
+    if (category === "all") {
+      setPieces(allPieces);
+    } else {
+      // setPieces(allPieces?.filter((piece) => piece.category === category));
+    }
   };
 
   const fetchPieces = async () => {
-    const allPieces = await PieceService.getAllPieces();
-    setPieces(allPieces);
+    const fetchedPieces = await PieceService.getAllPieces();
+    setAllPieces(fetchedPieces); // Save the original data
+    setPieces(fetchedPieces); // Set the initial display data
   };
 
   useEffect(() => {
     fetchPieces();
   }, []);
 
-  // FIX: for some reason when you click a category, it takes you to the top. do
-  // not know why this is
+  const handleTextChange = (e: any) => {
+    const searchText = e.target.value.toLowerCase();
+    if (!searchText) {
+      setPieces(allPieces); // Reset to all pieces if the search text is empty
+    } else {
+      setPieces(
+        allPieces?.filter((piece) =>
+          piece.title.toLowerCase().includes(searchText)
+        )
+      );
+    }
+  };
+
   return (
     <div className="h-screen bg-black flex flex-row px-52 py-20 mb-20">
       <div className="w-1/3 text-4xl gap-20 flex flex-col text-white ">
@@ -31,30 +49,30 @@ const StoreSecton = () => {
         <div className=" text-3xl h-full flex flex-col text-textGray gap-10 border-r border-textGray/40">
           <p
             className={`${
-              currentCateogry === "All" && "text-white"
+              currentCateogry === "all" && "text-white"
             } cursor-pointer`}
             onClick={() => {
-              handleCategoryChange("All");
+              handleCategoryChange("all");
             }}
           >
             All
           </p>
           <p
             className={`${
-              currentCateogry === "Solo" && "text-white"
+              currentCateogry === "solo" && "text-white"
             } cursor-pointer`}
             onClick={() => {
-              handleCategoryChange("Solo");
+              handleCategoryChange("solo");
             }}
           >
             Solo
           </p>
           <p
             className={`${
-              currentCateogry === "Percussion Ensemble" && "text-white"
+              currentCateogry === "percussion-ensemble" && "text-white"
             } cursor-pointer`}
             onClick={() => {
-              handleCategoryChange("Percussion Ensemble");
+              handleCategoryChange("percussion-ensemble");
             }}
           >
             Percussion Ensemble
@@ -65,17 +83,26 @@ const StoreSecton = () => {
       <div className="flex flex-col w-2/3 justify-between  z-10  gap-11 ml-20">
         <div className="flex flex-row  gap-10">
           <p className="text-7xl text-white">Pieces</p>
-          <div className="buttonOutline w-full gap-3 cursor-text text-textGray">
+          <div className="border border-r-10 rounded-xl flex items-center px-4 w-full gap-3  text-textGray">
             <IconSearch />
-            Search
+            <input
+              onChange={handleTextChange}
+              className="bg-black w-full h-1/2 "
+              type="text"
+              placeholder="Search"
+            />
           </div>
         </div>
 
         <div className="grid grid-cols-3 gap-3 bg-reallyBlack/30 p-6 rounded-lg overflow-y-scroll h-full justify-items-start items-start">
           {pieces ? (
-            pieces.map((piece) => <PieceCard piece={piece} />)
+            pieces.length > 0 ? (
+              pieces.map((piece) => <PieceCard piece={piece} />)
+            ) : (
+              <div className="text-white">No pieces found.</div>
+            )
           ) : (
-            <div>loading...</div>
+            <div className="text-white">Loading...</div>
           )}
         </div>
       </div>
