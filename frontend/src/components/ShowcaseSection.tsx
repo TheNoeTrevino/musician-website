@@ -82,7 +82,7 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
             </div>
 
             <div className="flex flex-row gap-4 items-center">
-              <IconClock /> {piece.timeLength} Minutes
+              <IconClock /> {formatTime(audio.current.duration)} Minutes
             </div>
 
             <div className="flex flex-row gap-4 items-center">
