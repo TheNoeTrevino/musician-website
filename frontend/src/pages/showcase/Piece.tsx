@@ -1,6 +1,6 @@
 import ContactSection from "../../components/ContactSection";
 import SeperationSection from "../../components/SeperationSection";
-import ShowcaseSection from "../../components/showcase/ShowcaseSection";
+import ShowcaseSection from "../../components/ShowcaseSection";
 import { PieceDTO } from "../../dtos/dtos";
 import useScrollToTop from "../../hooks/ScrollTop";
 

@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { PieceDTO } from "./dtos/dtos";
 import Layout from "./components/Layout";
 import ContactSection from "./components/ContactSection";
+import About from "./pages/about/About";
 
 function App() {
   const fetchPieces = async () => {
@@ -19,8 +20,6 @@ function App() {
 
   const [pieces, setPieces] = useState<PieceDTO[]>([]);
 
-  // getting pieces from the backend so we can use all of them for the routes!
-  // Also, using this for sSong cards as well be good
   useEffect(() => {
     fetchPieces();
   }, []);
@@ -34,6 +33,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/contact-me" element={<ContactSection />} />
+          <Route path="/about" element={<About />} />
           <Route path="*" element={<ErrorPage />} />
           {pieces.map((piece) => (
             <Route
