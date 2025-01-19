@@ -6,7 +6,7 @@ import {
   IconCircleCheckFilled,
   IconCircleXFilled,
 } from "@tabler/icons-react";
-import { PieceDTO } from "../dtos/dtos";
+import { PieceDTO } from "../../dtos/dtos";
 
 const PieceAttributeCard = ({
   piece: piece,
