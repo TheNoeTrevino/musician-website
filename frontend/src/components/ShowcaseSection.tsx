@@ -1,17 +1,12 @@
 import {
-  IconBrandSpeedtest,
-  IconCalendar,
   IconChevronDown,
-  IconCircleCheckFilled,
-  IconCircleXFilled,
-  IconClock,
   IconPlayerPauseFilled,
   IconPlayerPlayFilled,
-  IconUsers,
 } from "@tabler/icons-react";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { PieceDTO } from "../dtos/dtos";
+import PieceAttributeCard from "./PieceAttributeCard";
 
 // TODO: this is giving a weird pace to the size of some seconds
 function formatTime(time: number) {
@@ -65,54 +60,8 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
 
   return (
     <>
-      <div className="min-h-screen flex flex-row mx-52 mt-24">
-        <div className="flex flex-col w-full h-screen  z-10  text-textGray justify-between py-3">
-          <div className="flex flex-col gap-2">
-            <p className="text-7xl text-white">{piece.title}</p>
-            <span className="text-textGray text-lg font-light w-4/5">
-              {piece.description}
-            </span>
-          </div>
-
-          <div className="flex flex-col gap-4 text-3xl font-light">
-            <div className="flex flex-row gap-4 items-center">
-              <IconCalendar /> {piece.yearComposed}
-            </div>
-
-            <div className="flex flex-row gap-4 items-center">
-              <IconUsers /> {piece.numOfPlayers} Players
-            </div>
-
-            <div className="flex flex-row gap-4 items-center">
-              <IconBrandSpeedtest /> {piece.difficultyGrade}{" "}
-              {piece.difficultyGrade < 3 ? "Beginner" : "Advanced"}
-            </div>
-
-            <div className="flex flex-row gap-4 items-center">
-              <IconClock /> {duration} Minutes
-            </div>
-
-            <div className="flex flex-row gap-4 items-center">
-              {piece.hasElectronics ? (
-                <IconCircleCheckFilled className="text-primary size-6" />
-              ) : (
-                <IconCircleXFilled className="text-primary size-6" />
-              )}
-              Electronics
-            </div>
-
-            {/* TODO: change this to use the backend  */}
-            {/* <div className="flex flex-row gap-4 items-center"> */}
-            {/*   {song.octaves > 0 ? ( */}
-            {/*     `(${song.octaves}) Octave` */}
-            {/*   ) : ( */}
-            {/*     <> */}
-            {/*       <IconCircleXFilled className="text-primary size-6" /> Octaves */}
-            {/*     </> */}
-            {/*   )} */}
-            {/* </div> */}
-          </div>
-        </div>
+      <div className="min-h-screen flex flex-row mx-48 mt-24">
+        <PieceAttributeCard piece={piece} duration={duration} />
 
         <div className="flex flex-col  justify-between text-2xl font-medium text-textGray w-full  gap-4 h-screen py-3">
           <div className="relative flex items-center justify-center">
