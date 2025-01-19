@@ -1,9 +1,4 @@
-import {
-  IconBrandFacebook,
-  IconBrandInstagram,
-  IconBrandSoundcloud,
-  IconBrandYoutube,
-} from "@tabler/icons-react";
+import Socials from "./Socials";
 
 const Footer = () => {
   return (
@@ -15,33 +10,7 @@ const Footer = () => {
         <div className="mt-2 text-xs">© Copyright 2025</div>
       </div>
       <div className="flex flex-row gap-10 justify-center items-center text-white ">
-        <a
-          href="https://www.instagram.com/sebastianhavnermusic/"
-          target="_blank"
-        >
-          <IconBrandInstagram
-            strokeWidth={1}
-            className="cursor-pointer hover:scale-105 transition-transform"
-          />
-        </a>
-        <a href="https://www.youtube.com/@sebastianhavner" target="_blank">
-          <IconBrandYoutube
-            strokeWidth={1}
-            className="cursor-pointer hover:scale-105 transition-transform"
-          />
-        </a>
-        <a href="https://soundcloud.com/sebastian-havner" target="_blank">
-          <IconBrandSoundcloud
-            strokeWidth={1}
-            className="cursor-pointer hover:scale-105 transition-transform"
-          />
-        </a>
-        <a href="https://www.facebook.com/sebastian.havner.5" target="_blank">
-          <IconBrandFacebook
-            strokeWidth={1}
-            className="cursor-pointer hover:scale-105 transition-transform"
-          />
-        </a>
+        <Socials />
       </div>
     </div>
   );
