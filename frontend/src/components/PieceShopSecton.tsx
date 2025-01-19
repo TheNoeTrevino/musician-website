@@ -103,6 +103,7 @@ const StoreSecton = () => {
 
       <div className="flex flex-col w-2/3 justify-between  z-10  gap-11 ml-20">
         <div className="flex flex-row  gap-10">
+          {/* TODO: remove this */}
           <p className="text-7xl text-white">Pieces</p>
           <div className="border border-r-10 rounded-xl flex items-center px-4 w-full gap-3  text-textGray">
             <IconSearch />
