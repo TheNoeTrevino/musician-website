@@ -120,10 +120,10 @@ const StoreSecton = () => {
             pieces.length > 0 ? (
               pieces.map((piece) => <PieceCard piece={piece} />)
             ) : (
-              <div className="text-white">No pieces found.</div>
+              <div className="text-white text-3xl">No pieces found.</div>
             )
           ) : (
-            <div className="text-white">Loading...</div>
+            <div className="text-white text-3xl">Loading...</div>
           )}
         </div>
       </div>
