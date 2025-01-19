@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { PieceDTO } from "../dtos/dtos";
 import PieceAttributeCard from "./showcase/PieceAttributeCard";
+import AudioDisplay from "./showcase/AudioDisplay";
 
 // TODO: this is giving a weird pace to the size of some seconds
 function formatTime(time: number) {
@@ -20,7 +21,6 @@ function formatTime(time: number) {
 }
 
 const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
   const [progress, setProgress] = useState<string>("0:00");
   const [duration, setDuration] = useState<string>("0:00");
@@ -31,15 +31,6 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
   const audio = useRef(new Audio(pieceAudio));
 
   // TODO: this is not pausing
-  const handlePlayPauseClick = () => {
-    if (isPlaying) {
-      audio.current.pause();
-    } else {
-      audio.current.play();
-    }
-    setIsPlaying(!isPlaying);
-  };
-
   const handleTimeUpdate = () => {
     setProgress(formatTime(audio.current.currentTime));
   };
@@ -64,47 +55,12 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
         <PieceAttributeCard piece={piece} duration={duration} />
 
         <div className="flex flex-col  justify-between text-2xl font-medium text-textGray w-full  gap-4 h-screen py-3">
-          <div className="relative flex items-center justify-center">
-            <img
-              className="z-10 rounded-full w-[550px] h-[550px] object-cover"
-              src={
-                "../../public/albums/" +
-                piece.title.replace(/ /g, "-").toLowerCase() +
-                ".png"
-              }
-              alt="Music Album"
-            />
-            <img
-              loading="lazy"
-              className="absolute z-20 w-[550px] h-[550px] opacity-30 object-cover"
-              src="/record_overlay.png"
-              alt="Music Album Overlay"
-            />
-            {isPlaying ? (
-              <IconPlayerPauseFilled
-                onClick={handlePlayPauseClick}
-                className="absolute z-30 text-primary size-28 hover:text-reallyWhite cursor-pointer"
-              />
-            ) : (
-              <IconPlayerPlayFilled
-                onClick={handlePlayPauseClick}
-                className="absolute z-30 text-primary size-28 hover:text-reallyWhite cursor-pointer"
-              />
-            )}
-          </div>
-
-          <div className="relative w-full h-1  bg-reallyWhite rounded">
-            {/* TODO: somehow need to make this choose where you are in the piece */}
-            <div
-              className="absolute h-full bg-primary rounded"
-              style={{
-                width: `${(audio.current.currentTime / audio.current.duration) * 100}%`,
-              }}
-            ></div>
-            <div className="absolute -top-6 right-0 text-white text-sm">
-              {progress + " "} /{" " + duration}
-            </div>
-          </div>
+          <AudioDisplay
+            piece={piece}
+            audio={audio}
+            progress={progress}
+            duration={duration}
+          />
 
           <div>
             <div className="flex flex-row justify-between text-2xl">
