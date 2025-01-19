@@ -12,21 +12,19 @@ const StoreSecton = () => {
 
   const handleCategoryChange = (category: string) => {
     setCurrentCategory(category);
-    {
-      switch (category) {
-        case "all":
-          setPieces(allPieces);
-          break;
-        case "solo":
-          setPieces(allPieces?.filter((piece) => piece.numOfPlayers == 1));
-          break;
-        case "ensemble":
-          setPieces(allPieces?.filter((piece) => piece.numOfPlayers > 2));
-          break;
-        case "duet":
-          setPieces(allPieces?.filter((piece) => piece.numOfPlayers == 2));
-          break;
-      }
+    switch (category) {
+      case "all":
+        setPieces(allPieces);
+        break;
+      case "solo":
+        setPieces(allPieces?.filter((piece) => piece.numOfPlayers == 1));
+        break;
+      case "ensemble":
+        setPieces(allPieces?.filter((piece) => piece.numOfPlayers > 2));
+        break;
+      case "duet":
+        setPieces(allPieces?.filter((piece) => piece.numOfPlayers == 2));
+        break;
     }
   };
 
