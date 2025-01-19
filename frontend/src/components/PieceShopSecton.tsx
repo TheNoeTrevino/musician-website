@@ -8,7 +8,7 @@ const StoreSecton = () => {
   const [allPieces, setAllPieces] = useState<PieceDTO[] | undefined>(undefined);
   const [pieces, setPieces] = useState<PieceDTO[] | undefined>(undefined);
 
-  const [currentCateogry, setCurrentCategory] = useState("solo");
+  const [currentCateogry, setCurrentCategory] = useState("all");
 
   const handleCategoryChange = (category: string) => {
     setCurrentCategory(category);
