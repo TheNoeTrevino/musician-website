@@ -7,6 +7,7 @@ import {
   IconCircleXFilled,
 } from "@tabler/icons-react";
 import { PieceDTO } from "../../dtos/dtos";
+import { useEffect, useState } from "react";
 
 const PieceAttributeCard = ({
   piece: piece,
@@ -15,6 +16,33 @@ const PieceAttributeCard = ({
   piece: PieceDTO;
   duration: string;
 }) => {
+  const [difficulty, setDifficulty] = useState("Intermediate");
+
+  const handleDifficulty = (difficulty: number): string => {
+    switch (difficulty) {
+      // NOTE: this could be named better
+      case 1:
+        return `${difficulty} Beginner`;
+      case 2:
+        return `${difficulty} Beginner-Intermediate`;
+      case 3:
+        return `${difficulty} Intermediate`;
+      case 4:
+        return `${difficulty} Intermediate-Hard`;
+      case 5:
+        return `${difficulty} Intermediate-Advanced`;
+      case 6:
+        return `${difficulty} Advanced`;
+      default:
+        return "Error processing difficulty";
+    }
+  };
+
+  useEffect(
+    () => setDifficulty(handleDifficulty(piece.difficultyGrade)),
+    [piece.difficultyGrade],
+  );
+
   return (
     <div className="flex flex-col w-full h-screen  z-10  text-textGray justify-between py-3">
       <div className="flex flex-col gap-2">
@@ -34,8 +62,8 @@ const PieceAttributeCard = ({
         </div>
 
         <div className="flex flex-row gap-4 items-center">
-          <IconBrandSpeedtest /> {piece.difficultyGrade}{" "}
-          {piece.difficultyGrade < 3 ? "Beginner" : "Advanced"}
+          <IconBrandSpeedtest />
+          {difficulty}
         </div>
 
         <div className="flex flex-row gap-4 items-center">
