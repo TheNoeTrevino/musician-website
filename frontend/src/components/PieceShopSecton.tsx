@@ -29,15 +29,15 @@ const StoreSecton = () => {
     fetchPieces();
   }, []);
 
-  const handleTextChange = (e: any) => {
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchText = e.target.value.toLowerCase();
     if (!searchText) {
       setPieces(allPieces); // Reset to all pieces if the search text is empty
     } else {
       setPieces(
         allPieces?.filter((piece) =>
-          piece.title.toLowerCase().includes(searchText)
-        )
+          piece.title.toLowerCase().includes(searchText),
+        ),
       );
     }
   };
