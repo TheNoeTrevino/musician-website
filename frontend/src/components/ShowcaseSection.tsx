@@ -11,7 +11,7 @@ import {
 } from "@tabler/icons-react";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { PieceDTO } from "../../dtos/dtos";
+import { PieceDTO } from "../dtos/dtos";
 
 // TODO: this is giving a weird pace to the size of some seconds
 function formatTime(time: number) {
