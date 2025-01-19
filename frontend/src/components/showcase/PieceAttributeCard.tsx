@@ -58,7 +58,8 @@ const PieceAttributeCard = ({
         </div>
 
         <div className="flex flex-row gap-4 items-center">
-          <IconUsers /> {piece.numOfPlayers} Players
+          <IconUsers /> {piece.numOfPlayers}{" "}
+          {piece.numOfPlayers > 1 ? "Players" : "Player"}
         </div>
 
         <div className="flex flex-row gap-4 items-center">
