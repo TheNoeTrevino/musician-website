@@ -72,7 +72,7 @@ const StoreSecton = () => {
               currentCateogry === "percussion-ensemble" && "text-white"
             } cursor-pointer`}
             onClick={() => {
-              handleCategoryChange("percussion-ensemble");
+              handleCategoryChange("ensemble");
             }}
           >
             Percussion Ensemble
