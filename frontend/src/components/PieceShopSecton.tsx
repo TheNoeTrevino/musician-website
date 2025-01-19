@@ -21,7 +21,10 @@ const StoreSecton = () => {
           setPieces(allPieces?.filter((piece) => piece.numOfPlayers == 1));
           break;
         case "ensemble":
-          setPieces(allPieces?.filter((piece) => piece.numOfPlayers != 1));
+          setPieces(allPieces?.filter((piece) => piece.numOfPlayers > 2));
+          break;
+        case "duet":
+          setPieces(allPieces?.filter((piece) => piece.numOfPlayers == 2));
           break;
       }
     }
@@ -84,6 +87,16 @@ const StoreSecton = () => {
             }}
           >
             Percussion Ensemble
+          </p>
+          <p
+            className={`${
+              currentCateogry === "percussion-ensemble" && "text-white"
+            } cursor-pointer`}
+            onClick={() => {
+              handleCategoryChange("duet");
+            }}
+          >
+            Duet
           </p>
         </div>
       </div>
