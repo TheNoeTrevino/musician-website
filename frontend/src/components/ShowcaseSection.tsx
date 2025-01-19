@@ -1,8 +1,4 @@
-import {
-  IconChevronDown,
-  IconPlayerPauseFilled,
-  IconPlayerPlayFilled,
-} from "@tabler/icons-react";
+import { IconChevronDown } from "@tabler/icons-react";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { PieceDTO } from "../dtos/dtos";
@@ -22,6 +18,7 @@ function formatTime(time: number) {
 
 const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
   const [quantity, setQuantity] = useState<number>(1);
+
   const [progress, setProgress] = useState<string>("0:00");
   const [duration, setDuration] = useState<string>("0:00");
   const pieceAudio =
