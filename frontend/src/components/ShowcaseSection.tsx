@@ -28,6 +28,7 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
   const [progress, setProgress] = useState<string>("0:00");
+  const [duration, setDuration] = useState<string>("0:00");
   const pieceAudio =
     "../../public/audios/" +
     piece.title.replace(/ /g, "-").toLowerCase() +
@@ -44,15 +45,21 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
     setIsPlaying(!isPlaying);
   };
 
-  useEffect(() => {
-    const handleTimeUpdate = () => {
-      setProgress(formatTime(audio.current.currentTime));
-    };
+  const handleTimeUpdate = () => {
+    setProgress(formatTime(audio.current.currentTime));
+  };
 
+  const handleLoadedMetaData = () => {
+    setDuration(formatTime(audio.current.duration));
+  };
+
+  useEffect(() => {
     audio.current.addEventListener("timeupdate", handleTimeUpdate);
+    audio.current.addEventListener("loadedmetadata", handleLoadedMetaData);
 
     return () => {
       audio.current.removeEventListener("timeupdate", handleTimeUpdate);
+      audio.current.removeEventListener("loadedmetadata", handleLoadedMetaData);
     };
   }, []);
 
@@ -82,7 +89,7 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
             </div>
 
             <div className="flex flex-row gap-4 items-center">
-              <IconClock /> {formatTime(audio.current.duration)} Minutes
+              <IconClock /> {duration} Minutes
             </div>
 
             <div className="flex flex-row gap-4 items-center">
@@ -146,7 +153,7 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
               }}
             ></div>
             <div className="absolute -top-6 right-0 text-white text-sm">
-              {progress + " "} /{" " + formatTime(audio.current.duration)}
+              {progress + " "} /{" " + duration}
             </div>
           </div>
 
