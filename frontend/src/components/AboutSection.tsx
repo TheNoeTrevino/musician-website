@@ -1,7 +1,7 @@
 const AboutSection = () => {
   return (
-    <div id="about" className="h-screen bg-black flex flex-row pl-52 ">
-      <div className="flex flex-col w-full  gap-10  z-10 pt-14 ">
+    <div id="about" className="h-screen  flex flex-row pl-52 mt-20">
+      <div className="flex flex-col w-3/4  gap-6  z-10  ">
         <p className="text-7xl text-white">About</p>
         <span className="text-textGray text-xl">
           <p className="mb-4">

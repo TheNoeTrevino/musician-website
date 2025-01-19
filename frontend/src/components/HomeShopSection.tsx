@@ -37,7 +37,7 @@ const ShopSecton = () => {
           <div className="flex relative items-center justify-center">
             <img
               className="absolute w-full opacity-5"
-              src="/albums/1.png"
+              src="/albums/blank.png"
               alt="Music Album #4"
             />
             <Link

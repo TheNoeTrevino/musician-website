@@ -19,16 +19,28 @@ const Footer = () => {
           href="https://www.instagram.com/sebastianhavnermusic/"
           target="_blank"
         >
-          <IconBrandInstagram className="cursor-pointer" />
+          <IconBrandInstagram
+            strokeWidth={1}
+            className="cursor-pointer hover:scale-105 transition-transform"
+          />
         </a>
         <a href="https://www.youtube.com/@sebastianhavner" target="_blank">
-          <IconBrandYoutube className="cursor-pointer" />
+          <IconBrandYoutube
+            strokeWidth={1}
+            className="cursor-pointer hover:scale-105 transition-transform"
+          />
         </a>
         <a href="https://soundcloud.com/sebastian-havner" target="_blank">
-          <IconBrandSoundcloud className="cursor-pointer" />
+          <IconBrandSoundcloud
+            strokeWidth={1}
+            className="cursor-pointer hover:scale-105 transition-transform"
+          />
         </a>
         <a href="https://www.facebook.com/sebastian.havner.5" target="_blank">
-          <IconBrandFacebook className="cursor-pointer" />
+          <IconBrandFacebook
+            strokeWidth={1}
+            className="cursor-pointer hover:scale-105 transition-transform"
+          />
         </a>
       </div>
     </div>

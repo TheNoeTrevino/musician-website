@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { PieceDTO } from "../dtos/dtos";
-import { useEffect } from "react";
 
 const PieceCard = ({ piece }: { piece: PieceDTO }) => {
-  useEffect(() => window.scroll(0, 0));
+  const fallbackSrc = "/public/albums/blank.png";
+
   return (
     <Link
       to={"/" + piece.title.replace(/ /g, "-")}
@@ -15,11 +15,16 @@ const PieceCard = ({ piece }: { piece: PieceDTO }) => {
       <img
         className="w-full object-cover"
         src={
-          "../../public/albums/" +
+          "/public/albums/" +
           piece.title.replace(/ /g, "-").toLowerCase() +
           ".png"
         }
-        alt={`${piece.title} Album. Photo not found`}
+        onError={(e) => {
+          const target = e.target as HTMLImageElement;
+          target.onerror = null;
+          target.src = fallbackSrc;
+        }}
+        alt={`${piece.title} Album cover`}
       />
       <div className="bg-reallyBlack rounded-b-lg w-full text-2xl py-1">
         ${piece.price}

@@ -1,7 +1,7 @@
 import ContactSection from "../../components/ContactSection";
 import SecondaryHeroSection from "../../components/SecondaryHeroSection";
 import SeperationSection from "../../components/SeperationSection";
-import StoreSecton from "../../components/StoreSecton";
+import StoreSecton from "../../components/PieceShopSecton";
 
 // TODO: probably no secondary hero section here either
 const Shop = () => {
