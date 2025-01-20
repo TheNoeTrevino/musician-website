@@ -80,9 +80,7 @@ const AudioDisplay = ({ piece: piece }: { piece: PieceDTO }) => {
           waveColor="#F5862F"
           progressColor="#A65E2E"
           url={
-            "../../public/audios/" +
-            piece.title.replace(/ /g, "-").toLowerCase() +
-            ".mp3"
+            "/audios/" + piece.title.replace(/ /g, "-").toLowerCase() + ".mp3"
           }
           onReady={onReady}
           onPlay={() => setIsPlaying(true)}

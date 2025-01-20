@@ -21,9 +21,7 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
 
   const [duration, setDuration] = useState<string>("0:00");
   const pieceAudio =
-    "../../public/audios/" +
-    piece.title.replace(/ /g, "-").toLowerCase() +
-    ".mp3";
+    "/audios/" + piece.title.replace(/ /g, "-").toLowerCase() + ".mp3";
   const audio = useRef(new Audio(pieceAudio));
 
   // TODO: this is not pausing
@@ -44,7 +42,7 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
       <div className="min-h-screen flex flex-row mx-48 mt-24">
         <PieceAttributeCard piece={piece} duration={duration} />
 
-        <div className="flex flex-col  justify-between text-2xl font-medium text-textGray w-full  gap-4 h-screen py-3">
+        <div className="flex flex-col  justify-between text-2xl font-medium text-textGray w-full gap-4 h-screen py-3">
           <AudioDisplay piece={piece} />
 
           <div>
