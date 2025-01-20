@@ -27,15 +27,24 @@ const ContactSection = () => {
             placeholder="Last Name"
           />
         </div>
-        <input
-          className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit "
-          type="text"
-          name="email"
-          placeholder="Email"
-        />
-        <input
-          className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit "
-          type="text"
+        <div className="flex flex-row  gap-6 justify-between w-full rounded-lg min-h-[62px]">
+          <input
+            className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit "
+            type="text"
+            name="email"
+            placeholder="Your Email"
+          />
+        </div>
+        <div className="flex flex-row  gap-6 justify-between w-full rounded-lg min-h-[62px]">
+          <input
+            className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit "
+            type="text"
+            name="subject"
+            placeholder="Subject"
+          />
+        </div>
+        <textarea
+          className="flex cursor-text items-start px-6 pt-3 h-full rounded-xl border border-solid border-white w-full bg-inherit"
           name="message"
           placeholder="Message"
         />
