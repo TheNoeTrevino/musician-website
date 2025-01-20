@@ -1,11 +1,14 @@
 import {
   IconPlayerPauseFilled,
   IconPlayerPlayFilled,
+  IconRewindBackward15,
+  IconRewindForward15,
 } from "@tabler/icons-react";
 import { PieceDTO } from "../../dtos/dtos";
 import { useState } from "react";
 import WavesurferPlayer from "@wavesurfer/react";
 import WaveSurfer from "wavesurfer.js/dist/types.js";
+import HoverPlugin from "wavesurfer.js/dist/plugins/hover.js";
 
 const formatTime = (seconds: number) => {
   return [seconds / 60, seconds % 60]
@@ -28,8 +31,16 @@ const AudioDisplay = ({ piece: piece }: { piece: PieceDTO }) => {
   const onPlayPause = () => {
     wavesurfer && wavesurfer.playPause();
   };
-  const handleTimeUpdate = (ws: WaveSurfer) => {
-    setCurrentTime(ws.getCurrentTime());
+  const handleTimeUpdate = () => {
+    if (wavesurfer) {
+      setCurrentTime(wavesurfer.getCurrentTime());
+    }
+  };
+  const skipForward = () => {
+    wavesurfer?.setTime(wavesurfer.getCurrentTime() + 15);
+  };
+  const skipBackwards = () => {
+    wavesurfer?.setTime(wavesurfer.getCurrentTime() - 15);
   };
   return (
     <>
@@ -37,9 +48,7 @@ const AudioDisplay = ({ piece: piece }: { piece: PieceDTO }) => {
         <img
           className="z-10 rounded-full w-[550px] h-[550px] object-cover"
           src={
-            "../../public/albums/" +
-            piece.title.replace(/ /g, "-").toLowerCase() +
-            ".png"
+            "/albums/" + piece.title.replace(/ /g, "-").toLowerCase() + ".png"
           }
           alt="Music Album"
         />
@@ -61,7 +70,7 @@ const AudioDisplay = ({ piece: piece }: { piece: PieceDTO }) => {
           />
         )}
       </div>
-      <div>
+      <div className="py-2">
         {isLoading && <div className="text-center">Loading music...</div>}
         <WavesurferPlayer
           dragToSeek={true}
@@ -79,14 +88,28 @@ const AudioDisplay = ({ piece: piece }: { piece: PieceDTO }) => {
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
           onTimeupdate={handleTimeUpdate}
+          // TODO: for some reason, this breaks eveything
+          // plugins={[HoverPlugin.create()]}
         />
       </div>
-      <div className="flex flex-row justify-center gap-3">
-        <button onClick={onPlayPause}>{isPlaying ? "Pause" : "Play"}</button>
-        <p>
-          {formatTime(currentTime)} / {formatTime(duration)}
-        </p>
-      </div>
+      {!isLoading && (
+        <>
+          <div className="flex flex-row justify-center items-center gap-4">
+            <button className="button" onClick={skipBackwards}>
+              <IconRewindBackward15 />
+            </button>
+            <button className="button py-1 text-center" onClick={onPlayPause}>
+              {isPlaying ? <IconPlayerPauseFilled /> : <IconPlayerPlayFilled />}
+            </button>
+            <button className="button" onClick={skipForward}>
+              <IconRewindForward15 />
+            </button>
+          </div>
+          <p className="text-center text-white">
+            {formatTime(currentTime)} / {formatTime(duration)}
+          </p>
+        </>
+      )}
     </>
   );
 };
