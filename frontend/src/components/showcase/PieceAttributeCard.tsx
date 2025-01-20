@@ -47,7 +47,7 @@ const PieceAttributeCard = ({
     <div className="flex flex-col w-full h-screen  z-10  text-textGray justify-between py-3">
       <div className="flex flex-col gap-2">
         <p className="text-7xl text-white">{piece.title}</p>
-        <span className="text-textGray text-lg font-light w-4/5">
+        <span className="text-textGray text-lg font-light w-4/5 mt-3">
           {piece.description}
         </span>
       </div>
