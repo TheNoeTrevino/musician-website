@@ -71,7 +71,7 @@ const AudioDisplay = ({ piece: piece }: { piece: PieceDTO }) => {
         )}
       </div>
       <div className="py-2">
-        {isLoading && <div className="text-center">Loading music...</div>}
+        {isLoading && <div className="text-center">Loading audio...</div>}
         <WavesurferPlayer
           dragToSeek={true}
           barWidth={2}
