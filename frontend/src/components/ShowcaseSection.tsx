@@ -19,7 +19,6 @@ function formatTime(time: number) {
 const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
   const [quantity, setQuantity] = useState<number>(1);
 
-  const [progress, setProgress] = useState<string>("0:00");
   const [duration, setDuration] = useState<string>("0:00");
   const pieceAudio =
     "../../public/audios/" +
@@ -28,20 +27,14 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
   const audio = useRef(new Audio(pieceAudio));
 
   // TODO: this is not pausing
-  const handleTimeUpdate = () => {
-    setProgress(formatTime(audio.current.currentTime));
-  };
-
   const handleLoadedMetaData = () => {
     setDuration(formatTime(audio.current.duration));
   };
 
   useEffect(() => {
-    audio.current.addEventListener("timeupdate", handleTimeUpdate);
     audio.current.addEventListener("loadedmetadata", handleLoadedMetaData);
 
     return () => {
-      audio.current.removeEventListener("timeupdate", handleTimeUpdate);
       audio.current.removeEventListener("loadedmetadata", handleLoadedMetaData);
     };
   }, []);
@@ -52,12 +45,7 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
         <PieceAttributeCard piece={piece} duration={duration} />
 
         <div className="flex flex-col  justify-between text-2xl font-medium text-textGray w-full  gap-4 h-screen py-3">
-          <AudioDisplay
-            piece={piece}
-            audio={audio}
-            progress={progress}
-            duration={duration}
-          />
+          <AudioDisplay piece={piece} />
 
           <div>
             <div className="flex flex-row justify-between text-2xl">

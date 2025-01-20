@@ -4,28 +4,33 @@ import {
 } from "@tabler/icons-react";
 import { PieceDTO } from "../../dtos/dtos";
 import { useState } from "react";
+import WavesurferPlayer from "@wavesurfer/react";
+import WaveSurfer from "wavesurfer.js/dist/types.js";
 
-const AudioDisplay = ({
-  piece: piece,
-  audio: audio,
-  progress: progress,
-  duration: duration,
-}: {
-  piece: PieceDTO;
-  audio: React.MutableRefObject<HTMLAudioElement>;
-  progress: string;
-  duration: string;
-}) => {
+const formatTime = (seconds: number) => {
+  return [seconds / 60, seconds % 60]
+    .map((v) => `0${Math.floor(v)}`.slice(-2))
+    .join(":");
+};
+
+const AudioDisplay = ({ piece: piece }: { piece: PieceDTO }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const handlePlayPauseClick = () => {
-    if (isPlaying) {
-      audio.current.pause();
-    } else {
-      audio.current.play();
-    }
-    setIsPlaying(!isPlaying);
+  const [wavesurfer, setWavesurfer] = useState<WaveSurfer | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const onReady = (ws: WaveSurfer) => {
+    setWavesurfer(ws);
+    setIsPlaying(false);
+    setIsLoading(false);
+    setDuration(ws.getDuration());
   };
-
+  const onPlayPause = () => {
+    wavesurfer && wavesurfer.playPause();
+  };
+  const handleTimeUpdate = (ws: WaveSurfer) => {
+    setCurrentTime(ws.getCurrentTime());
+  };
   return (
     <>
       <div className="relative flex items-center justify-center">
@@ -46,28 +51,41 @@ const AudioDisplay = ({
         />
         {isPlaying ? (
           <IconPlayerPauseFilled
-            onClick={handlePlayPauseClick}
+            onClick={onPlayPause}
             className="absolute z-30 text-primary size-28 hover:text-reallyWhite cursor-pointer"
           />
         ) : (
           <IconPlayerPlayFilled
-            onClick={handlePlayPauseClick}
+            onClick={onPlayPause}
             className="absolute z-30 text-primary size-28 hover:text-reallyWhite cursor-pointer"
           />
         )}
       </div>
-
-      <div className="relative w-full h-1  bg-reallyWhite rounded">
-        {/* TODO: somehow need to make this choose where you are in the piece */}
-        <div
-          className="absolute h-full bg-primary rounded"
-          style={{
-            width: `${(audio.current.currentTime / audio.current.duration) * 100}%`,
-          }}
-        ></div>
-        <div className="absolute -top-6 right-0 text-white text-sm">
-          {progress + " "} /{" " + duration}
-        </div>
+      <div>
+        {isLoading && <div className="text-center">Loading music...</div>}
+        <WavesurferPlayer
+          dragToSeek={true}
+          barWidth={2}
+          barRadius={2}
+          height={75}
+          waveColor="#F5862F"
+          progressColor="#A65E2E"
+          url={
+            "../../public/audios/" +
+            piece.title.replace(/ /g, "-").toLowerCase() +
+            ".mp3"
+          }
+          onReady={onReady}
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+          onTimeupdate={handleTimeUpdate}
+        />
+      </div>
+      <div className="flex flex-row justify-center gap-3">
+        <button onClick={onPlayPause}>{isPlaying ? "Pause" : "Play"}</button>
+        <p>
+          {formatTime(currentTime)} / {formatTime(duration)}
+        </p>
       </div>
     </>
   );
