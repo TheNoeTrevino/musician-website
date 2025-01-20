@@ -78,7 +78,7 @@ const StoreSecton = () => {
           </p>
           <p
             className={`${
-              currentCateogry === "percussion-ensemble" && "text-white"
+              currentCateogry === "ensemble" && "text-white"
             } cursor-pointer`}
             onClick={() => {
               handleCategoryChange("ensemble");
@@ -88,7 +88,7 @@ const StoreSecton = () => {
           </p>
           <p
             className={`${
-              currentCateogry === "percussion-ensemble" && "text-white"
+              currentCateogry === "duet" && "text-white"
             } cursor-pointer`}
             onClick={() => {
               handleCategoryChange("duet");
