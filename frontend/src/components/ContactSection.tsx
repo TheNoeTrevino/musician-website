@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 const ContactSection = () => {
   return (
     <div
@@ -48,12 +50,15 @@ const ContactSection = () => {
           name="message"
           placeholder="Message"
         />
-        <div
+        <input
           className="button   w-full text-4xl font-semibold text-center  bg-primary rounded-xl border border-solid  min-h-[77px]"
-          onClick={() => alert("your message has been sent")}
-        >
-          Send
-        </div>
+          onClick={() => {
+            toast.success("Your email has been sent");
+          }}
+          type="submit"
+          name="send"
+          value="Send"
+        />
       </div>
     </div>
   );
