@@ -12,10 +12,21 @@ const StoreSecton = () => {
 
   const handleCategoryChange = (category: string) => {
     setCurrentCategory(category);
-    if (category === "all") {
-      setPieces(allPieces);
-    } else {
-      // setPieces(allPieces?.filter((piece) => piece.category === category));
+    {
+      switch (category) {
+        case "all":
+          setPieces(allPieces);
+          break;
+        case "solo":
+          setPieces(allPieces?.filter((piece) => piece.numOfPlayers == 1));
+          break;
+        case "ensemble":
+          setPieces(allPieces?.filter((piece) => piece.numOfPlayers > 2));
+          break;
+        case "duet":
+          setPieces(allPieces?.filter((piece) => piece.numOfPlayers == 2));
+          break;
+      }
     }
   };
 
@@ -29,15 +40,15 @@ const StoreSecton = () => {
     fetchPieces();
   }, []);
 
-  const handleTextChange = (e: any) => {
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchText = e.target.value.toLowerCase();
     if (!searchText) {
       setPieces(allPieces); // Reset to all pieces if the search text is empty
     } else {
       setPieces(
         allPieces?.filter((piece) =>
-          piece.title.toLowerCase().includes(searchText)
-        )
+          piece.title.toLowerCase().includes(searchText),
+        ),
       );
     }
   };
@@ -72,16 +83,27 @@ const StoreSecton = () => {
               currentCateogry === "percussion-ensemble" && "text-white"
             } cursor-pointer`}
             onClick={() => {
-              handleCategoryChange("percussion-ensemble");
+              handleCategoryChange("ensemble");
             }}
           >
             Percussion Ensemble
+          </p>
+          <p
+            className={`${
+              currentCateogry === "percussion-ensemble" && "text-white"
+            } cursor-pointer`}
+            onClick={() => {
+              handleCategoryChange("duet");
+            }}
+          >
+            Duet
           </p>
         </div>
       </div>
 
       <div className="flex flex-col w-2/3 justify-between  z-10  gap-11 ml-20">
         <div className="flex flex-row  gap-10">
+          {/* TODO: remove this */}
           <p className="text-7xl text-white">Pieces</p>
           <div className="border border-r-10 rounded-xl flex items-center px-4 w-full gap-3  text-textGray">
             <IconSearch />
@@ -99,10 +121,10 @@ const StoreSecton = () => {
             pieces.length > 0 ? (
               pieces.map((piece) => <PieceCard piece={piece} />)
             ) : (
-              <div className="text-white">No pieces found.</div>
+              <div className="text-white text-3xl">No pieces found.</div>
             )
           ) : (
-            <div className="text-white">Loading...</div>
+            <div className="text-white text-3xl">Loading...</div>
           )}
         </div>
       </div>
