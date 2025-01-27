@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { PieceDTO } from "../dtos/dtos";
 
 const PieceCard = ({ piece }: { piece: PieceDTO }) => {
-  const fallbackSrc = "/public/albums/blank.png";
+  const fallbackSrc = "/albums/blank.png";
 
   return (
     <Link
@@ -14,11 +14,7 @@ const PieceCard = ({ piece }: { piece: PieceDTO }) => {
       </div>
       <img
         className="w-full object-cover"
-        src={
-          "/public/albums/" +
-          piece.title.replace(/ /g, "-").toLowerCase() +
-          ".png"
-        }
+        src={"/albums/" + piece.title.replace(/ /g, "-").toLowerCase() + ".png"}
         onError={(e) => {
           const target = e.target as HTMLImageElement;
           target.onerror = null;

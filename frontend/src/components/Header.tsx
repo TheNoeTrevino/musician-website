@@ -1,12 +1,7 @@
-import {
-  IconBrandFacebook,
-  IconBrandInstagram,
-  IconBrandSoundcloud,
-  IconBrandYoutube,
-  IconShoppingCart,
-} from "@tabler/icons-react";
+import { IconShoppingCart } from "@tabler/icons-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Socials from "./Socials";
 
 const Header = () => {
   const [cartItems] = useState(["song1", "song2", "song3"]);
@@ -15,7 +10,13 @@ const Header = () => {
     <div className="absolute w-screen flex flex-row gap-10 justify-between items-center px-44 text-xl text-center text-white max-md:px-5 h-24 z-20  ">
       <div className="flex gap-10 justify-center items-center self-stretch my-auto font-light whitespace-nowrap min-w-[240px] w-[441px] max-md:max-w-full">
         <Link
-          to={"#about"}
+          to={"/"}
+          className="cursor-pointer hover:scale-110 transition-transform"
+        >
+          Home
+        </Link>
+        <Link
+          to={"/about"}
           className="cursor-pointer hover:scale-110 transition-transform"
         >
           About
@@ -44,33 +45,7 @@ const Header = () => {
       </Link>
 
       <div className="flex gap-10 justify-center items-center self-stretch my-auto whitespace-nowrap min-w-[240px] w-[441px] max-md:max-w-full">
-        <a
-          href="https://www.instagram.com/sebastianhavnermusic/"
-          target="_blank"
-        >
-          <IconBrandInstagram
-            strokeWidth={1}
-            className="cursor-pointer hover:scale-125 transition-transform"
-          />
-        </a>
-        <a href="https://www.youtube.com/@sebastianhavner" target="_blank">
-          <IconBrandYoutube
-            strokeWidth={1}
-            className="cursor-pointer hover:scale-125 transition-transform"
-          />
-        </a>
-        <a href="https://soundcloud.com/sebastian-havner" target="_blank">
-          <IconBrandSoundcloud
-            strokeWidth={1}
-            className="cursor-pointer hover:scale-125 transition-transform"
-          />
-        </a>
-        <a href="https://www.facebook.com/sebastian.havner.5" target="_blank">
-          <IconBrandFacebook
-            strokeWidth={1}
-            className="cursor-pointer hover:scale-125 transition-transform"
-          />
-        </a>
+        <Socials />
         <Link
           to={"/cart"}
           className="flex items-center justify-center  cursor-pointer"

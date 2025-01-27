@@ -46,7 +46,7 @@ const CartSection = () => {
               <img
                 loading="lazy"
                 src={
-                  "../../public/albums/" +
+                  "/albums/" +
                   item.title.replace(/ /g, "-").toLowerCase() +
                   ".png"
                 }

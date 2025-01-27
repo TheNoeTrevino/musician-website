@@ -7,7 +7,7 @@ import useScrollToTop from "../../hooks/ScrollTop";
 const Shop = ({ piece }: { piece: PieceDTO }) => {
   useScrollToTop();
   return (
-    <body className="flex flex-col  bg-black">
+    <body className="flex flex-col bg-black gap-6">
       <ShowcaseSection piece={piece} />
       <SeperationSection />
       <ContactSection />
