@@ -1,4 +1,14 @@
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { ContactDTO } from "../dtos/dtos";
+import { EmailService } from "../services/EmailService";
+
 const ContactSection = () => {
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const [from, setFrom] = useState<string>("");
+  const [subject, setSubject] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
   return (
     <div
       id="contact"
@@ -13,38 +23,88 @@ const ContactSection = () => {
       </div>
 
       <div className="flex flex-col  justify-between text-2xl font-light text-textGray w-full gap-5 ">
-        <div className="flex flex-row  gap-6 justify-between w-full rounded-lg min-h-[62px]">
-          <input
-            className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit "
-            type="text"
-            name="first-name"
-            placeholder="First Name"
-          />
-          <input
-            className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit "
-            type="text"
-            name="last-name"
-            placeholder="Last Name"
-          />
-        </div>
-        <input
-          className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit "
-          type="text"
-          name="email"
-          placeholder="Email"
-        />
-        <input
-          className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit "
-          type="text"
-          name="message"
-          placeholder="Message"
-        />
-        <div
-          className="button   w-full text-4xl font-semibold text-center  bg-primary rounded-xl border border-solid  min-h-[77px]"
-          onClick={() => alert("your message has been sent")}
+        <form
+          className="flex flex-col  justify-between text-2xl font-light text-textGray w-full gap-5 "
+          onSubmit={(e) => {
+            e.preventDefault();
+            const contactSubmission: ContactDTO = {
+              firstName: firstName,
+              lastName: lastName,
+              from: from,
+              subject: subject,
+              message: message,
+            };
+            EmailService.sendEmail(contactSubmission);
+          }}
+          onInvalid={(e) => {
+            e.preventDefault();
+            // TODO: fix this
+            const fieldName = e.target.id;
+            toast.error(`Please fill: ${fieldName}`);
+          }}
         >
-          Send
-        </div>
+          <div className="flex flex-row  gap-6 justify-between w-full rounded-lg min-h-[62px]">
+            <input
+              id="First Name"
+              className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit "
+              type="text"
+              name="first-name"
+              required
+              placeholder="First Name"
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <input
+              id="Last Name"
+              className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit "
+              type="text"
+              name="last-name"
+              required
+              placeholder="Last Name"
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          </div>
+          <div className="flex flex-row  gap-6 justify-between w-full rounded-lg min-h-[62px]">
+            <input
+              id="Email"
+              className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit "
+              type="text"
+              name="email"
+              required
+              placeholder="Your Email"
+              onChange={(e) => setFrom(e.target.value)}
+            />
+          </div>
+          <div className="flex flex-row  gap-6 justify-between w-full rounded-lg min-h-[62px]">
+            <input
+              id="Subject"
+              className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit "
+              type="text"
+              name="subject"
+              required
+              placeholder="Subject"
+              onChange={(e) => setSubject(e.target.value)}
+            />
+          </div>
+          <textarea
+            id="Message"
+            className="flex cursor-text items-start px-6 pt-3 h-full rounded-xl border border-solid border-white w-full bg-inherit"
+            name="message"
+            required
+            placeholder="Message"
+            onChange={(e) => setMessage(e.target.value)}
+          />
+          <input
+            className="button   w-full text-4xl font-semibold text-center  bg-primary rounded-xl border border-solid  min-h-[77px]"
+            type="submit"
+            name="send"
+            value="Send"
+          />
+        </form>
+        <p>first name: {firstName}</p>
+        <p>last name: {lastName}</p>
+        <p>from: {from}</p>
+        <p>subject: {subject}</p>
+        <p>message: {message}</p>
       </div>
     </div>
   );

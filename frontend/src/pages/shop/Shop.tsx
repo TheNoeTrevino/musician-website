@@ -8,7 +8,7 @@ const Shop = () => {
   useScrollToTop();
   return (
     <body className="flex flex-col bg-black">
-      <div className="h-px bg-black w-3/4 self-center my-10"></div>
+      <div className="h-px bg-black w-3/4 self-center my-7"></div>
       <StoreSecton />
       <SeperationSection />
       <ContactSection />

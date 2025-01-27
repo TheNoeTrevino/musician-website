@@ -45,3 +45,16 @@ export interface UserWithOrdersDTO {
   role: string;
   orders: OrderDTO[];
 }
+
+export interface ContactDTO {
+  firstName: string;
+  lastName: string;
+  from: string;
+  subject: string;
+  message: string;
+}
+
+export interface EmailResponseDTO {
+  successful: boolean;
+  reply: string;
+}

@@ -24,6 +24,7 @@ repositories {
 }
 
 dependencies {
+  implementation("org.springframework.boot:spring-boot-starter-mail")
   implementation("jakarta.validation:jakarta.validation-api:3.1.0")
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-web")

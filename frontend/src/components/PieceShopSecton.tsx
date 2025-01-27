@@ -12,6 +12,7 @@ const StoreSecton = () => {
 
   const handleCategoryChange = (category: string) => {
     setCurrentCategory(category);
+
     switch (category) {
       case "all":
         setPieces(allPieces);
@@ -25,6 +26,7 @@ const StoreSecton = () => {
       case "duet":
         setPieces(allPieces?.filter((piece) => piece.numOfPlayers == 2));
         break;
+
     }
   };
 
@@ -89,6 +91,7 @@ const StoreSecton = () => {
           <p
             className={`${
               currentCateogry === "duet" && "text-white"
+
             } cursor-pointer`}
             onClick={() => {
               handleCategoryChange("duet");
