@@ -16,15 +16,28 @@ public class EmailService {
 
   public EmailResponseDTO sendEmail(EmailDTO email) {
     SimpleMailMessage message = new SimpleMailMessage();
-    message.setTo("noetrevino.music@gmail.com");
+    message.setTo("noreply.sebastianhavner@gmail.com");
     message.setFrom(email.getFrom());
     message.setSubject(email.getSubject());
-    message.setText(email.getMessage());
+    message.setText(
+        "This email was sent from: "
+            + email.getFrom()
+            + "\n"
+            + "\n"
+            + "Their message is: "
+            + "\n"
+            + email.getMessage());
     mailSender.send(message);
 
     EmailResponseDTO response = new EmailResponseDTO();
     response.setSuccessful(true);
-    response.setReply("Thanks for sending me an email! I will get back to you as soon as I can.");
+    response.setReply(
+        "Thanks for sending me an email!"
+            + "\n"
+            + " I will get back to you as soon as I can.");
     return response;
   }
 }
+// this email was sent from x
+//
+// actual messge
