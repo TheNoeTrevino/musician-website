@@ -77,6 +77,3 @@ Java
    ```bash
    ./gradlew bootRun
    ```
-
-3. Configure the database connection:  
-   Open the `application.properties` file and update the database configuration to match your setup.
