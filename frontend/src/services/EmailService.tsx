@@ -3,6 +3,7 @@ import { ContactDTO, EmailResponseDTO } from "../dtos/dtos";
 
 export const EmailService = {
   async sendEmail(contactForm: ContactDTO): Promise<void> {
+    toast.success("We are currently sending your email.");
     try {
       const response = await fetch(`http://localhost:8080/email/send`, {
         method: "POST",
@@ -11,8 +12,9 @@ export const EmailService = {
       });
 
       if (!response.ok) {
-        toast.error("email was not sent");
+        toast.error("Email was not sent. Please try again.");
       }
+
       const responseData: EmailResponseDTO = await response.json();
       toast.success(responseData.reply);
     } catch (error) {
