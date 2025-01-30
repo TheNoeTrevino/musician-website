@@ -11,6 +11,8 @@ import { PieceDTO } from "./dtos/dtos";
 import Layout from "./components/Layout";
 import ContactSection from "./components/ContactSection";
 import About from "./pages/about/About";
+import Success from "./pages/payment/Success";
+import Cancel from "./pages/payment/Cancel";
 
 function App() {
   const fetchPieces = async () => {
@@ -34,6 +36,8 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/contact-me" element={<ContactSection />} />
           <Route path="/about" element={<About />} />
+          <Route path="/success" element={<Success />} />
+          <Route path="/cancel" element={<Cancel />} />
           <Route path="*" element={<ErrorPage />} />
           {pieces.map((piece) => (
             <Route
