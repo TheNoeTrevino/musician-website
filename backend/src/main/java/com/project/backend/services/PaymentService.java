@@ -67,8 +67,8 @@ public class PaymentService {
 
     SessionCreateParams params = SessionCreateParams.builder()
         .setMode(SessionCreateParams.Mode.PAYMENT)
-        .setSuccessUrl("http://localhost:5173/shop") // TODO: make a success page
-        .setCancelUrl("http://localhost:5173/shop") // TODO: make a cancel page
+        .setSuccessUrl("http://localhost:5173/success")
+        .setCancelUrl("http://localhost:5173/cancel")
         .addAllLineItem(lineItems)
         .build();
 
