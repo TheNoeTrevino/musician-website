@@ -17,6 +17,7 @@ import com.stripe.model.Product;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
 
+// FIX: this is not affecting the MRR, i dont know how to fix it though!
 @Service
 public class PaymentService {
   private static final Logger logger = LoggerFactory.getLogger(PaymentService.class);
