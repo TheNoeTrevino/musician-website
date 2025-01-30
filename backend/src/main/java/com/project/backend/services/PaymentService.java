@@ -1,5 +1,8 @@
 package com.project.backend.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,11 +27,7 @@ public class PaymentService {
   public PaymentResponseDTO checkoutProducts(PaymentRequestDTO paymentRequest) {
     Stripe.apiKey = stripeSecret;
 
-    SessionCreateParams params = SessionCreateParams.builder()
-        .setMode(SessionCreateParams.Mode.PAYMENT)
-        .setSuccessUrl("http://localhost:5173/shop") // TODO: make a success page
-        .setCancelUrl("http://localhost:5173/shop") // TODO: make a cancel page
-        .build();
+    List<SessionCreateParams.LineItem> lineItems = new ArrayList<>();
 
     paymentRequest.getProducts().stream().forEach(dto -> {
       Product product;
@@ -62,8 +61,15 @@ public class PaymentService {
           .setPriceData(priceData)
           .build();
 
-      params.getLineItems().add(lineItem);
+      lineItems.add(lineItem);
     });
+
+    SessionCreateParams params = SessionCreateParams.builder()
+        .setMode(SessionCreateParams.Mode.PAYMENT)
+        .setSuccessUrl("http://localhost:5173/shop") // TODO: make a success page
+        .setCancelUrl("http://localhost:5173/shop") // TODO: make a cancel page
+        .addAllLineItem(lineItems)
+        .build();
 
     Session session = null;
 
