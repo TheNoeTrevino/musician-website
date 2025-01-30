@@ -17,7 +17,8 @@ function formatTime(time: number) {
 }
 
 const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
-  const [quantity, setQuantity] = useState<number>(1);
+  // const [quantity, setQuantity] = useState<number>(1);
+  const quantity = 1;
 
   const [duration, setDuration] = useState<string>("0:00");
   const pieceAudio =
