@@ -1,5 +1,13 @@
 # Website for musicians
 
+# TODO: 
+
+- Use environment variables for all prefixes 
+- Connect cart to the backend
+- Cart redirect to the strip url
+- Add "coming soon" and "update" section 
+  * coming soon below about
+
 ## Technologies
 
 ### Frontend
