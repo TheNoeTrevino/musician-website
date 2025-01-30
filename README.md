@@ -23,6 +23,7 @@ Java
 
 - Hibernate
 - Spring
+- Stripe API
 
 ## How to run
 
@@ -39,8 +40,12 @@ Java
   export DATABASE_PW="<database_pw>"
 
   #Email variables
-  export EMAIL_USER="<yout gmail>"
+  export EMAIL_USER="<your gmail>"
   export EMAIL_PW="<gmail app password>"
+  
+  #Stripe Variables
+  export STRIPE_SECRET="<secret key>"
+  export STRIPE_PUBLISHABLE="<publishable key>"
 
   # confirmation
   echo "db url: $DATABASE_URL"
@@ -49,6 +54,9 @@ Java
 
   echo "email user: $EMAIL_USER"
   echo "email pass: $EMAIL_PW"
+
+  echo "stripe secret: $STRIPE_SECRET"
+  echo "stripe publishable: $STRIPE_PUBLISHABLE"
 ```
 2. Run it with this command:
   ``` bash
