@@ -7,8 +7,8 @@ import {
 import { PieceDTO } from "../../dtos/dtos";
 import { useState } from "react";
 import WavesurferPlayer from "@wavesurfer/react";
-import WaveSurfer from "wavesurfer.js/dist/types.js";
-import HoverPlugin from "wavesurfer.js/dist/plugins/hover.js";
+import WaveSurfer from "wavesurfer.js";
+// import HoverPlugin from "wavesurfer.js/dist/plugins/hover.js";
 
 const formatTime = (seconds: number) => {
   return [seconds / 60, seconds % 60]
