@@ -88,7 +88,7 @@ const CartSection = () => {
                 </div>
                 <IconTrash
                   onClick={() => {
-                    setItems(items.filter((i, id) => id !== index));
+                    setItems(items.filter((_, id) => id !== index));
                   }}
                   className="text-primary cursor-pointer hover:text-white"
                 />
