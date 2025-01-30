@@ -7,8 +7,12 @@ import org.springframework.stereotype.Service;
 
 import com.project.backend.DTOs.PaymentRequestDTO;
 import com.project.backend.DTOs.PaymentResponseDTO;
+import com.project.backend.DTOs.ProductDTO;
+import com.project.backend.exceptions.NotFoundException;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Price;
+import com.stripe.model.Product;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
 
@@ -21,14 +25,45 @@ public class PaymentService {
 
   public PaymentResponseDTO checkoutProducts(PaymentRequestDTO paymentRequest) {
     Stripe.apiKey = stripeSecret;
+
+    paymentRequest.getProducts().stream().forEach(dto -> {
+      Product product;
+      try {
+        product = Product.retrieve(dto.getId());
+      } catch {
+      }
+    }
+    );
+
+    try {
+      product = Product.retrieve(paymentRequest.getProductId());
+    } catch (StripeException ex) {
+      logger.error("Product retrieval failed: ", ex.getMessage());
+      return PaymentResponseDTO.builder()
+          .status("FAILED")
+          .message("Product not found")
+          .build();
+    }
+
+    Price price = null;
+    try {
+      price = Price.retrieve(product.getDefaultPrice());
+    } catch (StripeException ex) {
+      logger.error("Price retrieval failed: ", ex.getMessage());
+      return PaymentResponseDTO.builder()
+          .status("FAILED")
+          .message("Price not found")
+          .build();
+    }
+
     SessionCreateParams.LineItem.PriceData.ProductData productData = SessionCreateParams.LineItem.PriceData.ProductData
         .builder()
-        .setName(paymentRequest.getProductName())
+        .setName(product.getName())
         .build();
 
     SessionCreateParams.LineItem.PriceData priceData = SessionCreateParams.LineItem.PriceData.builder()
-        .setCurrency(paymentRequest.getCurrency() == null ? "USD" : paymentRequest.getCurrency())
-        .setUnitAmount(paymentRequest.getAmount())
+        .setCurrency(price.getCurrency()) // FIX: right now will always be USD
+        .setUnitAmount(price.getUnitAmount())
         .setProductData(productData)
         .build();
 
@@ -39,8 +74,8 @@ public class PaymentService {
 
     SessionCreateParams params = SessionCreateParams.builder()
         .setMode(SessionCreateParams.Mode.PAYMENT)
-        .setSuccessUrl("http://localhost:5173/shop")
-        .setCancelUrl("http://localhost:5173/shop")
+        .setSuccessUrl("http://localhost:5173/shop") // TODO: make a success page
+        .setCancelUrl("http://localhost:5173/shop") // TODO: make a cancel page
         .addLineItem(lineItem)
         .build();
 
@@ -50,15 +85,41 @@ public class PaymentService {
       session = Session.create(params);
     } catch (StripeException exception) {
       // TODO: return a failed stripe response
-      logger.error("Payment failed: ", exception.getMessage());
+      logger.error("Payment session creation failed: ", exception.getMessage());
+      return PaymentResponseDTO.builder()
+          .status("FAILED")
+          .message("Payment session creation failed")
+          .build();
     }
 
-    // TODO: take care of not null here
     return PaymentResponseDTO.builder()
         .status("SUCCESS")
         .message("Payment session created")
         .sessionId(session.getId())
-        .checkoutUrl(session.getSuccessUrl())
+        .checkoutUrl(session.getUrl()) // checkout URL
         .build();
+  }
+
+  public String getProductById() {
+    Stripe.apiKey = stripeSecret;
+
+    Product product = null;
+    try {
+      product = Product.retrieve("prod_RgMaQVCpahAW2z");
+    } catch (StripeException ex) {
+      logger.error("Payment failed: ", ex.getMessage());
+      throw new NotFoundException(ex.getMessage(), (long) 2);
+    }
+
+    String price;
+
+    try {
+      price = Price.retrieve(product.getDefaultPrice()).toString();
+    } catch (StripeException ex) {
+      logger.error("Payment failed: ", ex.getMessage());
+      throw new NotFoundException(ex.getMessage(), (long) 2);
+    }
+
+    return product.getName() + "\n" + price;
   }
 }
