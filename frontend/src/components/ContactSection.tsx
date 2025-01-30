@@ -39,7 +39,7 @@ const ContactSection = () => {
           onInvalid={(e) => {
             e.preventDefault();
             // TODO: fix this
-            const fieldName = e.target.id;
+            const fieldName = (e.target as HTMLInputElement).id;
             toast.error(`Please fill: ${fieldName}`);
           }}
         >
