@@ -25,5 +25,4 @@ public class PaymentController {
   public ResponseEntity<PaymentResponseDTO> checkoutProducts(@RequestBody PaymentRequestDTO request) {
     return ResponseEntity.ok(paymentService.checkoutProducts(request));
   }
-
 }
