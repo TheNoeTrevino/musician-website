@@ -84,7 +84,7 @@ const CartSection = () => {
                     </div>
                     <IconTrash
                       onClick={() => {
-                        clearCart();
+                        removePieceFromCart(item);
                       }}
                       className="text-primary cursor-pointer hover:text-white"
                     />

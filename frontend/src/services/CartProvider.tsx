@@ -46,6 +46,10 @@ export const CartProvider: React.FC<CartServiceProps> = ({ children }) => {
     }
   };
 
+  const removePieceFromCart = (piece: CartItems): void => {
+    setCartItems(cartItems.filter((item) => item.title != piece.title));
+  };
+
   const clearCart = (): void => {
     setCartItems([]);
   };
@@ -70,6 +74,7 @@ export const CartProvider: React.FC<CartServiceProps> = ({ children }) => {
         clearCart,
         getCartSubtotal,
         getTotalItems,
+        removePieceFromCart,
       }}
     >
       {children}
