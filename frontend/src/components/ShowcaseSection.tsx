@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { PieceDTO } from "../dtos/dtos";
 import PieceAttributeCard from "./showcase/PieceAttributeCard";
 import AudioDisplay from "./showcase/AudioDisplay";
+import { useCartContext } from "./CartContext";
 
 // TODO: this is giving a weird pace to the size of some seconds
 function formatTime(time: number) {
@@ -17,7 +18,8 @@ function formatTime(time: number) {
 }
 
 const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
-  const [quantity, setQuantity] = useState<number>(1);
+  const { cartItems, addToCart, removeFromCart, clearCart, getCartSubtotal } =
+    useCartContext();
 
   const [duration, setDuration] = useState<string>("0:00");
   const pieceAudio =
@@ -46,14 +48,12 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
           <AudioDisplay piece={piece} />
 
           <div>
-            <div className="flex flex-row justify-between text-2xl">
-              <div className="button bg-primary py-6">
-                Quantity {quantity} <IconChevronDown />
-              </div>
-              <p className="text-6xl text-white">${piece.price}</p>
+            <div className="flex flex-row justify-center text-2xl">
+              <p className="text-6xl text-white text-center">${piece.price}</p>
             </div>
             <a
               onClick={() => {
+                addToCart({ ...piece, quantity: 1 });
                 toast.success(piece.title + " Added to Cart");
               }}
               className="button bg-primary py-6"
