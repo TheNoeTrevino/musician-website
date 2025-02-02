@@ -5,8 +5,14 @@ import { useCartContext } from "./CartContext";
 import EmptyCart from "./EmptyCart";
 
 const CartSection = () => {
-  const { cartItems, addToCart, removeFromCart, clearCart, getCartSubtotal } =
-    useCartContext();
+  const {
+    cartItems,
+    addToCart,
+    removeFromCart,
+    clearCart,
+    getCartSubtotal,
+    getTotalItems,
+  } = useCartContext();
 
   const fallbackSrc = "/albums/blank.png";
   return (
@@ -100,7 +106,7 @@ const CartSection = () => {
           <div className="mt-8 pt-8 border-t border-textGray/40">
             <div className="flex justify-end items-center mb-6 gap-4">
               <span className="text-lg">
-                Subtotal ({cartItems.length} items):
+                Subtotal ({getTotalItems()} items):
               </span>
               <span className="text-lg">${getCartSubtotal()}</span>
             </div>
