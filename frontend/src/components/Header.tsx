@@ -4,14 +4,7 @@ import Socials from "./Socials";
 import { useCartContext } from "./CartContext";
 
 const Header = () => {
-  const {
-    cartItems,
-    addToCart,
-    removeFromCart,
-    clearCart,
-    getCartSubtotal,
-    getTotalItems,
-  } = useCartContext();
+  const { cartItems, getTotalItems } = useCartContext();
 
   return (
     <div className="absolute w-screen flex flex-row gap-10 justify-between items-center px-44 text-xl text-center text-white max-md:px-5 h-24 z-20  ">
