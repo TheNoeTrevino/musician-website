@@ -1,45 +1,23 @@
 import { IconTrash } from "@tabler/icons-react";
-import { useState } from "react";
-import { songDummyData } from "../constants/songDummyData";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { useCartContext } from "./CartContext";
 
 const CartSection = () => {
-  const [items, setItems] = useState(songDummyData);
-
-  const updateQuantity = (id: number, increment: number) => {
-    setItems(
-      items.map((item, index) => {
-        if (index === id) {
-          const newQuantity = Math.max(0, item.quantity + increment);
-          return { ...item, quantity: newQuantity };
-        }
-        return item;
-      }),
-    );
-  };
-
-  const getSubtotal = () => {
-    const activeItems = items.filter(
-      (item: { quantity: number }) => item.quantity > 0,
-    );
-    const total = activeItems.reduce(
-      (sum: number, item: { price: number; quantity: number }) =>
-        sum + item.price * item.quantity,
-      0,
-    );
-    return { count: activeItems.length, total };
-  };
+  const { cartItems, addToCart, removeFromCart, clearCart, getCartSubtotal } =
+    useCartContext();
 
   return (
     <div className="  min-h-screen flex flex-col mx-52 gap-8 text-white border-t border-textGray/40 mb-24 mt-40 py-16">
       <h1 className="text-7xl mb-8 font-light">Shopping Cart</h1>
 
       <div className="space-y-8 ">
-        {items.map((item, index) => (
+        {cartItems.map((item, index) => (
           <div
             className={`flex flex-row justify-between gap-3 pb-4 ${
-              index === items.length - 1 ? "" : "border-b border-textGray/20"
+              index === cartItems.length - 1
+                ? ""
+                : "border-b border-textGray/20"
             }`}
           >
             <Link to={"/" + item.title.replace(/ /g, "-").toLowerCase()}>
@@ -71,7 +49,7 @@ const CartSection = () => {
               <div className="flex flex-row items-center gap-4">
                 <div className="flex flex-row items-center border border-gray-700 rounded-lg w-fit">
                   <button
-                    onClick={() => updateQuantity(index, -1)}
+                    onClick={() => removeFromCart(item)}
                     className="px-3 py-1 text-primary hover:bg-gray-900"
                   >
                     -
@@ -80,7 +58,7 @@ const CartSection = () => {
                     {item.quantity}
                   </span>
                   <button
-                    onClick={() => updateQuantity(index, 1)}
+                    onClick={() => addToCart(item)}
                     className="px-3 py-1 text-primary hover:bg-gray-900"
                   >
                     +
@@ -88,7 +66,7 @@ const CartSection = () => {
                 </div>
                 <IconTrash
                   onClick={() => {
-                    setItems(items.filter((i, id) => id !== index));
+                    clearCart();
                   }}
                   className="text-primary cursor-pointer hover:text-white"
                 />
@@ -107,10 +85,8 @@ const CartSection = () => {
 
       <div className="mt-8 pt-8 border-t border-textGray/40">
         <div className="flex justify-end items-center mb-6 gap-4">
-          <span className="text-lg">
-            Subtotal ({getSubtotal().count} items):
-          </span>
-          <span className="text-lg">${getSubtotal().total.toFixed(2)}</span>
+          <span className="text-lg">Subtotal ({cartItems.length} items):</span>
+          <span className="text-lg">${getCartSubtotal()}</span>
         </div>
 
         <a
