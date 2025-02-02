@@ -10,14 +10,14 @@ export const CartProvider: React.FC<CartServiceProps> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItems[]>([]);
 
   const addToCart = (piece: CartItems): void => {
-    const isItemInCart = cartItems.find(
-      (item) => item.productId == piece.productId,
-    );
+    // TODO: once the SQL calls and the stripe gets situated, use productId
+    // instead. just in case
+    const isItemInCart = cartItems.find((item) => item.title == piece.title);
 
     if (isItemInCart) {
       setCartItems(
         cartItems.map((item) =>
-          item.productId == piece.productId
+          item.title == piece.title
             ? { ...item, quantity: item.quantity + 1 }
             : item,
         ),
@@ -29,18 +29,16 @@ export const CartProvider: React.FC<CartServiceProps> = ({ children }) => {
   };
 
   const removeFromCart = (piece: CartItems): void => {
-    const isItemInCart = cartItems.find(
-      (item) => item.productId == piece.productId,
-    );
+    // TODO: once the SQL calls and the stripe gets situated, use productId
+    // instead. just in case
+    const isItemInCart = cartItems.find((item) => item.title == piece.title);
 
     if (isItemInCart?.quantity == 1) {
-      setCartItems(
-        cartItems.filter((item) => item.productId != piece.productId),
-      );
+      setCartItems(cartItems.filter((item) => item.title != piece.title));
     } else {
       setCartItems(
         cartItems.map((item) =>
-          item.productId == piece.productId
+          item.title == piece.title
             ? { ...item, quantity: item.quantity - 1 }
             : item,
         ),
