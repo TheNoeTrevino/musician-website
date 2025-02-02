@@ -105,7 +105,7 @@ const CartSection = () => {
           </div>
 
           <div className="mt-8 pt-8 border-t border-textGray/40">
-            <div className="flex justify-end items-center mb-6 gap-4">
+            <div className="flex justify-start items-center mb-6 gap-4">
               <span className="text-lg">
                 Subtotal ({getTotalItems()} items):
               </span>
