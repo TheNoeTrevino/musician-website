@@ -1,10 +1,10 @@
 import { IconShoppingCart } from "@tabler/icons-react";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import Socials from "./Socials";
+import { useCartContext } from "./CartContext";
 
 const Header = () => {
-  const [cartItems] = useState(["song1", "song2", "song3"]);
+  const { cartItems, getTotalItems } = useCartContext();
 
   return (
     <div className="absolute w-screen flex flex-row gap-10 justify-between items-center px-44 text-xl text-center text-white max-md:px-5 h-24 z-20  ">
@@ -56,7 +56,7 @@ const Header = () => {
           />
           {cartItems.length > 0 && (
             <div className=" bg-secondary  w-5 h-5 bg-primary rounded-full text-xs flex justify-center items-center">
-              {cartItems.length}
+              {getTotalItems()}
             </div>
           )}
         </Link>

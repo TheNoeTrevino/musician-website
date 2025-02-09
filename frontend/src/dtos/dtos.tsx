@@ -24,6 +24,7 @@ export interface PieceDTO {
   difficultyGrade: number;
   timeLength: number; // this might be wrong
   description: string;
+  productId: string;
 }
 
 export interface CreateUpdateOrderDTO {
@@ -57,4 +58,8 @@ export interface ContactDTO {
 export interface EmailResponseDTO {
   successful: boolean;
   reply: string;
+}
+
+export interface CartItems extends PieceDTO {
+  quantity: number;
 }
