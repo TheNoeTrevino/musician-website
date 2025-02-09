@@ -1,0 +1,9 @@
+package com.project.backend.DTOs;
+
+import lombok.Data;
+
+@Data
+public class LoginDTO {
+  private String username;
+  private String password;
+}
