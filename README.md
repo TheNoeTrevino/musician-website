@@ -62,7 +62,26 @@ Java
   ``` bash
   source ./env.sh
   ```
-3. Make sure to source this before you run the backend.
+3. Make sure to source this before you run anything, in each terminal
+
+### Backend:
+
+1. Navigate to the `backend` directory:
+
+   ```bash
+   cd backend
+   ```
+
+2. Start the backend continuous compiler:
+
+   ```bash
+   ./gradlew --continous build
+   ```
+
+3. In another terminal, start the server in the same directory
+   ```bash
+   ./gradlew bootRun
+   ```
 
 ### Frontend:
 
@@ -80,16 +99,3 @@ Java
    ```
 4. Open [http://localhost:5173/](http://localhost:5173/) in your browser to view the site.
 
-### Backend:
-
-1. Navigate to the `backend` directory:
-
-   ```bash
-   cd backend
-   ```
-
-2. Start the backend server:
-
-   ```bash
-   ./gradlew bootRun
-   ```
