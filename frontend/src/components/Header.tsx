@@ -41,7 +41,7 @@ const Header = () => {
         to={"/"}
         className="self-stretch my-auto text-5xl max-md:text-4xl cursor-pointer hover:scale-105 transition-transform"
       >
-        <img loading="lazy" src="/logo.png" alt="logo" className="w-80" />
+        <img src="/logo.png" alt="logo" className="w-80" />
       </Link>
 
       <div className="flex gap-10 justify-center items-center self-stretch my-auto whitespace-nowrap min-w-[240px] w-[441px] max-md:max-w-full">
