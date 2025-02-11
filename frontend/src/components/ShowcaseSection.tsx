@@ -6,7 +6,7 @@ import PieceAttributeCard from "./showcase/PieceAttributeCard";
 import AudioDisplay from "./showcase/AudioDisplay";
 
 // TODO: this is giving a weird pace to the size of some seconds
-function formatTime(time: number) {
+function formatTime(time: number): string {
   const minutes = Math.floor(time / 60);
   const seconds = Math.floor(time % 60);
   if (seconds > 9) {

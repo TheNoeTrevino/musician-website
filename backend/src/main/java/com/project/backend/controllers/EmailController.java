@@ -18,7 +18,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/email")
 public class EmailController {
-  private static final Logger logger = LoggerFactory.getLogger(OrdersController.class);
+  private static final Logger logger = LoggerFactory.getLogger(EmailController.class);
 
   @Autowired
   EmailService emailService;

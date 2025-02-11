@@ -11,7 +11,7 @@ import com.project.backend.DTOs.LoginDTO;
 @RequestMapping("/auth")
 public class AuthController {
 
-  @PostMapping("login")
+  @PostMapping("/login")
   public String login(@RequestBody LoginDTO loginDTO) {
     return "success";
   }
