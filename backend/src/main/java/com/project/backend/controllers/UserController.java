@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.backend.DTOs.UserDTO;
-import com.project.backend.DTOs.UserWithOrdersDTO;
 import com.project.backend.DTOs.CreateUpdateUserDTO;
-import com.project.backend.eums.Role;
 import com.project.backend.services.UserService;
 
 import jakarta.validation.Valid;
@@ -44,12 +42,6 @@ public class UserController {
     return ResponseEntity.ok(userService.deleteUserById(id));
   }
 
-  @GetMapping("/role")
-  public ResponseEntity<List<UserDTO>> getUsersByRole(@RequestParam(required = true) Role role) {
-    logger.info("Fetching users with role: {}", role);
-    return ResponseEntity.ok(userService.getUsersByRole(role));
-  }
-
   @PostMapping("/")
   public ResponseEntity<UserDTO> createUser(@Valid @RequestBody CreateUpdateUserDTO user) {
     logger.info("Creating user");
@@ -58,15 +50,9 @@ public class UserController {
 
   @GetMapping("/")
   public ResponseEntity<List<UserDTO>> getAllUsers(
-    @RequestParam(required = false, defaultValue = "ASC") String sortOrder,
-    @RequestParam(required = false, defaultValue = "id") String orderBy) {
+      @RequestParam(required = false, defaultValue = "ASC") String sortOrder,
+      @RequestParam(required = false, defaultValue = "id") String orderBy) {
     logger.info("Fetching all user");
     return ResponseEntity.ok(userService.getAllUsers(sortOrder, orderBy));
-  }
-
-  @GetMapping("/user/orders/{id}")
-  public ResponseEntity<UserWithOrdersDTO> getUserWithOrdersById(@PathVariable Long id) {
-    logger.info("Searching for user orders with ID: {}", id);
-    return ResponseEntity.ok(userService.getUserWithOrdersById(id));
   }
 }

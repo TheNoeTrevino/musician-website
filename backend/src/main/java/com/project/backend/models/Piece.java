@@ -1,18 +1,12 @@
 package com.project.backend.models;
 
 import java.time.Duration;
-import java.util.HashSet;
-import java.util.Set;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -75,25 +69,17 @@ public class Piece {
   @Column(name = "time_length")
   private Duration timeLength;
 
-  @ManyToMany(cascade = CascadeType.PERSIST)
-  @JoinTable(
-    name = "order_pieces",
-    joinColumns = @JoinColumn(name = "piece_id"),
-    inverseJoinColumns = @JoinColumn(name = "order_id")
-  )
-  private Set<Order> orders = new HashSet<>();
-
-  public Piece(String title, String composer, Double price, String description, Integer yearComposed, 
-                boolean hasElectronics, boolean completed, Integer numOfPlayers, Integer difficultyGrade, Duration timeLength) {
-      this.title = title;
-      this.composer = composer;
-      this.price = price;
-      this.description = description;
-      this.yearComposed = yearComposed;
-      this.hasElectronics = hasElectronics;
-      this.completed = completed;
-      this.numOfPlayers = numOfPlayers;
-      this.difficultyGrade = difficultyGrade;
-      this.timeLength = timeLength;
+  public Piece(String title, String composer, Double price, String description, Integer yearComposed,
+      boolean hasElectronics, boolean completed, Integer numOfPlayers, Integer difficultyGrade, Duration timeLength) {
+    this.title = title;
+    this.composer = composer;
+    this.price = price;
+    this.description = description;
+    this.yearComposed = yearComposed;
+    this.hasElectronics = hasElectronics;
+    this.completed = completed;
+    this.numOfPlayers = numOfPlayers;
+    this.difficultyGrade = difficultyGrade;
+    this.timeLength = timeLength;
   }
 }
