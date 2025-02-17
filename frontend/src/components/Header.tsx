@@ -1,4 +1,4 @@
-import { IconShoppingCart } from "@tabler/icons-react";
+import { IconShoppingCart, IconUser } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import Socials from "./Socials";
 import { useCartContext } from "./CartContext";
@@ -59,6 +59,16 @@ const Header = () => {
               {getTotalItems()}
             </div>
           )}
+        </Link>
+
+        <Link
+          to={"/login"}
+          className="flex items-center justify-center  cursor-pointer"
+        >
+          <IconUser
+            strokeWidth={1}
+            className="hover:scale-125 transition-transform "
+          />
         </Link>
       </div>
     </div>
