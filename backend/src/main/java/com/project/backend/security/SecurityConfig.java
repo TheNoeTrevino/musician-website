@@ -27,8 +27,7 @@ public class SecurityConfig {
     return http.csrf(customizer -> customizer.disable())
         .authorizeHttpRequests(request -> request
             .requestMatchers("users/**", "login", "auth/**").permitAll() // for now, allow anyone to get
-                                                                         // piece
-            // information
+                                                                         // piece information
             .anyRequest().authenticated())
         .httpBasic(Customizer.withDefaults())
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
