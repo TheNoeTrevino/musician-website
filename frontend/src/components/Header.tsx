@@ -28,7 +28,6 @@ const Header = () => {
           Shop
         </Link>
 
-        {/* TODO: make this take us to a contact page instead of the section   */}
         <Link
           to={"/contact-me"}
           className="cursor-pointer hover:scale-110 transition-transform"
