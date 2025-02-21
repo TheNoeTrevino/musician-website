@@ -39,8 +39,9 @@ public class Users {
   @Column(name = "last_name")
   private String lastName;
 
+  // TODO: add more pw verification here
   @Size(max = 255, message = "Password must be below 255 characters long")
-  @Size(min = 0, message = "Password must be above 8 characters long")
+  @Size(min = 8, message = "Password must be above 8 characters long")
   @NotNull(message = "Password on a user cannot be null")
   @Column(name = "password")
   private String password;
