@@ -32,7 +32,7 @@ public class UserService {
   @Autowired
   UserMapper userMapper;
 
-  private BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder(5);
+  private BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder(10);
 
   public List<UserDTO> getAllUsers(String sortOrder, String orderBy) {
     Sort.Direction orderDirection = Sort.Direction.ASC;
