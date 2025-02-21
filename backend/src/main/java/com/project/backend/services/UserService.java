@@ -67,7 +67,6 @@ public class UserService {
   public UserDTO createUser(CreateUpdateUserDTO dto) {
     Users user = userMapper.CreateUpateDTOToUser(dto);
     user.setPassword(pwEncoder.encode(user.getPassword()));
-    userRepo.save(user);
-    return userMapper.UserToDTO(user);
+    return userMapper.UserToDTO(userRepo.save(user));
   }
 }
