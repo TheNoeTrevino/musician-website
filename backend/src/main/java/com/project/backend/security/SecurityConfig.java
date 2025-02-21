@@ -26,8 +26,7 @@ public class SecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     return http.csrf(customizer -> customizer.disable())
         .authorizeHttpRequests(request -> request
-            .requestMatchers("users/**", "login", "auth/**").permitAll() // for now, allow anyone to get
-                                                                         // piece information
+            .requestMatchers("/users/**", "/login", "/auth/**").permitAll() // permit
             .anyRequest().authenticated())
         .httpBasic(Customizer.withDefaults())
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -37,7 +36,7 @@ public class SecurityConfig {
   @Bean
   public AuthenticationProvider authenticationProvider() {
     DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-    provider.setPasswordEncoder(new BCryptPasswordEncoder(5)); // this is 2^5
+    provider.setPasswordEncoder(new BCryptPasswordEncoder(10)); // this is 2^x
     provider.setUserDetailsService(detailsService);
     return provider;
   }
