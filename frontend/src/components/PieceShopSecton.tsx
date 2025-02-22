@@ -26,14 +26,13 @@ const StoreSecton = () => {
       case "duet":
         setPieces(allPieces?.filter((piece) => piece.numOfPlayers == 2));
         break;
-
     }
   };
 
   const fetchPieces = async () => {
     const fetchedPieces = await PieceService.getAllPieces();
-    setAllPieces(fetchedPieces); // Save the original data
-    setPieces(fetchedPieces); // Set the initial display data
+    setAllPieces(fetchedPieces);
+    setPieces(fetchedPieces);
   };
 
   useEffect(() => {
@@ -43,7 +42,7 @@ const StoreSecton = () => {
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchText = e.target.value.toLowerCase();
     if (!searchText) {
-      setPieces(allPieces); // Reset to all pieces if the search text is empty
+      setPieces(allPieces);
     } else {
       setPieces(
         allPieces?.filter((piece) =>
@@ -91,7 +90,6 @@ const StoreSecton = () => {
           <p
             className={`${
               currentCateogry === "duet" && "text-white"
-
             } cursor-pointer`}
             onClick={() => {
               handleCategoryChange("duet");
