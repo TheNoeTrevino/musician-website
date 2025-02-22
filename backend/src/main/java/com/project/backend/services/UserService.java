@@ -18,6 +18,7 @@ import com.project.backend.mappers.UserMapper;
 import com.project.backend.models.Users;
 import com.project.backend.DTOs.CreateUpdateUserDTO;
 import com.project.backend.DTOs.LoginDTO;
+import com.project.backend.DTOs.LoginAndSignupResponseDTO;
 import com.project.backend.repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -74,20 +75,22 @@ public class UserService {
     return userDTO;
   };
 
-  public UserDTO createUser(CreateUpdateUserDTO dto) {
+  public LoginAndSignupResponseDTO createUser(CreateUpdateUserDTO dto) {
+    // TODO: check if they are already existing, if so, throw an error and make
+    // them sign in instead. check username, and email
     Users user = userMapper.CreateUpateDTOToUser(dto);
     user.setPassword(pwEncoder.encode(user.getPassword()));
-    return userMapper.UserToDTO(userRepo.save(user));
+    userRepo.save(user);
+    return new LoginAndSignupResponseDTO(null, "Account created successfully.", true);
   }
 
-  public String verify(LoginDTO dto) {
+  public LoginAndSignupResponseDTO login(LoginDTO dto) {
     Authentication authentication = authManager
         .authenticate(new UsernamePasswordAuthenticationToken(dto.getUsername(), dto.getPassword()));
 
     if (authentication.isAuthenticated()) {
-      return jwtService.generateToken();
+      return new LoginAndSignupResponseDTO(jwtService.generateToken(dto), "User logged in successfully", true);
     }
-    // NOTE: this doesnt happen, just throws 401
-    return "Failed";
+    return new LoginAndSignupResponseDTO(null, "User was not found", false);
   }
 }
