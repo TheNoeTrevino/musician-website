@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthService } from "../services/AuthService";
+import { LoginDTO } from "../dtos/dtos";
 
 const LoginSection = () => {
   const [username, setUsername] = useState<string>("");
@@ -8,14 +10,11 @@ const LoginSection = () => {
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    try {
-      // Log in the user
-      navigate("/");
-    } catch (error) {
-      console.error("Login Error:", error);
-      alert("An error occurred. Please try again.");
-    }
+    const loginInfo: LoginDTO = {
+      username: username,
+      password: password,
+    };
+    await AuthService.login(loginInfo, navigate);
   };
 
   const handleSignUp = async (e: React.MouseEvent<HTMLButtonElement>) => {
