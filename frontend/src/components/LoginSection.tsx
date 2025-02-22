@@ -17,7 +17,7 @@ const LoginSection = () => {
     await AuthService.login(loginInfo, navigate);
   };
 
-  const handleSignUp = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSignUp = async () => {
     navigate("/signup");
   };
 
