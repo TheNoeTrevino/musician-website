@@ -5,6 +5,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -14,6 +17,7 @@ import com.project.backend.exceptions.NotFoundException;
 import com.project.backend.mappers.UserMapper;
 import com.project.backend.models.Users;
 import com.project.backend.DTOs.CreateUpdateUserDTO;
+import com.project.backend.DTOs.LoginDTO;
 import com.project.backend.repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -31,6 +35,12 @@ public class UserService {
 
   @Autowired
   UserMapper userMapper;
+
+  @Autowired
+  JWTService jwtService;
+
+  @Autowired
+  AuthenticationManager authManager;
 
   private BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder(10);
 
@@ -68,5 +78,16 @@ public class UserService {
     Users user = userMapper.CreateUpateDTOToUser(dto);
     user.setPassword(pwEncoder.encode(user.getPassword()));
     return userMapper.UserToDTO(userRepo.save(user));
+  }
+
+  public String verify(LoginDTO dto) {
+    Authentication authentication = authManager
+        .authenticate(new UsernamePasswordAuthenticationToken(dto.getUsername(), dto.getPassword()));
+
+    if (authentication.isAuthenticated()) {
+      return jwtService.generateToken();
+    }
+    // NOTE: this doesnt happen, just throws 401
+    return "Failed";
   }
 }
