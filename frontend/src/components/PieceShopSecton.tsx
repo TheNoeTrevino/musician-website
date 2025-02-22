@@ -6,7 +6,9 @@ import PieceCard from "./PieceCard";
 
 const StoreSecton = () => {
   const [allPieces, setAllPieces] = useState<PieceDTO[] | undefined>(undefined);
-  const [pieces, setPieces] = useState<PieceDTO[] | undefined>(undefined);
+  const [shownPieces, setShownPieces] = useState<PieceDTO[] | undefined>(
+    undefined,
+  );
 
   const [currentCateogry, setCurrentCategory] = useState("all");
 
@@ -15,16 +17,16 @@ const StoreSecton = () => {
 
     switch (category) {
       case "all":
-        setPieces(allPieces);
+        setShownPieces(allPieces);
         break;
       case "solo":
-        setPieces(allPieces?.filter((piece) => piece.numOfPlayers == 1));
+        setShownPieces(allPieces?.filter((piece) => piece.numOfPlayers == 1));
         break;
       case "ensemble":
-        setPieces(allPieces?.filter((piece) => piece.numOfPlayers > 2));
+        setShownPieces(allPieces?.filter((piece) => piece.numOfPlayers > 2));
         break;
       case "duet":
-        setPieces(allPieces?.filter((piece) => piece.numOfPlayers == 2));
+        setShownPieces(allPieces?.filter((piece) => piece.numOfPlayers == 2));
         break;
     }
   };
@@ -32,7 +34,7 @@ const StoreSecton = () => {
   const fetchPieces = async () => {
     const fetchedPieces = await PieceService.getAllPieces();
     setAllPieces(fetchedPieces);
-    setPieces(fetchedPieces);
+    setShownPieces(fetchedPieces);
   };
 
   useEffect(() => {
@@ -42,9 +44,9 @@ const StoreSecton = () => {
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchText = e.target.value.toLowerCase();
     if (!searchText) {
-      setPieces(allPieces);
+      setShownPieces(allPieces);
     } else {
-      setPieces(
+      setShownPieces(
         allPieces?.filter((piece) =>
           piece.title.toLowerCase().includes(searchText),
         ),
@@ -116,9 +118,9 @@ const StoreSecton = () => {
         </div>
 
         <div className="grid grid-cols-3 gap-3 bg-reallyBlack/30 p-6 rounded-lg overflow-y-scroll h-full justify-items-start items-start">
-          {pieces ? (
-            pieces.length > 0 ? (
-              pieces.map((piece) => <PieceCard piece={piece} />)
+          {shownPieces ? (
+            shownPieces.length > 0 ? (
+              shownPieces.map((piece) => <PieceCard piece={piece} />)
             ) : (
               <div className="text-white text-3xl">No pieces found.</div>
             )
