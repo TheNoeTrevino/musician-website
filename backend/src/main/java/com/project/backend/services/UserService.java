@@ -1,5 +1,6 @@
 package com.project.backend.services;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -78,6 +80,9 @@ public class UserService {
   public LoginAndSignupResponseDTO createUser(CreateUpdateUserDTO dto) {
     // TODO: check if they are already existing, if so, throw an error and make
     // them sign in instead. check username, and email
+    if (dto.getAuthority() == null) {
+      dto.setAuthority(new SimpleGrantedAuthority("user"));
+    }
     Users user = userMapper.CreateUpateDTOToUser(dto);
     user.setPassword(pwEncoder.encode(user.getPassword()));
     userRepo.save(user);
