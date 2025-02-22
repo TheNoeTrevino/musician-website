@@ -13,7 +13,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.project.backend.filters.JwtFilter;
 import com.project.backend.services.CustomerDetailsService;
 
 @Configuration
@@ -22,16 +24,20 @@ public class SecurityConfig {
   @Autowired
   CustomerDetailsService detailsService;
 
+  @Autowired
+  private JwtFilter jwtFilter;
+
   // here we can set up what has an urls dont need to be verified
   // TODO: remove the auth premitted
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     return http.csrf(customizer -> customizer.disable())
         .authorizeHttpRequests(request -> request
-            .requestMatchers("/users/**", "/auth/login", "/pieces/**").permitAll() // permit
+            .requestMatchers("/auth/login", "/auth/register", "/pieces/**").permitAll() // permit
             .anyRequest().authenticated())
         .httpBasic(Customizer.withDefaults())
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
         .build();
   }
 
