@@ -19,5 +19,9 @@ public class AuthController {
   @PostMapping("/login")
   public String login(@RequestBody LoginDTO loginDTO) {
     return userService.verify(loginDTO);
+  @PostMapping("/register")
+  public ResponseEntity<LoginAndSignupResponseDTO> createUser(@Valid @RequestBody CreateUpdateUserDTO user) {
+    logger.info("Creating user with username: {}", user.getUsername());
+    return ResponseEntity.ok(userService.createUser(user));
   }
 }
