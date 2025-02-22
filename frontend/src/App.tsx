@@ -14,6 +14,7 @@ import About from "./pages/about/About";
 import Success from "./pages/payment/Success";
 import Cancel from "./pages/payment/Cancel";
 import Login from "./pages/login/Login";
+import Signup from "./pages/login/Signup";
 
 function App() {
   const fetchPieces = async () => {
@@ -38,6 +39,7 @@ function App() {
           <Route path="/contact-me" element={<ContactSection />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/success" element={<Success />} />
           <Route path="/cancel" element={<Cancel />} />
           <Route path="*" element={<ErrorPage />} />
