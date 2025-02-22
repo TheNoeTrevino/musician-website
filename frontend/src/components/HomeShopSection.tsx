@@ -35,21 +35,23 @@ const ShopSecton = () => {
         </div>
 
         <div className="grid grid-cols-2">
-          {pieces?.map((piece, index) => (
-            <div key={index}>
-              <Link to={"/" + piece.title.replace(/ /g, "-")}>
-                <img
-                  className="w-full"
-                  src={
-                    "/albums/" +
-                    piece.title.replace(/ /g, "-").toLowerCase() +
-                    ".png"
-                  }
-                  alt={`${piece.title} Album`}
-                />
-              </Link>
-            </div>
-          ))}
+          {pieces
+            ?.filter((piece) => piece.completed == true)
+            .map((piece, index) => (
+              <div key={index}>
+                <Link to={"/" + piece.title.replace(/ /g, "-")}>
+                  <img
+                    className="w-full"
+                    src={
+                      "/albums/" +
+                      piece.title.replace(/ /g, "-").toLowerCase() +
+                      ".png"
+                    }
+                    alt={`${piece.title} Album`}
+                  />
+                </Link>
+              </div>
+            ))}
 
           <div className="flex relative items-center justify-center">
             <img
