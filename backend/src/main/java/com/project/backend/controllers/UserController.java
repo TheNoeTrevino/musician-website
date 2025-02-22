@@ -42,12 +42,6 @@ public class UserController {
     return ResponseEntity.ok(userService.deleteUserById(id));
   }
 
-  @PostMapping("/")
-  public ResponseEntity<UserDTO> createUser(@Valid @RequestBody CreateUpdateUserDTO user) {
-    logger.info("Creating user");
-    return ResponseEntity.ok(userService.createUser(user));
-  }
-
   @GetMapping("/")
   public ResponseEntity<List<UserDTO>> getAllUsers(
       @RequestParam(required = false, defaultValue = "ASC") String sortOrder,
