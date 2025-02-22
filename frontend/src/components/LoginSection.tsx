@@ -18,15 +18,7 @@ const LoginSection = () => {
   };
 
   const handleSignUp = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
-    try {
-      // Create a new user
-      navigate("/");
-    } catch (error) {
-      console.error("Sign Up Error:", error);
-      alert("An error occurred. Please try again.");
-    }
+    navigate("/signup");
   };
 
   return (
