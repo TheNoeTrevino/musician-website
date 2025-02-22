@@ -20,6 +20,7 @@ export interface PieceDTO {
   price: number;
   yearComposed: number;
   hasElectronics: boolean;
+  completed: boolean;
   numOfPlayers: number;
   difficultyGrade: number;
   timeLength: number; // this might be wrong
