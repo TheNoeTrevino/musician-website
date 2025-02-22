@@ -25,4 +25,24 @@ export const AuthService = {
     localStorage.setItem("jwt", loginResponse.jwtToken);
     return loginResponse;
   },
+
+  async register(registerDTO: RegisterDTO, navigate: (path: string) => void) {
+    const response = await fetch("http://localhost:8080/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(registerDTO),
+    });
+
+    const registerResponse: LoginAndResgisterResponseDTO =
+      await response.json();
+
+    if (!registerResponse.successful) {
+      toast.error("Something went wrong making your account");
+      return registerResponse;
+    }
+
+    toast.success("Successfully registered, please log in.");
+    navigate("/login");
+    return registerResponse;
+  },
 };
