@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const LoginSection = () => {
-  const [email, setEmail] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
 
@@ -52,13 +52,13 @@ const LoginSection = () => {
           onSubmit={handleLogin}
           className="text-2xl flex flex-col gap-4 text-white"
         >
-          <label>Email</label>
+          <label>Username</label>
           <input
             className="flex cursor-text items-center px-6 h-full rounded-xl border border-solid border-white w-full bg-black"
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            placeholder="Enter your username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
 
