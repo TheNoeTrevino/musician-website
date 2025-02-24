@@ -100,6 +100,12 @@ const CartSection = () => {
                     ${(item.price * item.quantity).toFixed(2)}
                   </p>
                 </div>
+                <IconTrash
+                  onClick={() => {
+                    clearCart();
+                  }}
+                  className="text-primary cursor-pointer hover:text-white"
+                />
               </div>
             ))}
           </div>

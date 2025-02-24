@@ -100,11 +100,6 @@ const ContactSection = () => {
             value="Send"
           />
         </form>
-        <p>first name: {firstName}</p>
-        <p>last name: {lastName}</p>
-        <p>from: {from}</p>
-        <p>subject: {subject}</p>
-        <p>message: {message}</p>
       </div>
     </div>
   );

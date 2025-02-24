@@ -1,24 +1,27 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthService } from "../services/AuthService";
-import { LoginDTO } from "../dtos/dtos";
+import { RegisterDTO } from "../dtos/dtos";
 
-const LoginSection = () => {
+const SignupSection = () => {
+  const [emailAddress, setEmailAddress] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+
   const navigate = useNavigate();
 
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const loginInfo: LoginDTO = {
+    const registerDTO: RegisterDTO = {
       username: username,
+      firstName: firstName,
+      lastName: lastName,
       password: password,
+      emailAddress: emailAddress,
     };
-    await AuthService.login(loginInfo, navigate);
-  };
-
-  const handleSignUp = async () => {
-    navigate("/signup");
+    await AuthService.register(registerDTO, navigate);
   };
 
   return (
@@ -40,16 +43,46 @@ const LoginSection = () => {
         </div>
 
         <form
-          onSubmit={handleLogin}
+          onSubmit={handleSignup}
           className="text-2xl flex flex-col gap-4 text-white"
         >
           <label>Username</label>
           <input
             className="flex cursor-text items-center px-6 h-full rounded-xl border border-solid border-white w-full bg-black"
             type="text"
-            placeholder="Enter your username"
+            placeholder="Enter Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+
+          <label>Email Address</label>
+          <input
+            className="flex cursor-text items-center px-6 h-full rounded-xl border border-solid border-white w-full bg-black"
+            type="text"
+            placeholder="Enter Email"
+            value={emailAddress}
+            onChange={(e) => setEmailAddress(e.target.value)}
+            required
+          />
+
+          <label>First Name</label>
+          <input
+            className="flex cursor-text items-center px-6 h-full rounded-xl border border-solid border-white w-full bg-black"
+            type="text"
+            placeholder="Enter First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+
+          <label>Last Name</label>
+          <input
+            className="flex cursor-text items-center px-6 h-full rounded-xl border border-solid border-white w-full bg-black"
+            type="text"
+            placeholder="Enter Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
             required
           />
 
@@ -57,7 +90,7 @@ const LoginSection = () => {
           <input
             className="flex cursor-text items-center px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit"
             type="password"
-            placeholder="Enter your password"
+            placeholder="Enter Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -67,19 +100,12 @@ const LoginSection = () => {
             type="submit"
             className="button bg-primary cursor-pointer py-2"
           >
-            Login
+            Sign Up
           </button>
         </form>
-
-        <button
-          onClick={handleSignUp}
-          className="buttonOutline justify-center cursor-pointer"
-        >
-          Sign Up
-        </button>
       </div>
     </div>
   );
 };
 
-export default LoginSection;
+export default SignupSection;

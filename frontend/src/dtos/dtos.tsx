@@ -20,6 +20,7 @@ export interface PieceDTO {
   price: number;
   yearComposed: number;
   hasElectronics: boolean;
+  completed: boolean;
   numOfPlayers: number;
   difficultyGrade: number;
   timeLength: number; // this might be wrong
@@ -39,14 +40,6 @@ export interface OrderDTO {
   pieces: PieceDTO[];
 }
 
-export interface UserWithOrdersDTO {
-  firstName: string;
-  lastName: string;
-  emailAddress: string;
-  role: string;
-  orders: OrderDTO[];
-}
-
 export interface ContactDTO {
   firstName: string;
   lastName: string;
@@ -62,4 +55,23 @@ export interface EmailResponseDTO {
 
 export interface CartItems extends PieceDTO {
   quantity: number;
+}
+
+export interface LoginDTO {
+  username: string;
+  password: string;
+}
+
+export interface LoginResponseDTO {
+  jwtToken: string;
+  message: string;
+  successful: boolean;
+}
+
+export interface RegisterDTO {
+  username: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  emailAddress: string;
 }

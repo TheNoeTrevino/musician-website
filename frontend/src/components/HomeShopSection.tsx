@@ -1,9 +1,20 @@
 import { IconChevronRight } from "@tabler/icons-react";
-import { songDummyData } from "../constants/songDummyData";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { PieceService } from "../services/PieceService";
+import { PieceDTO } from "../dtos/dtos";
 
 const ShopSecton = () => {
-  const items = songDummyData;
+  const [pieces, setPieces] = useState<PieceDTO[] | undefined>(undefined);
+
+  const fetchPieces = async () => {
+    const fetchedPieces = await PieceService.getAllPieces();
+    setPieces(fetchedPieces);
+  };
+
+  useEffect(() => {
+    fetchPieces();
+  }, []);
 
   return (
     <div className="h-screen bg-black flex flex-row pr-52 ">
@@ -24,15 +35,23 @@ const ShopSecton = () => {
         </div>
 
         <div className="grid grid-cols-2">
-          {items.slice(0, 3).map((item, index) => (
-            <div key={index}>
-              <img
-                className="w-full"
-                src={item.image}
-                alt={`${item.title} Album`}
-              />
-            </div>
-          ))}
+          {pieces
+            ?.filter((piece) => piece.completed == true)
+            .map((piece, index) => (
+              <div key={index}>
+                <Link to={"/" + piece.title.replace(/ /g, "-")}>
+                  <img
+                    className="w-full"
+                    src={
+                      "/albums/" +
+                      piece.title.replace(/ /g, "-").toLowerCase() +
+                      ".png"
+                    }
+                    alt={`${piece.title} Album`}
+                  />
+                </Link>
+              </div>
+            ))}
 
           <div className="flex relative items-center justify-center">
             <img
