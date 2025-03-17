@@ -23,6 +23,7 @@ public class PaymentController {
 
   @PostMapping("/checkout")
   public ResponseEntity<PaymentResponseDTO> checkoutProducts(@RequestBody PaymentRequestDTO request) {
+    logger.info("Request to checkout products with ids: {}", request.getProducts().stream().map(x -> x.getId()));
     return ResponseEntity.ok(paymentService.checkoutProducts(request));
   }
 }
