@@ -7,7 +7,7 @@ const Header = () => {
   const { cartItems, getTotalItems } = useCartContext();
 
   return (
-    <div className="absolute w-screen flex flex-row gap-10 justify-between items-center px-44 text-xl text-center text-white max-md:px-5 h-24 z-20  ">
+    <div className="absolute w-screen flex flex-row gap-10 justify-between items-center px-44 text-xl text-center text-white max-md:px-5 h-24 z-20">
       <div className="flex gap-10 justify-center items-center self-stretch my-auto font-light whitespace-nowrap min-w-[240px] w-[441px] max-md:max-w-full">
         <Link
           to={"/"}
