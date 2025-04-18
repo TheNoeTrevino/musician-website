@@ -1,9 +1,9 @@
 const AboutSection = () => {
   return (
-    <div id="about" className="h-screen  flex flex-row pl-52 mt-20">
+    <div id="about" className="min-h-screen  flex flex-row pl-52 mt-20">
       <div className="flex flex-col w-3/4  gap-6  z-10">
         <p className="text-7xl text-white">About</p>
-        <span className="text-textGray text-xl overflow-auto ">
+        <span className="text-textGray text-xl-auto">
           <p className="mb-4">
             Sebastian Havner is an American percussionist, educator, arranger,
             and composer based out of Denton, TX.
