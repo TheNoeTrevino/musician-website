@@ -46,7 +46,7 @@ const ContactSection = () => {
           <div className="flex flex-row  gap-6 justify-between w-full rounded-lg min-h-[62px]">
             <input
               id="First Name"
-              className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit "
+              className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit text-white"
               type="text"
               name="first-name"
               required
@@ -55,7 +55,7 @@ const ContactSection = () => {
             />
             <input
               id="Last Name"
-              className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit "
+              className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit text-white"
               type="text"
               name="last-name"
               required
@@ -66,18 +66,18 @@ const ContactSection = () => {
           <div className="flex flex-row  gap-6 justify-between w-full rounded-lg min-h-[62px]">
             <input
               id="Email"
-              className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit "
+              className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit text-white"
               type="text"
               name="email"
               required
-              placeholder="Your Email"
+              placeholder="Your Email Address"
               onChange={(e) => setFrom(e.target.value)}
             />
           </div>
           <div className="flex flex-row  gap-6 justify-between w-full rounded-lg min-h-[62px]">
             <input
               id="Subject"
-              className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit "
+              className="flex cursor-text items-center   px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit text-white"
               type="text"
               name="subject"
               required
@@ -87,7 +87,7 @@ const ContactSection = () => {
           </div>
           <textarea
             id="Message"
-            className="flex cursor-text items-start px-6 pt-3 h-full rounded-xl border border-solid border-white w-full bg-inherit"
+            className="flex cursor-text items-start px-6 pt-3 h-48 rounded-xl border border-solid border-white w-full bg-inherit text-white"
             name="message"
             required
             placeholder="Message"
