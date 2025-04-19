@@ -36,6 +36,7 @@ public class DataGen {
     // adding the pieces he has written
     List<Piece> piecesList = new ArrayList<>();
 
+    // TODO: add productId to these entries
     piecesList.add(
         new Piece(
             "Standing on The Shoulders of Giants",
