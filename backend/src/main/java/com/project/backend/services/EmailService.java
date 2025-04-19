@@ -1,5 +1,7 @@
 package com.project.backend.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,7 +16,10 @@ public class EmailService {
   @Autowired
   private JavaMailSender mailSender;
 
+  private static final Logger logger = LoggerFactory.getLogger(EmailService.class);
+
   public EmailResponseDTO sendEmail(EmailDTO email) {
+    logger.info("Sending email from: " + email.getFrom());
     SimpleMailMessage message = new SimpleMailMessage();
     message.setTo("noreply.sebastianhavner@gmail.com");
     message.setFrom(email.getFrom());
@@ -38,6 +43,3 @@ public class EmailService {
     return response;
   }
 }
-// this email was sent from x
-//
-// actual messge
