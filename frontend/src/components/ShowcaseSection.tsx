@@ -38,41 +38,39 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
   }, []);
 
   return (
-    <>
-      <div className="min-h-screen flex flex-row mx-48 mt-24">
-        <PieceAttributeCard piece={piece} duration={duration} />
+    <div className="min-h-screen flex flex-row mx-48 my-24">
+      <PieceAttributeCard piece={piece} duration={duration} />
 
-        <div className="flex flex-col  justify-between text-2xl font-medium text-textGray w-full gap-4 h-screen py-3">
-          <AudioDisplay piece={piece} />
+      <div className="flex flex-col  justify-between text-2xl font-medium text-textGray w-full gap-4 h-screen py-3">
+        <AudioDisplay piece={piece} />
 
-          <div>
-            <div className="flex flex-row justify-center text-2xl">
-              <p className="text-6xl text-white text-center">${piece.price}</p>
-            </div>
-            <a
-              onClick={() => {
-                addToCart({ ...piece, quantity: 1 });
-                toast.success(piece.title + " Added to Cart");
-              }}
-              className="button bg-primary py-6"
-            >
-              Add To Cart
-            </a>
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-row justify-center text-2xl">
+            <p className="text-6xl text-white text-center">${piece.price}</p>
           </div>
+          <a
+            onClick={() => {
+              addToCart({ ...piece, quantity: 1 });
+              toast.success(piece.title + " Added to Cart");
+            }}
+            className="button bg-primary py-6"
+          >
+            Add To Cart
+          </a>
         </div>
       </div>
-
-      {/* TODO: change this to where it works with the backend   */}
-      {/* <div className="flex flex-col w-full  gap-10  text-center items-center justify-center py-44 "> */}
-      {/*   <p className="text-7xl text-white">Players</p> */}
-      {/*   {song.players.map((player, index) => ( */}
-      {/*     <span key={index} className="text-textGray text-4xl font-light"> */}
-      {/*       {player.name} - {player.instrument} */}
-      {/*     </span> */}
-      {/*   ))} */}
-      {/* </div> */}
-    </>
+    </div>
   );
 };
 
 export default ShowcaseSection;
+
+// TODO: change this to where it works with the backend
+// <div className="flex flex-col w-full  gap-10  text-center items-center justify-center py-44 ">
+//   <p className="text-7xl text-white">Players</p>
+//   {song.players.map((player, index) => (
+//     <span key={index} className="text-textGray text-4xl font-light">
+//       {player.name} - {player.instrument}
+//     </span>
+//   ))}
+// </div>
