@@ -16,5 +16,5 @@ public class PieceDTO {
   private Integer difficultyGrade;
   private Duration timeLength;
   private boolean completed;
-  // TODO: add description to model as well
+  private String productId;
 }
