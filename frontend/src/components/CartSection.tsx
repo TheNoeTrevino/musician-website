@@ -13,6 +13,7 @@ const CartSection = () => {
     getCartSubtotal,
     getTotalItems,
     removePieceFromCart,
+    checkoutCart,
   } = useCartContext();
 
   const fallbackSrc = "/albums/blank.png";
@@ -121,7 +122,7 @@ const CartSection = () => {
             <div className="flex flex-col justify-end items-center mb-6 gap-4">
               <a
                 onClick={() => {
-                  toast.success("Checked Out");
+                  checkoutCart();
                 }}
                 className="button cursor-pointer text-white  float-right  py-2 bg-primary"
               >

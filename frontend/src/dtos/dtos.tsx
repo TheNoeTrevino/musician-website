@@ -55,6 +55,12 @@ export interface EmailResponseDTO {
 
 export interface CartItems extends PieceDTO {
   quantity: number;
+  productId: string;
+}
+
+export interface ProductDTO {
+  quantity: number;
+  productId: string;
 }
 
 export interface LoginDTO {
@@ -74,4 +80,9 @@ export interface RegisterDTO {
   lastName: string;
   password: string;
   emailAddress: string;
+}
+
+export interface PaymentRequestDTO {
+  products: ProductDTO[];
+  currency: string;
 }

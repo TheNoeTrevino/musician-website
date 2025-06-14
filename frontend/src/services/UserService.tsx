@@ -1,4 +1,4 @@
-import { UserDTO, UserWithOrdersDTO } from "../dtos/dtos";
+import { UserDTO } from "../dtos/dtos";
 
 // FIX: remove alerts once this is all settled
 export const UserService = {
@@ -80,33 +80,6 @@ export const UserService = {
       console.error("Error fetching users:", error);
       throw new Error(
         `Something went wrong fetching the users. Error: ${error}`,
-      );
-    }
-  },
-
-  async getUserWithOrdersById(userId: number): Promise<UserWithOrdersDTO[]> {
-    try {
-      const response = await fetch(
-        `http://localhost:8080/users/user/orders/${userId}`,
-        {
-          method: "GET",
-        },
-      );
-
-      const usersWithOrders = await response.json();
-
-      if (!response.ok) {
-        throw new Error(
-          `Error fetching users with id ${userId}: ${response.statusText}`,
-        );
-      }
-      return usersWithOrders;
-    } catch (error) {
-      console.log(
-        `Error fetch user and their orders with id: ${userId}. Error: ${error}`,
-      );
-      throw new Error(
-        `Something went wrong fetching the user and their orders. Error: ${error}`,
       );
     }
   },

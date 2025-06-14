@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from "react";
 import { CartContext } from "../components/CartContext";
-import { CartItems } from "../dtos/dtos";
+import { CartItems, PaymentRequestDTO } from "../dtos/dtos";
 
 interface CartServiceProps {
   children: ReactNode;
@@ -65,6 +65,28 @@ export const CartProvider: React.FC<CartServiceProps> = ({ children }) => {
     return cartItems.reduce((total, item) => total + item.quantity, 0);
   };
 
+  const prepareCartItemsForCheckout = () => {
+    return cartItems.map((item) => ({
+      productId: item.productId,
+      quantity: item.quantity,
+    }));
+  };
+
+  const checkoutCart = async (): Promise<void> => {
+    console.log(prepareCartItemsForCheckout());
+    const paymentRequest: PaymentRequestDTO = {
+      products: prepareCartItemsForCheckout(),
+      currency: "USD",
+    };
+
+    const response = await fetch("http://localhost:8080/payment/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(paymentRequest),
+    });
+    console.log(response);
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -75,6 +97,7 @@ export const CartProvider: React.FC<CartServiceProps> = ({ children }) => {
         getCartSubtotal,
         getTotalItems,
         removePieceFromCart,
+        checkoutCart,
       }}
     >
       {children}
