@@ -8,7 +8,7 @@ export default {
         white: "#F9F9F9",
         reallyWhite: "#FFFFFF",
         reallyBlack: "#000000",
-        primary: "#F5862F",
+        primary: "#7266F5",
         textGray: "#808080",
       },
     },

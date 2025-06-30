@@ -24,12 +24,14 @@ body {
   font-size: 30px;
   text-align: center;
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
 
 .button:hover {
   background-color: white;
-  color: orange;
+  color: #7266f5;
 }
 
 .buttonOutline {
@@ -47,10 +49,12 @@ body {
   font-size: 30px;
   text-align: center;
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
 
 .buttonOutline:hover {
   background-color: white;
-  color: orange;
+  color: #7266f5;
 }
