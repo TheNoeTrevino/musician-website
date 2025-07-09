@@ -86,16 +86,41 @@ Java
 ### Frontend:
 
 1. Navigate to the `frontend` directory:
+
    ```bash
    cd frontend
    ```
+
 2. Install dependencies:
+
    ```bash
    npm install
    ```
+
 3. Start the development server:
+
    ```bash
    npm run dev
    ```
+   
 4. Open [http://localhost:5173/](http://localhost:5173/) in your browser to view the site.
 
+
+## notes for docker
+
+1.  Build the docker image
+
+  ``` bash
+  docker build -t <project-name> .  
+  ```
+
+2.  Verify the image was made
+  
+  ``` bash
+  docker images 
+  ```
+  
+3.  Run the Container
+  ``` bash
+  docker run -p 8080:8080 my--app     
+  ```
