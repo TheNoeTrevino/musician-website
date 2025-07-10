@@ -1,6 +1,6 @@
 import { PieceDTO } from "../dtos/dtos";
 
-const baseUrl = import.meta.env.BACKEND_URL;
+const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
 // TODO: make some test buttons for this
 export const PieceService = {
