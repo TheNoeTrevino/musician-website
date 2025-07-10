@@ -6,6 +6,8 @@ interface CartServiceProps {
   children: ReactNode;
 }
 
+const baseUrl = import.meta.env.VITE_BACKEND_URL;
+
 export const CartProvider: React.FC<CartServiceProps> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItems[]>([]);
 
@@ -79,7 +81,7 @@ export const CartProvider: React.FC<CartServiceProps> = ({ children }) => {
       currency: "USD",
     };
 
-    const response = await fetch("http://localhost:8080/payment/checkout", {
+    const response = await fetch(`${baseUrl}/payment/checkout`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(paymentRequest),
