@@ -1,5 +1,5 @@
 import { UserDTO } from "../dtos/dtos";
-const baseUrl = process.env.BACKEND_URL;
+const baseUrl = import.meta.env.BACKEND_URL;
 
 // FIX: remove alerts once this is all settled
 export const UserService = {

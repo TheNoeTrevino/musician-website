@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import { ContactDTO, EmailResponseDTO } from "../dtos/dtos";
 
-const baseUrl = process.env.BACKEND_URL;
+const baseUrl = import.meta.env.BACKEND_URL;
 
 export const EmailService = {
   async sendEmail(contactForm: ContactDTO): Promise<void> {

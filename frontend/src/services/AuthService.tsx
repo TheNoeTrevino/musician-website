@@ -5,7 +5,7 @@ import {
   RegisterDTO,
 } from "../dtos/dtos";
 
-const baseUrl = process.env.BACKEND_URL;
+const baseUrl = import.meta.env.BACKEND_URL;
 
 export const AuthService = {
   async login(loginDTO: LoginDTO, navigate: (path: string) => void) {
