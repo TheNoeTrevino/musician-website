@@ -5,9 +5,11 @@ import {
   RegisterDTO,
 } from "../dtos/dtos";
 
+const baseUrl = process.env.BACKEND_URL;
+
 export const AuthService = {
   async login(loginDTO: LoginDTO, navigate: (path: string) => void) {
-    const response = await fetch("http://localhost:8080/auth/login", {
+    const response = await fetch(`${baseUrl}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(loginDTO),
@@ -27,7 +29,7 @@ export const AuthService = {
   },
 
   async register(registerDTO: RegisterDTO, navigate: (path: string) => void) {
-    const response = await fetch("http://localhost:8080/auth/register", {
+    const response = await fetch(`${baseUrl}/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(registerDTO),

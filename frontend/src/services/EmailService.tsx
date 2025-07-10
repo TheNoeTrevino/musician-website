@@ -1,11 +1,13 @@
 import { toast } from "react-toastify";
 import { ContactDTO, EmailResponseDTO } from "../dtos/dtos";
 
+const baseUrl = process.env.BACKEND_URL;
+
 export const EmailService = {
   async sendEmail(contactForm: ContactDTO): Promise<void> {
     toast.success("We are currently sending your email.");
     try {
-      const response = await fetch(`http://localhost:8080/email/send`, {
+      const response = await fetch(`${baseUrl}/email/send`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(contactForm),

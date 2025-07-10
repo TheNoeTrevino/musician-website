@@ -12,6 +12,7 @@
   "dependencies": {
     "@tabler/icons-react": "^3.26.0",
     "@wavesurfer/react": "^1.0.7",
+    "dotenv": "^17.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
+    "@types/node": "^24.0.12",
     "@types/react": "^18.3.17",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",

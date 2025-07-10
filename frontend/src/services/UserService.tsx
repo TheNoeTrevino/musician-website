@@ -1,11 +1,12 @@
 import { UserDTO } from "../dtos/dtos";
+const baseUrl = process.env.BACKEND_URL;
 
 // FIX: remove alerts once this is all settled
 export const UserService = {
   async getUserById(userId: number): Promise<UserDTO> {
     try {
       const response = await fetch(
-        `http://localhost:8080/users/user/${userId}`,
+        `${baseUrl}/users/user/${userId}`,
         {
           method: "GET",
         },
@@ -32,7 +33,7 @@ export const UserService = {
   async deleteUserById(userId: number): Promise<UserDTO> {
     try {
       const response = await fetch(
-        `http://localhost:8080/users/user/${userId}`,
+        `${baseUrl}/users/user/${userId}`,
         {
           method: "DELETE",
         },
@@ -62,7 +63,7 @@ export const UserService = {
   async getAllUsersByRole(role: string): Promise<UserDTO[]> {
     try {
       const response = await fetch(
-        `http://localhost:8080/users/?role=${role}`,
+        `${baseUrl}/users/?role=${role}`,
         {
           method: "GET",
         },
@@ -92,7 +93,7 @@ export const UserService = {
       });
 
       const response = await fetch(
-        `http://localhost:8080/users/?${params.toString()}`,
+        `${baseUrl}/users/?${params.toString()}`,
         {
           method: "GET",
         },

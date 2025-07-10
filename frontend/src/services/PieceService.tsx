@@ -1,5 +1,7 @@
 import { PieceDTO } from "../dtos/dtos";
 
+const baseUrl = process.env.BACKEND_URL;
+
 // TODO: make some test buttons for this
 export const PieceService = {
   async getAllPieces(
@@ -15,7 +17,7 @@ export const PieceService = {
       });
 
       const response = await fetch(
-        `http://localhost:8080/pieces/?${params.toString()}`,
+        `${baseUrl}/pieces/?${params.toString()}`,
         {
           method: "GET",
         },
@@ -40,7 +42,7 @@ export const PieceService = {
   async getPieceById(pieceId: number): Promise<PieceDTO> {
     try {
       const response = await fetch(
-        `http://localhost:8080/pieces/piece/${pieceId}`,
+        `${baseUrl}/pieces/piece/${pieceId}`,
         {
           method: "GET",
         },
