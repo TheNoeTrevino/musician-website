@@ -1,4 +1,3 @@
-import 'dotenv/config'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Shop from "./pages/shop/Shop";
 import Home from "./pages/home/Home";

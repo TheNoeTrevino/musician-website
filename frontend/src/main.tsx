@@ -4,7 +4,6 @@ import "./index.css";
 import App from "./App.tsx";
 import { ToastContainer } from "react-toastify";
 import { CartProvider } from "./services/CartProvider.tsx";
-import 'dotenv/config'
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
