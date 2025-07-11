@@ -25,6 +25,9 @@ public class PaymentService {
   @Value("${STRIPE_SECRET}")
   private String stripeSecret;
 
+  @Value("${FRONTEND_URL}")
+  private String baseUrl;
+
   public PaymentResponseDTO checkoutProducts(PaymentRequestDTO paymentRequest) {
     Stripe.apiKey = stripeSecret;
 
@@ -67,8 +70,8 @@ public class PaymentService {
 
     SessionCreateParams params = SessionCreateParams.builder()
         .setMode(SessionCreateParams.Mode.PAYMENT)
-        .setSuccessUrl("http://localhost:5173/success")
-        .setCancelUrl("http://localhost:5173/cancel")
+        .setSuccessUrl(baseUrl + "/success")
+        .setCancelUrl(baseUrl + "/cancel")
         .addAllLineItem(lineItems)
         .build();
 
