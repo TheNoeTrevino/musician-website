@@ -1,12 +1,13 @@
 import React, { ReactNode, useState } from "react";
 import { CartContext } from "../components/CartContext";
-import { CartItems, PaymentRequestDTO } from "../dtos/dtos";
+import { CartItems, PaymentRequestDTO, PaymentResponseDTO } from "../dtos/dtos";
 
 interface CartServiceProps {
   children: ReactNode;
 }
 
 const baseUrl = import.meta.env.VITE_BACKEND_URL;
+
 
 export const CartProvider: React.FC<CartServiceProps> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItems[]>([]);
@@ -69,12 +70,12 @@ export const CartProvider: React.FC<CartServiceProps> = ({ children }) => {
 
   const prepareCartItemsForCheckout = () => {
     return cartItems.map((item) => ({
-      productId: item.productId,
+      id: item.productId,
       quantity: item.quantity,
     }));
   };
 
-  const checkoutCart = async (): Promise<void> => {
+  const checkoutCart = async () => {
     console.log(prepareCartItemsForCheckout());
     const paymentRequest: PaymentRequestDTO = {
       products: prepareCartItemsForCheckout(),
@@ -86,7 +87,8 @@ export const CartProvider: React.FC<CartServiceProps> = ({ children }) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(paymentRequest),
     });
-    console.log(response);
+    const paymentResponse: PaymentResponseDTO = await response.json();
+    window.open(paymentResponse.checkoutUrl)
   };
 
   return (

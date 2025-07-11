@@ -86,3 +86,10 @@ export interface PaymentRequestDTO {
   products: ProductDTO[];
   currency: string;
 }
+
+export interface PaymentResponseDTO {
+  status: string;
+  message: string;
+  sessionId: string;
+  checkoutUrl: string;
+}
