@@ -23,9 +23,6 @@ const SecondaryHeroSection = ({
       ) : (
         <div className="flex flex-col items-center text-center gap-7 w-full h-full justify-center">
           <p className="text-8xl text-white">Our Shop </p>
-          <span className="text-textGray text-4xl">
-            Lorem ipsum odor amet, <p>consectetuer adipiscing elit.</p>
-          </span>
         </div>
       )}
     </div>

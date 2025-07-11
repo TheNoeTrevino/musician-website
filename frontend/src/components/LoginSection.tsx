@@ -34,9 +34,6 @@ const LoginSection = () => {
       <div className="flex flex-col w-1/2 px-10 justify-center z-10 gap-6 mt-10">
         <div className="text-center">
           <p className="text-7xl text-white">Welcome to Havner Music</p>
-          <p className="text-textGray text-xl">
-            Lorem ipsum odor amet, consectetuer adipiscing elit.
-          </p>
         </div>
 
         <form

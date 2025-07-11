@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <div className="h-screen bg-black flex flex-row">
+    <div className="min-h-screen bg-black flex flex-row">
       <div className="w-full"></div>
       <img
         className="h-screen absolute "

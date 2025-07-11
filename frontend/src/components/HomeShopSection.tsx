@@ -29,9 +29,6 @@ const ShopSecton = () => {
       <div className="flex flex-col w-full justify-between  z-10 pt-14 ">
         <div className="flex flex-col gap-3">
           <p className="text-7xl text-white">Shop</p>
-          <span className="text-textGray text-4xl">
-            Lorem ipsum odor amet, consectetuer <p>adipiscing elit.</p>
-          </span>
         </div>
 
         <div className="grid grid-cols-2">
