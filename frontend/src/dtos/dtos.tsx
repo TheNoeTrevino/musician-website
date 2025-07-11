@@ -60,7 +60,7 @@ export interface CartItems extends PieceDTO {
 
 export interface ProductDTO {
   quantity: number;
-  productId: string;
+  id: string;
 }
 
 export interface LoginDTO {
