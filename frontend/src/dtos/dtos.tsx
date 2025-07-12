@@ -93,3 +93,9 @@ export interface PaymentResponseDTO {
   sessionId: string;
   checkoutUrl: string;
 }
+
+export interface PaymentStatusResponseDTO {
+  status: string;
+  message: string;
+  sessionId: string;
+}

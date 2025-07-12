@@ -5,12 +5,12 @@ import ShopSecton from "../../components/HomeShopSection";
 
 const Home = () => {
   return (
-    <body className="flex flex-col ">
+    <div className="flex flex-col ">
       <HeroSection />
       <AboutSection />
       <ShopSecton />
       <ContactSection />
-    </body>
+    </div>
   );
 };
 

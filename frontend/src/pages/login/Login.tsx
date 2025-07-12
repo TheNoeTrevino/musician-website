@@ -2,9 +2,9 @@ import LoginSection from "../../components/LoginSection";
 
 const Login = () => {
   return (
-    <body className="flex flex-col ">
+    <div className="flex flex-col ">
       <LoginSection />;
-    </body>
+    </div>
   );
 };
 

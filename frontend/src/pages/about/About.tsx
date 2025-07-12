@@ -3,10 +3,10 @@ import ContactSection from "../../components/ContactSection";
 
 const About = () => {
   return (
-    <body className="flex flex-col ">
+    <div className="flex flex-col ">
       <AboutSection />;
       <ContactSection />
-    </body>
+    </div>
   );
 };
 
