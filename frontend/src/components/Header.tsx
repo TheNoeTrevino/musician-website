@@ -1,4 +1,4 @@
-import { IconShoppingCart, IconUser } from "@tabler/icons-react";
+import { IconShoppingCart } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import Socials from "./Socials";
 import { useCartContext } from "./CartContext";
