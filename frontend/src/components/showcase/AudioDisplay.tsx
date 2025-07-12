@@ -77,8 +77,8 @@ const AudioDisplay = ({ piece: piece }: { piece: PieceDTO }) => {
           barWidth={2}
           barRadius={2}
           height={75}
-          waveColor="#F5862F"
-          progressColor="#A65E2E"
+          waveColor="#FFFFFF"
+          progressColor="#888888"
           url={
             "/audios/" + piece.title.replace(/ /g, "-").toLowerCase() + ".mp3"
           }
