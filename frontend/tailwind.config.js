@@ -13,5 +13,6 @@ export default {
       },
     },
   },
+  safelist: ["md:mx-12", "lg:mx-24", "xl:mx-48", "mt-12", "md:mt-24", "pb-16"],
   plugins: [],
 };
