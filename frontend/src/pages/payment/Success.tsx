@@ -1,13 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import { PaymentService } from "../../services/PaymentService";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { toast } from "react-toastify";
-import { PaymentStatusResponseDTO } from "../../dtos/dtos";
 
 const Success = () => {
-  const [paymentStatus, setPaymentStatus] = useState<PaymentStatusResponseDTO>(
-    {} as PaymentStatusResponseDTO,
-  );
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,8 +15,6 @@ const Success = () => {
         console.log("Payment status result:", result);
 
         if (isMounted) {
-          setPaymentStatus(result);
-
           if (result.status === "SUCCESS") {
             toast.success("Your purchase was successful");
           } else if (result.status === "ERROR" || result.status === "PENDING") {
