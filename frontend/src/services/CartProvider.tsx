@@ -7,7 +7,7 @@ interface CartServiceProps {
 }
 
 const baseUrl = import.meta.env.VITE_BACKEND_URL;
-
+const SESSION = "SEB_SESSION_ID";
 
 export const CartProvider: React.FC<CartServiceProps> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItems[]>([]);
@@ -88,7 +88,8 @@ export const CartProvider: React.FC<CartServiceProps> = ({ children }) => {
       body: JSON.stringify(paymentRequest),
     });
     const paymentResponse: PaymentResponseDTO = await response.json();
-    window.open(paymentResponse.checkoutUrl)
+    localStorage.setItem(SESSION, paymentResponse.sessionId);
+    window.location.href = paymentResponse.checkoutUrl;
   };
 
   return (
