@@ -39,10 +39,9 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row mx-4">
+      <div className="flex flex-col md:flex-row mx-4 md:mx-12 lg:mx-24 xl:mx-48 mt-12 md:mt-24 pb-16">
         <PieceAttributeCard piece={piece} duration={duration} />
-
-        <div className="flex flex-col justify-between text-2xl font-medium text-textGray w-full gap-4 py-3">
+        <div className="flex flex-col justify-between text-2xl font-medium text-textGray w-full gap-4 min-h-0 py-3">
           <AudioDisplay piece={piece} />
 
           <div>
