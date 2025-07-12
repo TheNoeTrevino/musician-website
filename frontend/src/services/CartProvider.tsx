@@ -1,6 +1,7 @@
 import React, { ReactNode, useState } from "react";
 import { CartContext } from "../components/CartContext";
 import { CartItems, PaymentRequestDTO, PaymentResponseDTO } from "../dtos/dtos";
+import { toast } from "react-toastify";
 
 interface CartServiceProps {
   children: ReactNode;
@@ -82,6 +83,7 @@ export const CartProvider: React.FC<CartServiceProps> = ({ children }) => {
       currency: "USD",
     };
 
+    toast.info("Taking you to payment, please wait...");
     const response = await fetch(`${baseUrl}/payment/checkout`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
