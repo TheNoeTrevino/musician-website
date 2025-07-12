@@ -2,9 +2,9 @@ import SignupSection from "../../components/SignupSection";
 
 const Signup = () => {
   return (
-    <body className="flex flex-col ">
+    <div className="flex flex-col ">
       <SignupSection />;
-    </body>
+    </div>
   );
 };
 

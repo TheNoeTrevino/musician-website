@@ -6,11 +6,11 @@ import useScrollToTop from "../../hooks/ScrollTop";
 const Shop = () => {
   useScrollToTop();
   return (
-    <body className="flex flex-col bg-black">
+    <div className="flex flex-col bg-black">
       <div className="h-px bg-black w-3/4 self-center my-7"></div>
       <StoreSecton />
       <ContactSection />
-    </body>
+    </div>
   );
 };
 

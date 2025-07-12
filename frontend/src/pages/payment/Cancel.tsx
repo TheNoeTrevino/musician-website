@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Cancel = () => {
   return (
-    <body className="flex flex-col ">
+    <div className="flex flex-col ">
       <div className="h-screen bg-black flex flex-row relative">
         <div className="flex flex-col items-center text-center gap-7 w-full h-full justify-center">
           <p className="text-8xl text-white">
@@ -18,7 +18,7 @@ const Cancel = () => {
           </span>
         </div>
       </div>
-    </body>
+    </div>
   );
 };
 

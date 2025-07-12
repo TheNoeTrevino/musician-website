@@ -1,8 +1,8 @@
 import { IconTrash } from "@tabler/icons-react";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
 import { useCartContext } from "./CartContext";
 import EmptyCart from "./EmptyCart";
+import { Link } from "react-router-dom";
 
 const CartSection = () => {
   const {
@@ -17,6 +17,7 @@ const CartSection = () => {
   } = useCartContext();
 
   const fallbackSrc = "/albums/blank.png";
+
   return (
     <div className="  min-h-screen flex flex-col mx-52 gap-8 text-white border-t border-textGray/40 mb-24 mt-40 py-16">
       {cartItems.length != 0 ? (
@@ -25,11 +26,10 @@ const CartSection = () => {
           <div className="space-y-8 ">
             {cartItems.map((item, index) => (
               <div
-                className={`flex flex-row justify-between gap-3 pb-4 ${
-                  index === cartItems.length - 1
-                    ? ""
-                    : "border-b border-textGray/20"
-                }`}
+                className={`flex flex-row justify-between gap-3 pb-4 ${index === cartItems.length - 1
+                  ? ""
+                  : "border-b border-textGray/20"
+                  }`}
               >
                 <Link to={"/" + item.title.replace(/ /g, "-").toLowerCase()}>
                   <img
@@ -121,9 +121,7 @@ const CartSection = () => {
 
             <div className="flex flex-col justify-end items-center mb-6 gap-4">
               <a
-                onClick={() => {
-                  checkoutCart();
-                }}
+                onClick={checkoutCart}
                 className="button cursor-pointer text-white  float-right  py-2 bg-primary"
               >
                 Proceed to Checkout
