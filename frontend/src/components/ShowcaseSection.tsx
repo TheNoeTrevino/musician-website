@@ -53,7 +53,7 @@ const ShowcaseSection = ({ piece: piece }: { piece: PieceDTO }) => {
                 addToCart({ ...piece, quantity: 1 });
                 toast.success(piece.title + " Added to Cart");
               }}
-              className="button bg-primary py-6"
+              className="button bg-primary py-6 mt-3"
             >
               Add To Cart
             </a>

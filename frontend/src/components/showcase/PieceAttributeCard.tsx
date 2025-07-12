@@ -44,6 +44,7 @@ const PieceAttributeCard = ({
   );
 
   return (
+    // TODO: increase spacing between the desc and the details
     <div className="flex flex-col w-full h-screen  z-10  text-textGray justify-between py-3">
       <div className="flex flex-col gap-2">
         <p className="text-7xl text-white">{piece.title}</p>
