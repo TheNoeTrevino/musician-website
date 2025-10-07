@@ -1,12 +1,8 @@
 # Website for musicians
 
-# TODO: 
+## Why 
 
-- Use environment variables for all prefixes 
-- Connect cart to the backend
-- Cart redirect to the strip url
-- Add "coming soon" and "update" section 
-  * coming soon below about
+This was made for my buddy Sebastian to sell his music at a cheaper price that those devlish publishers offer.
 
 ## Technologies
 
@@ -35,7 +31,7 @@ Java
   ``` bash
   #!/bin/bash
   #Database variables
-  export DATABASE_URL="jdbc:postgresql://localhost:5432/<database-name>"
+  export DATABASE_URL="jdbc:postgresql://<port>/<database-name>"
   export DATABASE_USER="<database_user>"
   export DATABASE_PW="<database_pw>"
 
@@ -46,6 +42,9 @@ Java
   #Stripe Variables
   export STRIPE_SECRET="<secret key>"
   export STRIPE_PUBLISHABLE="<publishable key>"
+  export VITE_BACKEND_URL="<backend w port>"
+
+
 
   # confirmation
   echo "db url: $DATABASE_URL"
@@ -122,5 +121,5 @@ Java
   
 3.  Run the Container
   ``` bash
-  docker run -p 8080:8080 my--app     
+  docker run -p 8080:8080 <project-name>     
   ```
