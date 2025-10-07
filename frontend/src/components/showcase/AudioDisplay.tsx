@@ -46,32 +46,33 @@ const AudioDisplay = ({ piece: piece }: { piece: PieceDTO }) => {
     <>
       <div className="relative flex items-center justify-center">
         <img
-          className="z-10 rounded-full w-[550px] h-[550px] object-cover"
+          className="z-10 rounded-full w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[550px] lg:h-[550px] object-cover"
           src={
             "/albums/" + piece.title.replace(/ /g, "-").toLowerCase() + ".png"
           }
           alt="Music Album"
+          loading="eager"
         />
         <img
           loading="lazy"
-          className="absolute z-20 w-[550px] h-[550px] opacity-30 object-cover"
+          className="absolute z-20 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[550px] lg:h-[550px] opacity-30 object-cover"
           src="/record_overlay.png"
           alt="Music Album Overlay"
         />
         {isPlaying ? (
           <IconPlayerPauseFilled
             onClick={onPlayPause}
-            className="absolute z-30 text-primary size-28 hover:text-reallyWhite cursor-pointer"
+            className="absolute z-30 text-primary size-20 sm:size-24 md:size-28 hover:text-reallyWhite cursor-pointer active:scale-95 transition-transform"
           />
         ) : (
           <IconPlayerPlayFilled
             onClick={onPlayPause}
-            className="absolute z-30 text-primary size-28 hover:text-reallyWhite cursor-pointer"
+            className="absolute z-30 text-primary size-20 sm:size-24 md:size-28 hover:text-reallyWhite cursor-pointer active:scale-95 transition-transform"
           />
         )}
       </div>
-      <div className="py-2">
-        {isLoading && <div className="text-center">Loading audio...</div>}
+      <div className="py-2 w-full">
+        {isLoading && <div className="text-center text-white">Loading audio...</div>}
         <WavesurferPlayer
           dragToSeek={true}
           barWidth={2}
@@ -92,18 +93,18 @@ const AudioDisplay = ({ piece: piece }: { piece: PieceDTO }) => {
       </div>
       {!isLoading && (
         <>
-          <div className="flex flex-row justify-center items-center gap-4">
-            <button className="button" onClick={skipBackwards}>
-              <IconRewindBackward15 />
+          <div className="flex flex-row justify-center items-center gap-3 md:gap-4">
+            <button className="button py-3 px-6 md:py-2 md:px-8 text-base md:text-lg active:scale-95" onClick={skipBackwards}>
+              <IconRewindBackward15 className="w-6 h-6 md:w-7 md:h-7" />
             </button>
-            <button className="button py-1 text-center" onClick={onPlayPause}>
-              {isPlaying ? <IconPlayerPauseFilled /> : <IconPlayerPlayFilled />}
+            <button className="button py-3 px-6 md:py-2 md:px-8 text-base md:text-lg active:scale-95" onClick={onPlayPause}>
+              {isPlaying ? <IconPlayerPlayFilled className="w-6 h-6 md:w-7 md:h-7" /> : <IconPlayerPlayFilled className="w-6 h-6 md:w-7 md:h-7" />}
             </button>
-            <button className="button" onClick={skipForward}>
-              <IconRewindForward15 />
+            <button className="button py-3 px-6 md:py-2 md:px-8 text-base md:text-lg active:scale-95" onClick={skipForward}>
+              <IconRewindForward15 className="w-6 h-6 md:w-7 md:h-7" />
             </button>
           </div>
-          <p className="text-center text-white">
+          <p className="text-center text-white text-sm md:text-base mt-2">
             {formatTime(currentTime)} / {formatTime(duration)}
           </p>
         </>

@@ -22,27 +22,30 @@ const LoginSection = () => {
   };
 
   return (
-    <div id="about" className="h-screen flex flex-row pr-52">
-      <div className="w-2/3">
+    <div id="about" className="min-h-screen flex flex-col md:flex-row md:pr-52">
+      {/* Image section - hidden on mobile, visible on tablet+ */}
+      <div className="hidden md:block md:w-2/3">
         <img
-          className="h-full w-full"
+          className="h-full w-full object-cover"
           src="/loginsection_image.png"
           alt="Sebastian playing instrument in a band"
+          loading="lazy"
         />
       </div>
 
-      <div className="flex flex-col w-1/2 px-10 justify-center z-10 gap-6 mt-10">
+      {/* Form section - full width on mobile, half width on desktop */}
+      <div className="flex flex-col w-full md:w-1/2 px-4 md:px-8 lg:px-10 justify-center z-10 gap-4 md:gap-6 py-12 md:py-0 md:mt-10">
         <div className="text-center">
-          <p className="text-7xl text-white">Welcome to Havner Music</p>
+          <p className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl text-white">Welcome to Havner Music</p>
         </div>
 
         <form
           onSubmit={handleLogin}
-          className="text-2xl flex flex-col gap-4 text-white"
+          className="text-lg md:text-xl lg:text-2xl flex flex-col gap-3 md:gap-4 text-white"
         >
           <label>Username</label>
           <input
-            className="flex cursor-text items-center px-6 h-full rounded-xl border border-solid border-white w-full bg-black"
+            className="flex cursor-text items-center px-4 md:px-6 py-3 md:py-2 rounded-xl border border-solid border-white w-full bg-black"
             type="text"
             placeholder="Enter your username"
             value={username}
@@ -52,7 +55,7 @@ const LoginSection = () => {
 
           <label>Password</label>
           <input
-            className="flex cursor-text items-center px-6 h-full rounded-xl border border-solid border-white w-full bg-inherit"
+            className="flex cursor-text items-center px-4 md:px-6 py-3 md:py-2 rounded-xl border border-solid border-white w-full bg-inherit"
             type="password"
             placeholder="Enter your password"
             value={password}
@@ -62,7 +65,7 @@ const LoginSection = () => {
 
           <button
             type="submit"
-            className="button bg-primary cursor-pointer py-2"
+            className="button bg-primary cursor-pointer py-3 md:py-2 mt-2"
           >
             Login
           </button>
@@ -70,7 +73,7 @@ const LoginSection = () => {
 
         <button
           onClick={handleSignUp}
-          className="buttonOutline justify-center cursor-pointer"
+          className="buttonOutline justify-center cursor-pointer py-3 md:py-2"
         >
           Sign Up
         </button>

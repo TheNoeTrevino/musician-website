@@ -7,7 +7,7 @@ import {
 
 const Socials = () => {
   return (
-    <>
+    <div className="flex gap-4 md:gap-8 lg:gap-10 items-center">
       <a href="https://www.instagram.com/sebastianhavnermusic/" target="_blank">
         <IconBrandInstagram
           strokeWidth={1}
@@ -32,7 +32,7 @@ const Socials = () => {
           className="cursor-pointer hover:scale-125 transition-transform"
         />
       </a>
-    </>
+    </div>
   );
 };
 
