@@ -9,13 +9,7 @@ import {
 import { PieceDTO } from "../../dtos/dtos";
 import { useEffect, useState } from "react";
 
-const PieceAttributeCard = ({
-  piece: piece,
-  duration: duration,
-}: {
-  piece: PieceDTO;
-  duration: string;
-}) => {
+const PieceAttributeCard = ({ piece: piece, duration: duration }: { piece: PieceDTO; duration: string }) => {
   const [difficulty, setDifficulty] = useState("Intermediate");
 
   const handleDifficulty = (difficulty: number): string => {
@@ -38,15 +32,12 @@ const PieceAttributeCard = ({
     }
   };
 
-  useEffect(
-    () => setDifficulty(handleDifficulty(piece.difficultyGrade)),
-    [piece.difficultyGrade],
-  );
+  useEffect(() => setDifficulty(handleDifficulty(piece.difficultyGrade)), [piece.difficultyGrade]);
 
   return (
     <div className="flex flex-col w-full md:h-screen z-10 text-textGray justify-between py-3 md:py-6 gap-6 md:gap-0">
       <div className="flex flex-col gap-2 md:gap-3">
-        <p className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white">{piece.title}</p>
+        <p className="text-4xl sm:text-5xl pt-6 md:pt-0 md:text-6xl lg:text-7xl text-white">{piece.title}</p>
         <span className="text-textGray text-sm sm:text-base md:text-lg font-light w-full md:w-4/5 mt-2 md:mt-3">
           {piece.description}
         </span>
