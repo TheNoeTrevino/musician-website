@@ -1,5 +1,5 @@
 import ContactSection from "../../components/ContactSection";
-import StoreSecton from "../../components/PieceShopSecton";
+import StoreSecton from "../../components/PieceShopSection";
 import useScrollToTop from "../../hooks/ScrollTop";
 
 // TODO: probably no secondary hero section here either

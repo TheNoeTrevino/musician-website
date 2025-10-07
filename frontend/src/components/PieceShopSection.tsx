@@ -166,7 +166,7 @@ const StoreSecton = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 bg-reallyBlack/30 p-4 md:p-6 rounded-lg overflow-y-auto h-full justify-items-start items-start">
           {shownPieces ? (
             shownPieces.length > 0 ? (
-              shownPieces.map((piece) => <PieceCard key={piece.id} piece={piece} />)
+              shownPieces.map((piece) => <PieceCard key={piece.pieceId} piece={piece} />)
             ) : (
               <div className="text-white text-xl md:text-2xl lg:text-3xl">No pieces found.</div>
             )
