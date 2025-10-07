@@ -1,14 +1,14 @@
 import AboutSection from "../../components/AboutSection";
 import ContactSection from "../../components/ContactSection";
 import HeroSection from "../../components/HeroSection";
-import ShopSecton from "../../components/HomeShopSection";
+import HomeShopSection from "../../components/HomeShopSection";
 
 const Home = () => {
   return (
     <div className="flex flex-col ">
       <HeroSection />
       <AboutSection />
-      <ShopSecton />
+      <HomeShopSection />
       <ContactSection />
     </div>
   );

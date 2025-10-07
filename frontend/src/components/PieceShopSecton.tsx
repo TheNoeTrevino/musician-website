@@ -55,14 +55,15 @@ const StoreSecton = () => {
   };
 
   return (
-    <div className="h-screen bg-black flex flex-row px-52 py-20 mb-20">
-      <div className="w-1/3 text-4xl gap-20 flex flex-col text-white ">
+    <div className="min-h-screen bg-black flex flex-col lg:flex-row px-4 md:px-12 lg:px-24 xl:px-52 py-12 md:py-16 lg:py-20 mb-12 md:mb-20">
+      {/* Desktop: Sidebar Categories */}
+      <div className="hidden lg:flex w-1/3 text-3xl xl:text-4xl gap-12 xl:gap-20 flex-col text-white">
         <p>Categories</p>
-        <div className=" text-3xl h-full flex flex-col text-textGray gap-10 border-r border-textGray/40">
+        <div className="text-2xl xl:text-3xl h-full flex flex-col text-textGray gap-8 xl:gap-10 border-r border-textGray/40 pr-6">
           <p
             className={`${
               currentCateogry === "all" && "text-white"
-            } cursor-pointer`}
+            } cursor-pointer hover:text-white transition-colors`}
             onClick={() => {
               handleCategoryChange("all");
             }}
@@ -72,7 +73,7 @@ const StoreSecton = () => {
           <p
             className={`${
               currentCateogry === "solo" && "text-white"
-            } cursor-pointer`}
+            } cursor-pointer hover:text-white transition-colors`}
             onClick={() => {
               handleCategoryChange("solo");
             }}
@@ -82,7 +83,7 @@ const StoreSecton = () => {
           <p
             className={`${
               currentCateogry === "ensemble" && "text-white"
-            } cursor-pointer`}
+            } cursor-pointer hover:text-white transition-colors`}
             onClick={() => {
               handleCategoryChange("ensemble");
             }}
@@ -92,7 +93,7 @@ const StoreSecton = () => {
           <p
             className={`${
               currentCateogry === "duet" && "text-white"
-            } cursor-pointer`}
+            } cursor-pointer hover:text-white transition-colors`}
             onClick={() => {
               handleCategoryChange("duet");
             }}
@@ -102,30 +103,75 @@ const StoreSecton = () => {
         </div>
       </div>
 
-      <div className="flex flex-col w-2/3 justify-between  z-10  gap-11 ml-20">
-        <div className="flex flex-row  gap-10">
-          {/* TODO: remove this */}
-          <p className="text-7xl text-white">Shop</p>
-          <div className="border border-r-10 rounded-xl flex items-center px-4 w-full gap-3  text-textGray">
-            <IconSearch />
+      <div className="flex flex-col w-full lg:w-2/3 justify-between z-10 gap-6 md:gap-8 lg:gap-11 lg:ml-20">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row gap-4 md:gap-6 lg:gap-10">
+          <p className="text-4xl md:text-6xl lg:text-7xl text-white whitespace-nowrap">Shop</p>
+          <div className="border border-r-10 rounded-xl flex items-center px-3 md:px-4 py-2 md:py-0 w-full gap-3 text-textGray">
+            <IconSearch size={20} className="flex-shrink-0" />
             <input
               onChange={handleTextChange}
-              className="bg-black w-full h-1/2 "
+              className="bg-black w-full outline-none text-base md:text-lg"
               type="text"
               placeholder="Search"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-3 bg-reallyBlack/30 p-6 rounded-lg overflow-y-scroll h-full justify-items-start items-start">
+        {/* Mobile: Horizontal Scrollable Categories */}
+        <div className="lg:hidden flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
+          <button
+            className={`${
+              currentCateogry === "all"
+                ? "bg-primary text-white"
+                : "bg-reallyBlack text-textGray"
+            } px-4 py-2 rounded-lg whitespace-nowrap text-sm md:text-base font-medium transition-colors flex-shrink-0 active:scale-95`}
+            onClick={() => handleCategoryChange("all")}
+          >
+            All
+          </button>
+          <button
+            className={`${
+              currentCateogry === "solo"
+                ? "bg-primary text-white"
+                : "bg-reallyBlack text-textGray"
+            } px-4 py-2 rounded-lg whitespace-nowrap text-sm md:text-base font-medium transition-colors flex-shrink-0 active:scale-95`}
+            onClick={() => handleCategoryChange("solo")}
+          >
+            Solo
+          </button>
+          <button
+            className={`${
+              currentCateogry === "ensemble"
+                ? "bg-primary text-white"
+                : "bg-reallyBlack text-textGray"
+            } px-4 py-2 rounded-lg whitespace-nowrap text-sm md:text-base font-medium transition-colors flex-shrink-0 active:scale-95`}
+            onClick={() => handleCategoryChange("ensemble")}
+          >
+            Percussion Ensemble
+          </button>
+          <button
+            className={`${
+              currentCateogry === "duet"
+                ? "bg-primary text-white"
+                : "bg-reallyBlack text-textGray"
+            } px-4 py-2 rounded-lg whitespace-nowrap text-sm md:text-base font-medium transition-colors flex-shrink-0 active:scale-95`}
+            onClick={() => handleCategoryChange("duet")}
+          >
+            Duet
+          </button>
+        </div>
+
+        {/* Products Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 bg-reallyBlack/30 p-4 md:p-6 rounded-lg overflow-y-auto h-full justify-items-start items-start">
           {shownPieces ? (
             shownPieces.length > 0 ? (
-              shownPieces.map((piece) => <PieceCard piece={piece} />)
+              shownPieces.map((piece) => <PieceCard key={piece.id} piece={piece} />)
             ) : (
-              <div className="text-white text-3xl">No pieces found.</div>
+              <div className="text-white text-xl md:text-2xl lg:text-3xl">No pieces found.</div>
             )
           ) : (
-            <div className="text-white text-3xl">Loading...</div>
+            <div className="text-white text-xl md:text-2xl lg:text-3xl">Loading...</div>
           )}
         </div>
       </div>
