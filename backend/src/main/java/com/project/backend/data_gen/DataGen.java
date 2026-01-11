@@ -51,7 +51,7 @@ public class DataGen {
 
     piecesList.add(
         new Piece("Memento Mori",
-            "Sebastian Havner", 50.00,
+            "Sebastian Havner", 40.00,
             "Memento Mori is a Latin phrase translating to “Remember that you must die”. I wrote this piece to convey the many different feelings that this idea can cause in a person. At face value, the idea of death can be a very scary and dark thought, although without death, the meaning of life is diminished. Memento Mori aims to show the constant convolution of how death is viewed, while generally intense and “negative” at times the piece diverges to showcase the beauty of death as the finale to someone's story, rather than an undesirable end. I purposefully switch between different tones within the music to convey my own uncertainty with the idea of death. Memento Mori is written for solo marimba with a percussion quartet accompaniment. It is an advanced piece with individual challenges as well as difficult ensemble moments. The soloist weaves in and out of the spotlight, keeping an interesting blend of soloistic moments and full ensemble ideas. I intended to create a compelling soundscape between the warmer timbre of the marimba with the bright sounds of the metallic instruments backing up the soloist, driven forward by the energy of the hand drumming.",
             2024, false, true, 5, 6, Duration.ofMinutes(6)));
 
@@ -63,7 +63,7 @@ public class DataGen {
 
     piecesList.add(
         new Piece("Azure",
-            "Sebastian Havner", 25.00,
+            "Sebastian Havner", 30.00,
             "WIP",
             2025, false, false, 2, 6, Duration.ofMinutes(6)));
 
