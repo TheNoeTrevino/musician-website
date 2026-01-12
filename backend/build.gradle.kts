@@ -7,6 +7,10 @@ plugins {
 group = "com.project"
 version = "0.0.1-SNAPSHOT"
 
+tasks.bootJar {
+	archiveFileName.set("sebastian-api.jar")
+}
+
 java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(21)

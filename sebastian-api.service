@@ -1,0 +1,15 @@
+[Unit]
+Description=Sebastian Website API
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=noetrevino
+WorkingDirectory=/home/noetrevino/projects/sebastian-website/backend
+EnvironmentFile=/home/noetrevino/projects/sebastian-website/.env
+ExecStart=/usr/bin/java -jar /home/noetrevino/projects/sebastian-website/backend/build/libs/sebastian-api.jar
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
