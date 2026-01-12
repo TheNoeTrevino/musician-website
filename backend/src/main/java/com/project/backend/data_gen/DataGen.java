@@ -31,7 +31,7 @@ public class DataGen {
 
   // NOTE: todos are missing information from sebastian
   @Transactional(rollbackFor = Exception.class)
-  // @Bean // NOTE: add this if you want to generate the sample piece data
+  @Bean // NOTE: add this if you want to generate the sample piece data
   public DataGen generateSampleData() {
     // adding the pieces he has written
     List<Piece> piecesList = new ArrayList<>();
@@ -70,24 +70,24 @@ public class DataGen {
     piecesList.stream().forEach(pieceRepo::save);
 
     // adding us
-    List<Users> userList = new ArrayList<>();
-    userList.add(new Users("Noe", "Trevino", "noe123", "noe.mail.com", new SimpleGrantedAuthority("user")));
-    userList.add(new Users("Enna", "Trevino", "enna123", "enna.mail.com", new SimpleGrantedAuthority("user")));
-    userList.add(
-        new Users("Sebastian", "Havner", "sebastian123", "sebastian.mail.com", new SimpleGrantedAuthority("user")));
-
-    // adding fake random users
-    for (int i = 0; i < 100; i++) {
-      Users user = new Users(faker.name().firstName(), faker.name().lastName(), faker.internet().password(),
-          faker.internet().emailAddress(), new SimpleGrantedAuthority("user"));
-      userList.add(user);
-    }
-
-    userList.forEach(userRepo::save);
-    piecesList.forEach(pieceRepo::save);
-
-    // make it the actual ones in the database since they are now saved
-    userList = userRepo.findAll();
+    // List<Users> userList = new ArrayList<>();
+    // userList.add(new Users("Noe", "Trevino", "noe123", "noe.mail.com", new SimpleGrantedAuthority("user")));
+    // userList.add(new Users("Enna", "Trevino", "enna123", "enna.mail.com", new SimpleGrantedAuthority("user")));
+    // userList.add(
+    //     new Users("Sebastian", "Havner", "sebastian123", "sebastian.mail.com", new SimpleGrantedAuthority("user")));
+    //
+    // // adding fake random users
+    // for (int i = 0; i < 100; i++) {
+    //   Users user = new Users(faker.name().firstName(), faker.name().lastName(), faker.internet().password(),
+    //       faker.internet().emailAddress(), new SimpleGrantedAuthority("user"));
+    //   userList.add(user);
+    // }
+    //
+    // userList.forEach(userRepo::save);
+    // piecesList.forEach(pieceRepo::save);
+    //
+    // // make it the actual ones in the database since they are now saved
+    // userList = userRepo.findAll();
     return null;
   }
 }
