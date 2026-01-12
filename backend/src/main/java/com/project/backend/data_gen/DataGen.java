@@ -31,7 +31,7 @@ public class DataGen {
 
   // NOTE: todos are missing information from sebastian
   @Transactional(rollbackFor = Exception.class)
-  @Bean // NOTE: add this if you want to generate the sample piece data
+  // @Bean // NOTE: add this if you want to generate the sample piece data
   public DataGen generateSampleData() {
     // adding the pieces he has written
     List<Piece> piecesList = new ArrayList<>();
