@@ -28,34 +28,36 @@ Java
 1. Make a shell script with these variables. I named mine `env.sh` in the home
    directory
   
-  ``` bash
-  #!/bin/bash
-  #Database variables
-  export DATABASE_URL="jdbc:postgresql://<port>/<database-name>"
-  export DATABASE_USER="<database_user>"
-  export DATABASE_PW="<database_pw>"
+``` bash
+#!/bin/bash
+#Database variables
+export DATABASE_URL="jdbc:postgresql://<port>/<database-name>"
+export DATABASE_USER="<database_user>"
+export DATABASE_PW="<database_pw>"
 
-  #Email variables
-  export EMAIL_USER="<your gmail>"
-  export EMAIL_PW="<gmail app password>"
-  
-  #Stripe Variables
-  export STRIPE_SECRET="<secret key>"
-  export STRIPE_PUBLISHABLE="<publishable key>"
-  export VITE_BACKEND_URL="<backend w port>"
+#Email variables
+export EMAIL_USER="<your gmail>"
+export EMAIL_PW="<gmail app password>"
+
+#Stripe Variables
+export STRIPE_SECRET="<secret key>"
+export STRIPE_PUBLISHABLE="<publishable key>"
+export VITE_BACKEND_URL="<backend w port>"
+
+BACKEND_PORT=8081
 
 
 
-  # confirmation
-  echo "db url: $DATABASE_URL"
-  echo "db user: $DATABASE_USER"
-  echo "db pass: $DATABASE_PW"
+# confirmation
+echo "db url: $DATABASE_URL"
+echo "db user: $DATABASE_USER"
+echo "db pass: $DATABASE_PW"
 
-  echo "email user: $EMAIL_USER"
-  echo "email pass: $EMAIL_PW"
+echo "email user: $EMAIL_USER"
+echo "email pass: $EMAIL_PW"
 
-  echo "stripe secret: $STRIPE_SECRET"
-  echo "stripe publishable: $STRIPE_PUBLISHABLE"
+echo "stripe secret: $STRIPE_SECRET"
+echo "stripe publishable: $STRIPE_PUBLISHABLE"
 ```
 2. Run it with this command:
   ``` bash
