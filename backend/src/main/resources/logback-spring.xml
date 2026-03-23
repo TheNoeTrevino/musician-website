@@ -2,14 +2,14 @@
 <configuration>
     <springProperty scope="context" name="appName" source="spring.application.name" defaultValue="sebastian-backend"/>
 
-    <!-- Console appender with trace context (MDC populated by OTel agent) -->
+    <!-- Console appender with trace context (MDC populated by Micrometer) -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} traceId=%X{trace_id:-none} spanId=%X{span_id:-none} - %msg%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} traceId=%mdc{traceId:-none} spanId=%mdc{spanId:-none} - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <!-- Loki appender (MDC populated by OTel agent) -->
+    <!-- Loki appender (MDC populated by Micrometer) -->
     <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
         <http>
             <url>http://localhost:3100/loki/api/v1/push</url>
@@ -19,7 +19,7 @@
                 <pattern>app=${appName},level=%level,host=${HOSTNAME}</pattern>
             </label>
             <message>
-                <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} traceId=%X{trace_id:-none} spanId=%X{span_id:-none} - %msg%n</pattern>
+                <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} traceId=%mdc{traceId:-none} spanId=%mdc{spanId:-none} - %msg%n</pattern>
             </message>
             <sortByTime>true</sortByTime>
         </format>

@@ -28,7 +28,10 @@ repositories {
 }
 
 dependencies {
-  implementation("io.opentelemetry:opentelemetry-api:1.43.0")
+  implementation("org.springframework.boot:spring-boot-starter-actuator")
+  implementation("io.micrometer:micrometer-tracing-bridge-otel")
+  implementation("io.opentelemetry:opentelemetry-exporter-otlp")
+  implementation("io.micrometer:context-propagation")
   implementation("org.springframework.boot:spring-boot-starter-security:3.4.2")
   implementation("io.jsonwebtoken:jjwt-api:0.12.6")
   runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.6")
@@ -48,31 +51,14 @@ dependencies {
   implementation("com.github.javafaker:javafaker:1.0.2") {
       exclude(group = "org.yaml", module = "snakeyaml")
   }
-  implementation("com.github.loki4j:loki-logback-appender:1.5.2")
+  implementation("com.github.loki4j:loki-logback-appender:1.6.0")
 }
 
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
-tasks.register("downloadOtelAgent") {
-	val agentFile = layout.projectDirectory.file("agents/opentelemetry-javaagent.jar")
-	outputs.file(agentFile)
-	doLast {
-		agentFile.asFile.parentFile.mkdirs()
-		if (!agentFile.asFile.exists()) {
-			val version = "2.14.0"
-			val url = "https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v$version/opentelemetry-javaagent.jar"
-			uri(url).toURL().openStream().use { input ->
-				agentFile.asFile.outputStream().use { output -> input.copyTo(output) }
-			}
-		}
-	}
-}
-
 tasks.bootRun {
-	dependsOn("downloadOtelAgent")
-	jvmArgs("-javaagent:${projectDir}/agents/opentelemetry-javaagent.jar")
 	systemProperties["spring.devtools.restart.enabled"] = "false"
 
 	// Load .env file
@@ -90,13 +76,6 @@ tasks.bootRun {
 	}
 
 	environment(envMap + mapOf(
-		"OTEL_SERVICE_NAME" to "sebastian-backend",
-		"OTEL_EXPORTER_OTLP_ENDPOINT" to (System.getenv("OTEL_EXPORTER_OTLP_ENDPOINT") ?: "http://localhost:4317"),
-		"OTEL_EXPORTER_OTLP_PROTOCOL" to "grpc",
-		"OTEL_INSTRUMENTATION_LOGBACK_APPENDER_ENABLED" to "false",
-		"OTEL_INSTRUMENTATION_LOGBACK_MDC_ENABLED" to "false",
-		"OTEL_METRICS_EXPORTER" to "none",
-		"OTEL_LOGS_EXPORTER" to "none",
 		"BACKEND_PORT" to "8081"
 	))
 }
