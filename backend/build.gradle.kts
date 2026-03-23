@@ -44,10 +44,13 @@ dependencies {
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
   implementation("org.mapstruct:mapstruct:1.6.1")
-  annotationProcessor("org.mapstruct:mapstruct-processor:1.6.1") 
+  annotationProcessor("org.mapstruct:mapstruct-processor:1.6.1")
   implementation("com.github.javafaker:javafaker:1.0.2") {
       exclude(group = "org.yaml", module = "snakeyaml")
   }
+
+  // OpenTelemetry
+  implementation("io.opentelemetry.instrumentation:opentelemetry-spring-boot-starter:2.0.0")
 }
 
 tasks.withType<Test> {
