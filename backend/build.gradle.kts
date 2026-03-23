@@ -75,7 +75,7 @@ tasks.bootRun {
 	jvmArgs("-javaagent:${projectDir}/agents/opentelemetry-javaagent.jar")
 	environment(
 		"OTEL_SERVICE_NAME" to "sebastian-backend",
-		"OTEL_EXPORTER_OTLP_ENDPOINT" to "http://localhost:4317",
+		"OTEL_EXPORTER_OTLP_ENDPOINT" to (System.getenv("OTEL_EXPORTER_OTLP_ENDPOINT") ?: "http://localhost:4317"),
 		"OTEL_EXPORTER_OTLP_PROTOCOL" to "grpc",
 		"OTEL_LOGS_EXPORTER" to "none",
 		"BACKEND_PORT" to "9069"
