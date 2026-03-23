@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.opentelemetry.api.trace.Span;
+
 import com.project.backend.DTOs.PieceDTO;
 import com.project.backend.services.PieceService;
 
@@ -36,5 +38,14 @@ public class PieceController {
   public ResponseEntity<PieceDTO> getPieceById(@PathVariable Long id) {
     logger.info("Fetching piece with id: {}", id);
     return ResponseEntity.ok(pieceService.getPieceById(id));
+  }
+
+  @GetMapping("/trace-test")
+  public String traceTest() {
+    Span span = Span.current();
+    String traceId = span.getSpanContext().getTraceId();
+    String spanId = span.getSpanContext().getSpanId();
+    logger.info("Manual check - traceId={} spanId={}", traceId, spanId);
+    return "traceId=" + traceId + " spanId=" + spanId;
   }
 }
