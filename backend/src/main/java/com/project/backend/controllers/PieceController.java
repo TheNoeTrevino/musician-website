@@ -27,7 +27,8 @@ public class PieceController {
   public ResponseEntity<List<PieceDTO>> getAllPieces(
     @RequestParam(required = false, defaultValue = "title") String orderBy,
     @RequestParam(required = false, defaultValue = "ASC") String sortOrder) {
-    logger.info("Getting all pieces");
+    logger.info("Getting all pieces, sorted by {} {}", orderBy, sortOrder);
+    logger.debug("Query parameters: orderBy={}, sortOrder={}", orderBy, sortOrder);
     return ResponseEntity.ok(pieceService.getAllPieces(sortOrder, orderBy));
   }
 
