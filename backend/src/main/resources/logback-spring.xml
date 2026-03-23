@@ -2,14 +2,14 @@
 <configuration>
     <springProperty scope="context" name="appName" source="spring.application.name" defaultValue="sebastian-backend"/>
 
-    <!-- Console appender with trace context -->
+    <!-- Console appender with trace context (MDC populated by OTel agent) -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} traceId=%X{trace_id:-none} spanId=%X{span_id:-none} - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <!-- Loki appender -->
+    <!-- Loki appender (MDC populated by OTel agent) -->
     <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
         <http>
             <url>http://localhost:3100/loki/api/v1/push</url>
@@ -25,7 +25,7 @@
         </format>
     </appender>
 
-    <!-- Hibernate SQL logging preserved from application.properties -->
+    <!-- Hibernate SQL logging -->
     <logger name="org.hibernate.SQL" level="DEBUG"/>
     <logger name="org.hibernate.type.descriptor.sql" level="TRACE"/>
 

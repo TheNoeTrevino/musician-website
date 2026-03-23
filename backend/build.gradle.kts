@@ -28,6 +28,7 @@ repositories {
 }
 
 dependencies {
+  implementation("io.opentelemetry:opentelemetry-api:1.43.0")
   implementation("org.springframework.boot:spring-boot-starter-security:3.4.2")
   implementation("io.jsonwebtoken:jjwt-api:0.12.6")
   runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.6")
@@ -39,7 +40,6 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
   compileOnly("org.projectlombok:lombok")
   annotationProcessor("org.projectlombok:lombok")
-  developmentOnly("org.springframework.boot:spring-boot-devtools")
   implementation("org.postgresql:postgresql:42.5.0")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
@@ -73,11 +73,30 @@ tasks.register("downloadOtelAgent") {
 tasks.bootRun {
 	dependsOn("downloadOtelAgent")
 	jvmArgs("-javaagent:${projectDir}/agents/opentelemetry-javaagent.jar")
-	environment(
+	systemProperties["spring.devtools.restart.enabled"] = "false"
+
+	// Load .env file
+	val envFile = rootProject.file("../.env")
+	val envMap = mutableMapOf<String, String>()
+	if (envFile.exists()) {
+		envFile.readLines().forEach { line ->
+			if (line.isNotBlank() && !line.startsWith("#")) {
+				val parts = line.split("=", limit = 2)
+				if (parts.size == 2) {
+					envMap[parts[0].trim()] = parts[1].trim().removeSurrounding("\"")
+				}
+			}
+		}
+	}
+
+	environment(envMap + mapOf(
 		"OTEL_SERVICE_NAME" to "sebastian-backend",
 		"OTEL_EXPORTER_OTLP_ENDPOINT" to (System.getenv("OTEL_EXPORTER_OTLP_ENDPOINT") ?: "http://localhost:4317"),
 		"OTEL_EXPORTER_OTLP_PROTOCOL" to "grpc",
+		"OTEL_INSTRUMENTATION_LOGBACK_APPENDER_ENABLED" to "false",
+		"OTEL_INSTRUMENTATION_LOGBACK_MDC_ENABLED" to "false",
+		"OTEL_METRICS_EXPORTER" to "none",
 		"OTEL_LOGS_EXPORTER" to "none",
-		"BACKEND_PORT" to "9069"
-	)
+		"BACKEND_PORT" to "8081"
+	))
 }
