@@ -33,7 +33,7 @@ public class UserController {
 
   @DeleteMapping("/user/{id}")
   public ResponseEntity<UserDTO> deleteUserById(@PathVariable Long id) {
-    logger.info("Deleteing user with ID: {}", id);
+    logger.info("Deleting user with ID: {}", id);
     return ResponseEntity.ok(userService.deleteUserById(id));
   }
 
@@ -41,7 +41,7 @@ public class UserController {
   public ResponseEntity<List<UserDTO>> getAllUsers(
       @RequestParam(required = false, defaultValue = "ASC") String sortOrder,
       @RequestParam(required = false, defaultValue = "id") String orderBy) {
-    logger.info("Fetching all user");
+    logger.info("Fetching all users, sorted by {} {}", orderBy, sortOrder);
     return ResponseEntity.ok(userService.getAllUsers(sortOrder, orderBy));
   }
 }
