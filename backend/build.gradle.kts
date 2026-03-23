@@ -48,11 +48,36 @@ dependencies {
   implementation("com.github.javafaker:javafaker:1.0.2") {
       exclude(group = "org.yaml", module = "snakeyaml")
   }
-
-  // OpenTelemetry
-  implementation("io.opentelemetry.instrumentation:opentelemetry-spring-boot-starter:2.0.0")
+  implementation("com.github.loki4j:loki-logback-appender:1.5.2")
 }
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+tasks.register("downloadOtelAgent") {
+	val agentFile = layout.projectDirectory.file("agents/opentelemetry-javaagent.jar")
+	outputs.file(agentFile)
+	doLast {
+		agentFile.asFile.parentFile.mkdirs()
+		if (!agentFile.asFile.exists()) {
+			val version = "2.14.0"
+			val url = "https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v$version/opentelemetry-javaagent.jar"
+			uri(url).toURL().openStream().use { input ->
+				agentFile.asFile.outputStream().use { output -> input.copyTo(output) }
+			}
+		}
+	}
+}
+
+tasks.bootRun {
+	dependsOn("downloadOtelAgent")
+	jvmArgs("-javaagent:${projectDir}/agents/opentelemetry-javaagent.jar")
+	environment(
+		"OTEL_SERVICE_NAME" to "sebastian-backend",
+		"OTEL_EXPORTER_OTLP_ENDPOINT" to "http://localhost:4317",
+		"OTEL_EXPORTER_OTLP_PROTOCOL" to "grpc",
+		"OTEL_LOGS_EXPORTER" to "none",
+		"BACKEND_PORT" to "9069"
+	)
 }
