@@ -32,6 +32,7 @@ public class PaymentService {
   @Autowired PiecesRepository piecesRepository;
 
   public PaymentResponseDTO checkoutProducts(PaymentRequestDTO paymentRequest) {
+    logger.info("Initiating payment checkout for {} products", paymentRequest.getProducts().size());
     Stripe.apiKey = stripeSecret;
 
     List<SessionCreateParams.LineItem> lineItems = new ArrayList<>();
@@ -41,16 +42,19 @@ public class PaymentService {
             dto -> {
               Product product;
               try {
-                logger.info("Looking for product with id: {}" + dto.getId());
+                logger.debug("Looking for product with id: {}", dto.getId());
                 product = Product.retrieve(dto.getId());
               } catch (StripeException ex) {
+                logger.error("Failed to retrieve product {}: {}", dto.getId(), ex.getMessage());
                 throw new RuntimeException("Failed to get product");
               }
 
               Price price;
               try {
+                logger.debug("Retrieving price for product: {}", product.getId());
                 price = Price.retrieve(product.getDefaultPrice());
               } catch (StripeException ex) {
+                logger.error("Failed to retrieve price for product {}: {}", product.getId(), ex.getMessage());
                 throw new RuntimeException("Failed to get price");
               }
 

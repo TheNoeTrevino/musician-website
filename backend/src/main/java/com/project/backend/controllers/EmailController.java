@@ -26,7 +26,13 @@ public class EmailController {
   @PostMapping("/send")
   private ResponseEntity<EmailResponseDTO> sendEmail(
       @Valid @RequestBody EmailDTO email) {
-    logger.info("Sending email");
-    return ResponseEntity.ok(emailService.sendEmail(email));
+    logger.info("Email send request from: {} with subject: {}", email.getFrom(), email.getSubject());
+    EmailResponseDTO response = emailService.sendEmail(email);
+    if (response.isSuccessful()) {
+      logger.info("Email sent successfully from: {}", email.getFrom());
+    } else {
+      logger.warn("Email send failed from: {}", email.getFrom());
+    }
+    return ResponseEntity.ok(response);
   }
 }

@@ -7,6 +7,8 @@ import java.util.function.Function;
 
 import javax.crypto.SecretKey;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -24,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 @Component("jwtService")
 @RequiredArgsConstructor
 public class JWTService {
+  private static final Logger logger = LoggerFactory.getLogger(JWTService.class);
 
   @Value("${JWT_SECRET}")
   private String jwtSecret;
@@ -36,11 +39,11 @@ public class JWTService {
   }
 
   public String generateToken(LoginDTO loginDTO) {
-
+    logger.debug("Generating JWT token for user: {}", loginDTO.getUsername());
     Map<String, Object> claims = new HashMap<>();
     claims.put("hello", "world");
 
-    return Jwts.builder()
+    String token = Jwts.builder()
         .claims()
         .add(claims)
         .subject(loginDTO.getUsername())
@@ -49,10 +52,19 @@ public class JWTService {
         .and()
         .signWith(getKey())
         .compact();
+    logger.debug("JWT token generated successfully for user: {}", loginDTO.getUsername());
+    return token;
   }
 
   public String extractUsername(String token) {
-    return extractClaim(token, Claims::getSubject);
+    try {
+      String username = extractClaim(token, Claims::getSubject);
+      logger.debug("Extracted username from token: {}", username);
+      return username;
+    } catch (Exception ex) {
+      logger.warn("Failed to extract username from token: {}", ex.getMessage());
+      throw ex;
+    }
   }
 
   private <T> T extractClaim(String token, Function<Claims, T> claimResolver) {
@@ -69,8 +81,23 @@ public class JWTService {
   }
 
   public boolean validateToken(String token, UserDetails userDetails) {
-    final String userName = extractUsername(token);
-    return (userName.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    try {
+      final String userName = extractUsername(token);
+      boolean isValid = userName.equals(userDetails.getUsername()) && !isTokenExpired(token);
+      if (isValid) {
+        logger.debug("JWT token validated successfully for user: {}", userName);
+      } else {
+        if (!userName.equals(userDetails.getUsername())) {
+          logger.warn("JWT token username mismatch: token has {} but expected {}", userName, userDetails.getUsername());
+        } else {
+          logger.warn("JWT token expired for user: {}", userName);
+        }
+      }
+      return isValid;
+    } catch (Exception ex) {
+      logger.error("JWT token validation failed: {}", ex.getMessage());
+      return false;
+    }
   }
 
   private Date extractExpiration(String token) {

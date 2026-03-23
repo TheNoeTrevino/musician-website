@@ -27,13 +27,25 @@ public class AuthController {
 
   @PostMapping("/login")
   public ResponseEntity<LoginAndSignupResponseDTO> login(@RequestBody LoginDTO loginDTO) {
-    logger.info("Logging in user with username: {}", loginDTO.getUsername());
-    return ResponseEntity.ok(userService.login(loginDTO));
+    logger.info("Login endpoint called for username: {}", loginDTO.getUsername());
+    LoginAndSignupResponseDTO response = userService.login(loginDTO);
+    if (response.isSuccessful()) {
+      logger.info("Login successful for user: {}", loginDTO.getUsername());
+    } else {
+      logger.warn("Login failed for user: {}", loginDTO.getUsername());
+    }
+    return ResponseEntity.ok(response);
   }
 
   @PostMapping("/register")
   public ResponseEntity<LoginAndSignupResponseDTO> createUser(@Valid @RequestBody CreateUpdateUserDTO user) {
-    logger.info("Creating user with username: {}", user.getUsername());
-    return ResponseEntity.ok(userService.createUser(user));
+    logger.info("Registration endpoint called for username: {}", user.getUsername());
+    LoginAndSignupResponseDTO response = userService.createUser(user);
+    if (response.isSuccessful()) {
+      logger.info("User registration successful: {}", user.getUsername());
+    } else {
+      logger.warn("User registration failed for: {}", user.getUsername());
+    }
+    return ResponseEntity.ok(response);
   }
 }
