@@ -6,17 +6,19 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  pull-latest-code:
     runs-on: self-hosted
-
     steps:
-      # build
       - name: Pull Latest Code
         run: |
           cd /opt/sebastian/qa
           git fetch origin
           git reset --hard origin/${{ github.ref_name }}
 
+  build-packages:
+    runs-on: self-hosted
+    needs: pull-latest-code
+    steps:
       - name: Build Frontend
         run: |
           set -a && source /opt/sebastian/qa/.env && set +a
@@ -31,7 +33,10 @@ jobs:
           cd /opt/sebastian/qa/backend
           ./gradlew bootJar
 
-      # deploy
+  deploy:
+    runs-on: self-hosted
+    needs: build-packages
+    steps:
       - name: Restart Services
         run: |
           sudo systemctl restart sebastian-api-qa
@@ -40,6 +45,10 @@ jobs:
         run: |
           rsync -avz --delete /opt/sebastian/qa/frontend/dist/ reverse-proxy:/var/www/sebastian-test/
 
+  health-check:
+    runs-on: self-hosted
+    needs: deploy
+    steps:
       - name: Health Check
         run: |
           sleep 5
