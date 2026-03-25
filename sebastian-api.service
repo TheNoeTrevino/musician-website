@@ -7,7 +7,7 @@ Type=simple
 User=noetrevino
 WorkingDirectory=/opt/sebastian/prod
 EnvironmentFile=/opt/sebastian/prod/.env
-ExecStart=/usr/bin/java -jar /opt/sebastian/prod/sebastian-api.jar
+ExecStart=/usr/bin/java -jar /opt/sebastian/prod/backend/build/libs/sebastian-api.jar
 Restart=always
 RestartSec=5
 

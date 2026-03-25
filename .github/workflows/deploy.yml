@@ -13,14 +13,14 @@ jobs:
       # build
       - name: Pull Latest Code
         run: |
-          cd /home/noetrevino/projects/sebastian-website
+          cd /opt/sebastian/prod
           git fetch origin
           git reset --hard origin/${{ github.ref_name }}
 
       - name: Build Frontend
         run: |
           set -a && source /opt/sebastian/prod/.env && set +a
-          cd /home/noetrevino/projects/sebastian-website/frontend
+          cd /opt/sebastian/prod/frontend
           npm ci
           npm run build -- --outDir dist-new
           rm -rf dist
@@ -28,12 +28,8 @@ jobs:
 
       - name: Build Java Service
         run: |
-          cd /home/noetrevino/projects/sebastian-website/backend
+          cd /opt/sebastian/prod/backend
           ./gradlew bootJar
-
-      - name: Deploy JAR to Production
-        run: |
-          cp /home/noetrevino/projects/sebastian-website/backend/build/libs/sebastian-api.jar /opt/sebastian/prod/sebastian-api.jar
 
       # deploy
       - name: Restart Services
@@ -42,7 +38,7 @@ jobs:
 
       - name: Sync Frontend Files to Reverse Proxy
         run: |
-          rsync -avz --delete /home/noetrevino/projects/sebastian-website/frontend/dist/ reverse-proxy:/var/www/sebastian/
+          rsync -avz --delete /opt/sebastian/prod/frontend/dist/ reverse-proxy:/var/www/sebastian/
 
       - name: Health Check
         run: |
