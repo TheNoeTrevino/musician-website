@@ -5,7 +5,6 @@ import com.project.backend.DTOs.PaymentResponseDTO;
 import com.project.backend.DTOs.PaymentStatusResponseDTO;
 import com.project.backend.DTOs.SessionDTO;
 import com.project.backend.repositories.PiecesRepository;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Price;
 import com.stripe.model.Product;
@@ -23,17 +22,15 @@ import org.springframework.stereotype.Service;
 public class PaymentService {
   private static final Logger logger = LoggerFactory.getLogger(PaymentService.class);
 
-  @Value("${STRIPE_SECRET}")
-  private String stripeSecret;
-
   @Value("${FRONTEND_URL}")
   private String baseUrl;
 
   @Autowired PiecesRepository piecesRepository;
 
+  @Autowired StripeClientWrapper stripeClient;
+
   public PaymentResponseDTO checkoutProducts(PaymentRequestDTO paymentRequest) {
     logger.info("Initiating payment checkout for {} products", paymentRequest.getProducts().size());
-    Stripe.apiKey = stripeSecret;
 
     List<SessionCreateParams.LineItem> lineItems = new ArrayList<>();
 
@@ -43,7 +40,7 @@ public class PaymentService {
               Product product;
               try {
                 logger.debug("Looking for product with id: {}", dto.getId());
-                product = Product.retrieve(dto.getId());
+                product = stripeClient.retrieveProduct(dto.getId());
               } catch (StripeException ex) {
                 logger.error("Failed to retrieve product {}: {}", dto.getId(), ex.getMessage());
                 throw new RuntimeException("Failed to get product");
@@ -52,7 +49,7 @@ public class PaymentService {
               Price price;
               try {
                 logger.debug("Retrieving price for product: {}", product.getId());
-                price = Price.retrieve(product.getDefaultPrice());
+                price = stripeClient.retrievePrice(product.getDefaultPrice());
               } catch (StripeException ex) {
                 logger.error("Failed to retrieve price for product {}: {}", product.getId(), ex.getMessage());
                 throw new RuntimeException("Failed to get price");
@@ -90,7 +87,7 @@ public class PaymentService {
     Session session = null;
 
     try {
-      session = Session.create(params);
+      session = stripeClient.createSession(params);
     } catch (StripeException exception) {
       logger.error("Payment session creation failed: {}", exception.getMessage());
       return PaymentResponseDTO.builder()
@@ -109,11 +106,9 @@ public class PaymentService {
   }
 
   public PaymentStatusResponseDTO checkSessionStatus(SessionDTO dto) {
-    Stripe.apiKey = stripeSecret;
-
     logger.info("Looking for session: {}", dto.getSessionId());
     try {
-      Session session = Session.retrieve(dto.getSessionId());
+      Session session = stripeClient.retrieveSession(dto.getSessionId());
 
       if (!session.getStatus().equals("complete")) {
         return new PaymentStatusResponseDTO(
