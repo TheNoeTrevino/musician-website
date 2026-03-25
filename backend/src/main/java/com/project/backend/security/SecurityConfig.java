@@ -33,6 +33,7 @@ public class SecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     return http.csrf(customizer -> customizer.disable())
         .authorizeHttpRequests(request -> request
+            .requestMatchers("/actuator/health", "/actuator/health/**").permitAll()
             .anyRequest().permitAll()) // Allow all requests
         .httpBasic(Customizer.withDefaults())
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
