@@ -1,0 +1,46 @@
+name: Deploy Prod - Pi
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      # build
+      - name: Pull Latest Code
+        run: |
+          cd /opt/sebastian/prod
+          git fetch origin
+          git reset --hard origin/${{ github.ref_name }}
+
+      - name: Build Frontend
+        run: |
+          set -a && source /opt/sebastian/prod/.env && set +a
+          cd /opt/sebastian/prod/frontend
+          npm ci
+          npm run build -- --outDir dist-new
+          rm -rf dist
+          mv dist-new dist
+
+      - name: Build Java Service
+        run: |
+          cd /opt/sebastian/prod/backend
+          ./gradlew bootJar
+
+      # deploy
+      - name: Restart Services
+        run: |
+          sudo systemctl restart sebastian-api-prod
+
+      - name: Sync Frontend Files to Reverse Proxy
+        run: |
+          rsync -avz --delete /opt/sebastian/prod/frontend/dist/ reverse-proxy:/var/www/sebastian/
+
+      - name: Health Check
+        run: |
+          sleep 5
+          curl -f http://localhost:38741/api/health || echo "API health check"
