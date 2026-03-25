@@ -41,6 +41,14 @@ logging:
     org.hibernate.type.descriptor.sql: TRACE
 
 management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
   tracing:
     sampling:
       probability: 1.0
@@ -52,3 +60,6 @@ management:
       http:
         server:
           requests: true
+
+app:
+  otel-collector-url: http://localhost:4318
