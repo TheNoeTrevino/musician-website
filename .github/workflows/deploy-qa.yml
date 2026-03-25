@@ -1,8 +1,8 @@
-name: Deploy Prod - Pi
+name: Deploy Test - Pi
 
 on:
   push:
-    branches: [main]
+    branches: [qa]
   workflow_dispatch:
 
 jobs:
@@ -13,14 +13,14 @@ jobs:
       # build
       - name: Pull Latest Code
         run: |
-          cd /opt/sebastian/prod
+          cd /opt/sebastian/qa
           git fetch origin
           git reset --hard origin/${{ github.ref_name }}
 
       - name: Build Frontend
         run: |
-          set -a && source /opt/sebastian/prod/.env && set +a
-          cd /opt/sebastian/prod/frontend
+          set -a && source /opt/sebastian/qa/.env && set +a
+          cd /opt/sebastian/qa/frontend
           npm ci
           npm run build -- --outDir dist-new
           rm -rf dist
@@ -28,19 +28,19 @@ jobs:
 
       - name: Build Java Service
         run: |
-          cd /opt/sebastian/prod/backend
+          cd /opt/sebastian/qa/backend
           ./gradlew bootJar
 
       # deploy
       - name: Restart Services
         run: |
-          sudo systemctl restart sebastian-api
+          sudo systemctl restart sebastian-api-qa
 
       - name: Sync Frontend Files to Reverse Proxy
         run: |
-          rsync -avz --delete /opt/sebastian/prod/frontend/dist/ reverse-proxy:/var/www/sebastian/
+          rsync -avz --delete /opt/sebastian/qa/frontend/dist/ reverse-proxy:/var/www/sebastian-test/
 
       - name: Health Check
         run: |
           sleep 5
-          curl -f http://localhost:8081/api/health || echo "API health check"
+          curl -f http://localhost:38742/api/health || echo "API health check"
