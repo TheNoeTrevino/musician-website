@@ -1,7 +1,7 @@
 plugins {
 	java
-	id("org.springframework.boot") version "3.4.0"
-	id("io.spring.dependency-management") version "1.1.6"
+	id("org.springframework.boot") version "3.5.12"
+	id("io.spring.dependency-management") version "1.1.7"
 }
 
 group = "com.project"
@@ -32,7 +32,7 @@ dependencies {
   implementation("io.micrometer:micrometer-tracing-bridge-otel")
   implementation("io.opentelemetry:opentelemetry-exporter-otlp")
   implementation("io.micrometer:context-propagation")
-  implementation("org.springframework.boot:spring-boot-starter-security:3.4.2")
+  implementation("org.springframework.boot:spring-boot-starter-security")
   implementation("io.jsonwebtoken:jjwt-api:0.12.6")
   runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.6")
   runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.6")
@@ -41,9 +41,9 @@ dependencies {
   implementation("jakarta.validation:jakarta.validation-api:3.1.0")
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-web")
-  compileOnly("org.projectlombok:lombok")
-  annotationProcessor("org.projectlombok:lombok")
-  implementation("org.postgresql:postgresql:42.5.0")
+  compileOnly("org.projectlombok:lombok:1.18.44")
+  annotationProcessor("org.projectlombok:lombok:1.18.44")
+  implementation("org.postgresql:postgresql")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
   implementation("org.mapstruct:mapstruct:1.6.1")
