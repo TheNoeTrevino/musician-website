@@ -38,7 +38,7 @@ jobs:
 
       - name: Sync Frontend Files to Reverse Proxy
         run: |
-          rsync -avz --delete /opt/sebastian/qa/frontend/dist/ reverse-proxy:/var/www/sebastian/
+          rsync -avz --delete /opt/sebastian/qa/frontend/dist/ reverse-proxy:/var/www/sebastian-test/
 
       - name: Health Check
         run: |
